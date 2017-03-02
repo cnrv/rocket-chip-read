@@ -45,6 +45,14 @@ Assumption: **TODO**
 + The beats in a burst on channel *A*, *B* and *C* must be in order.
 + The beats in a burst on channel *D* can be out of order? **TODO**
 
+object TLBundleSnoop
+------------------------------
+*A snoop point for a monitor to passively monitor a bus*
+
+object TLRationalBundle
+------------------------------
+**TODO** *A bus connection for rational clock domains?*
+
 
 
 
