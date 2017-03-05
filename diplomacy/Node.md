@@ -29,6 +29,21 @@ abstract class NodeImp[D, U, EO, EI, B <: Data]
 
 abstract class BaseNode
 ---------------------------
+*Base class of all Node classes*
+
++ *lazyModule: LazyModule*: ??
++ *index: Int*: ??
++ *externalIn: Boolean*: ??
++ *externalOut: Boolean*: ??
++ *nodename: _ => String*: get node name
++ *name: _ => String*: get hierarchical node name ??
++ *omitGraphML: _ => Bool*: omit graph generation when no inner or no outer nodes
++ *gci: _ => Option[BaseNode]*: get the greatest common inner node type
++ *gco: _ => Option[BaseNode]*: get the greatest common outer node type
++ *outputs: _ => Seq[(BaseNode, String)]*: list of outer nodes
++ *inputs: _ => Seq[(BaseNode, String)]*: list of inner nodes
++ *colour: _ => String*: node color
+
 
 
 case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
@@ -41,7 +56,29 @@ case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
 trait InwardNodeHandle[DI, UI, BI <: Data]
 ---------------------------
 
-+ *inward: InwardNode[DI, UI, BI]*: **TODO** ??
++ *inward: InwardNode[DI, UI, BI]*: self object pointer
 + *operator (:=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
-+ *operator (\*=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
-+ *operator (=\*): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
++ *operator (&ast;=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
++ *operator (=&ast;): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
+
+case object BIND\_ONCE
+---------------------------------
+
+case object BIND\_QUERY
+---------------------------------
+
+case object BIND\_STAR
+---------------------------------
+
+
+trait InwardNode[DI, UI, BI <: Data]
+------------------------
+    trait InwardNode[DI, UI, BI <: Data] extends BaseNode with InwardNodeHandle[DI, UI, BI]
+
++ *inward: InwardNode[DI, UI, BI]*: self object pointer
++ *numPI: Range.Inclusive*: number of inputs (numPI >= 0)
++ *accPI: ListBuffer[(Int, OutwardNode[DI, UI, BI], NodeBinding)]*: private, list of inputs (input, node, binding)
++ *iRealized: Boolean*: ??
++ *iPushed: _ => Int*: number of inputs been processed
++ *iPush: (node:Int, node: OutwardNode[DI, UI, BI], binding: NodeBinding) => Unit*: push an input to accPI
+
