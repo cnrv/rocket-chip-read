@@ -53,14 +53,6 @@ case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
       extends Object with InwardNodeHandle[DI, UI, BI] with OutwardNodeHandle[DO, UO, BO]
 
 
-trait InwardNodeHandle[DI, UI, BI <: Data]
----------------------------
-
-+ *inward: InwardNode[DI, UI, BI]*: self object pointer
-+ *operator (:=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
-+ *operator (&ast;=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
-+ *operator (=&ast;): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** get a LazyModule for inward from outward??
-
 case object BIND\_ONCE
 ---------------------------------
 
@@ -71,14 +63,60 @@ case object BIND\_STAR
 ---------------------------------
 
 
+trait InwardNodeHandle[DI, UI, BI <: Data]
+---------------------------
+
++ *inward: InwardNode[DI, UI, BI]*: self object pointer
++ *operator (:=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** (once) get a LazyModule for inward from outward??
++ *operator (&ast;=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** (star) get a LazyModule for inward from outward??
++ *operator (=&ast;): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** (query) get a LazyModule for inward from outward??
+
+
 trait InwardNode[DI, UI, BI <: Data]
 ------------------------
     trait InwardNode[DI, UI, BI <: Data] extends BaseNode with InwardNodeHandle[DI, UI, BI]
 
 + *inward: InwardNode[DI, UI, BI]*: self object pointer
-+ *numPI: Range.Inclusive*: number of inputs (numPI >= 0)
-+ *accPI: ListBuffer[(Int, OutwardNode[DI, UI, BI], NodeBinding)]*: private, list of inputs (input, node, binding)
-+ *iRealized: Boolean*: ??
-+ *iPushed: _ => Int*: number of inputs been processed
-+ *iPush: (node:Int, node: OutwardNode[DI, UI, BI], binding: NodeBinding) => Unit*: push an input to accPI
++ *numPI: Range.Inclusive*: number of inner nodes (numPI >= 0)
++ *iPushed: _ => Int*: number of inner nodes being processed
++ *iPush: (node:Int, node: OutwardNode[DI, UI, BI], binding: NodeBinding) => Unit*: process an inner node
++ *iBindings: List[(Int, OutwardNode[DI, UI, BI], NodeBinding)]*: list of inner nodes (index, input, binding)
++ *iStar: Int*: ??
++ *iPortMapping: Seq[(Int, Int)]*: range of each inner nodes
++ *iParams: Seq[UI]*: inner node parameters
++ *bundleIn: Vec[BI]*: inner node bundles
 
+trait OutwardNodeHandle[DO, UO, BO <: Data]
+---------------------------
+
++ *outward: OutwardNode[DO, UO, BO]*: self object pointer
+
+
+trait OutwardNode[DO, UO, BO <: Data]
+----------------------------
+    trait OutwardNode[DO, UO, BO <: Data] extends BaseNode with OutwardNodeHandle[DO, UO, BO]
+
++ *outward: OutwardNode[DO, UO, BO]*: self object pointer
++ *numPO: Range.Inclusive*: number of putputs (numPO >= 0)
++ *oPushed: _ => Int*: number of outer nodes being processed
++ *oPush: (index: Int, node: InwardNode [DO, UO, BO], binding: NodeBinding) => Unit*: process an outer node
++ *oBindings: List[(Int, InwardNode [DO, UO, BO], NodeBinding)]*: list of outer nodes (index, output, binding)
++ *oStar: Int*: ??
++ *oPortMapping: Seq[(Int, Int)]*: Range of each outer nodes
++ *oParams: Seq[DO]*: outer node parameters
++ *bundleOut: vec[BO]*: outer node bundles
+
+
+abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data]
+---------------------------
+    abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
+      inner: InwardNodeImp [DI, UI, EI, BI],
+      outer: OutwardNodeImp[DO, UO, EO, BO])(
+      protected[diplomacy] val numPO: Range.Inclusive,
+      protected[diplomacy] val numPI: Range.Inclusive)
+      extends BaseNode with InwardNode[DI, UI, BI] with OutwardNode[DO, UO, BO]
+
++ *oPorts: (Int, (Int, InwardNode [DO, UO, BO]))*: mapping from outer node to inner nodes?
++ *iPorts: (Int, (Int, OutwardNode [DO, UO, BO]))*: mapping from inner node to outer nodes?
+
+....
