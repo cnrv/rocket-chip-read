@@ -10,7 +10,7 @@ object RegionType
 
 case class IdRange(start: Int, end: Int)
 ----------------------
-*A non-empty half-open range [start, end)*
+*A non-empty half-open range* `[start, end)`
 
     0 <= start < end
 
@@ -26,7 +26,7 @@ case class IdRange(start: Int, end: Int)
 
 case class TransferSizes(min: Int, max: Int)
 --------------------------
-*An potentially empty inclusive range of 2-powers [min, max] (in bytes)*
+*An potentially empty inclusive range of 2-powers* `[min, max]`
 
     0 <= min <= max && isPow2(max) && isPow2(min) && (max == 0 || min != 0)
 
