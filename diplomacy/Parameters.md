@@ -1,3 +1,7 @@
+[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Parameters](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/Parameters.scala)
+=====================
+
+**********************
 object RegionType
 ------------------------------
 *Type of address region*
@@ -88,3 +92,14 @@ object AddressSet
 ----------------------------
 + *misaligned: (BigInt, BigInt, Seq[AddressSet]) => Seq[AddressSet]*: ?? not used
 + *unify: (seq: Seq[AddressSet]) => Seq[AddressSet]*: combine ranges which are combinable (order as well)
+
+
+
+
+**********************
+
+```scala
+last modified = 12/03/2017
+authors       = Wei Song <wsong83@gmail.com>
+license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
+```

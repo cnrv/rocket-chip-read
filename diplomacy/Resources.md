@@ -129,8 +129,8 @@ Description(describeName("memory", resources),
 case class Resource(owner: Device, key: String)
 ----------
 
-+ *bind: (user: Device, value: ResourceValue) => Unit*
-+ *bind: (value: ResourceValue) => Unit*
++ **bind** `(user: Device, value: ResourceValue) => Unit`
++ **bind** `(value: ResourceValue) => Unit`
 
 trait BindingScope
 -----------
@@ -138,12 +138,19 @@ trait BindingScope
 
 object BindingScope
 ------------
++ **find** `(m: Option[LazyModule]) => Option[BindingScope]` : return the first parent `LazyModule` extended with `BindingScope`.
+
+object ResourceBinding
+-------------
+*An global function object that is called with extension (weird Scala code pattern) in a device to initialize all binding functions.*
+
++ **apply** `(block: => Unit): Unit` : accept a code segement `block` as the initial binding function and append the binding function list with other functions from the immediate parent `LazyModule` extended with `BindingScope`. 
 
 
-
+**********************
 
 ```scala
-lastModifiedDate = "12/03/2017"
-author = "Wei Song <wsong83@gmail.com>"
-license = "CC-BY <https://creativecommons.org/licenses/by/3.0/>"
+last modified = 12/03/2017
+authors       = Wei Song <wsong83@gmail.com>
+license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```

@@ -8,13 +8,13 @@
 -------------
 A module generator to allow run-time configuration negotiation before the actual module elaboration (generation).
 
-[Parameters](diplomacy/Parameters.md)
----------------
-Basic parameter definitions (address space).
-
 [Node](diplomacy/Node.md)
 --------------
 Regulate the communication interface of a interconnect node.
+
+[Parameters](diplomacy/Parameters.md)
+---------------
+Basic parameter definitions (address space).
 
 [Resources](diplomacy/Resources.md)
 --------------
@@ -24,8 +24,10 @@ Detailed definition of a resource (device).
 
 
 
+**********************
+
 ```scala
-lastModifiedDate = "12/03/2017"
-author = "Wei Song <wsong83@gmail.com>"
-license = "CC-BY <https://creativecommons.org/licenses/by/3.0/>"
+last_modified = 12/03/2017
+authors       = Wei Song <wsong83@gmail.com>
+license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```

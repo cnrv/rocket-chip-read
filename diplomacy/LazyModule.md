@@ -1,3 +1,8 @@
+[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[LazyModule](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/LazyModule.scala)
+=====================
+
+**********************
+
 abstract class LazyModule
 ----------------------
 *Module generator. Allow run-time module configuration and generation.*
@@ -33,3 +38,14 @@ abstract class LazyModuleImp
 + *val p: Parameters*: configuration from the paired LazyModule.
 
 
+
+
+
+
+**********************
+
+```scala
+last modified = 12/03/2017
+authors       = Wei Song <wsong83@gmail.com>
+license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
+```

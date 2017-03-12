@@ -1,3 +1,8 @@
+[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Node](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/Node.scala)
+=====================
+
+**********************
+
 trait InwardNodeImp[DI, UI, EI, BI <: Data]
 -------------------------------
 *Typeclass for inward node*
@@ -120,3 +125,11 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data]
 + *iPorts: (Int, (Int, OutwardNode [DO, UO, BO]))*: mapping from inner node to outer nodes?
 
 ....
+
+**********************
+
+```scala
+last modified = 12/03/2017
+authors       = Wei Song <wsong83@gmail.com>
+license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
+```
