@@ -1,6 +1,8 @@
 [Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Resources](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/Resources.scala)
 =====================
 
+*Device tree generation helpers*
+
 **********************
 
 case class ResourceAddress(address: Seq[AddressSet], r: Boolean, w: Boolean, x: Boolean)
@@ -12,10 +14,10 @@ final case class ResourceAddress(address: Seq[AddressSet], r: Boolean, w: Boolea
 
 *An address space with permission bits.*
 
-+ *address: Seq[AddressSet]*: address space.
-+ *r: Boolean*: readable.
-+ *w: Boolean*: writable.
-+ *x: Boolean*: executable.
++ **address** `Seq[AddressSet]` address space.
++ **r** `Boolean` readable.
++ **w** `Boolean` writable.
++ **x** `Boolean` executable.
 
 case class ResourceMapping(address: Seq[AddressSet], offset: BigInt)
 -----------------------
@@ -58,7 +60,9 @@ case class ResourceBindings(map: Map[String, Seq[Binding]])
 ----------------------
 *A map of resource bindings.*
 
-+ *apply: (key: String) => Seq[Binding]*: get the bindings of ("int").
++ **apply** `(key: String) => Seq[Binding]`
+
+    Get the bindings of ("int").
 
 case class Description(name: String, mapping: Map[String, Seq[ResourceValue]])
 ----------------------
@@ -68,29 +72,44 @@ abstract class Device
 -----------------------
 *Definition of a device*
 
-+ *describe: (resources: ResourceBindings) => Description*: generate the device description.
-+ *label: String*: A unique label of a device.
++ **describe** `(resources: ResourceBindings) => Description`
+
+    Generate the device description.
+
++ **label** `String` A unique label of a device.
 
 trait DeviceInterrupts
 -----------------------
 *Interrupts of a device (extensible only to Device).*
 
-+ *alwaysExtended: Boolean = false*: Not a concrete device (but a middle layer agent)??
-+ *describeInterrupts: (resources: ResourceBindings) => Map[String, Seq[ResourceValue]]*:
-return interrupt definitions.
-  + *("interrupt-parent" -> Seq(ResourceReference(Device.label)))*: A concrete device's label.
-  + *("interrupts" -> Seq[ResourceValue])*: A concrete device's interrupts.
-  + *("interrupts-extended" -> Seq[ResourceMap])*: An extended devices' interrupts.
-+ *int: _ => Seq(Resource(this, "int"))*: ??
++ **alwaysExtended** `Boolean = false`
+
+    Not a concrete device (but a middle layer agent)??
+
++ **describeInterrupts** `(resources: ResourceBindings) => Map[String, Seq[ResourceValue]]`
+
+    return interrupt definitions.
+
+  + `("interrupt-parent" -> Seq(ResourceReference(Device.label)))` A concrete device's label.
+  + `("interrupts" -> Seq[ResourceValue])` A concrete device's interrupts.
+  + `("interrupts-extended" -> Seq[ResourceMap])` An extended devices' interrupts.
+
++ **int** `_ => Seq(Resource(this, "int"))`
+
+    ??
 
 trait DeviceRegName
 -------------------------
 *Device registration name (extensible only to Device).*
 
-+ *prefix: String = "soc/"*: prefix
-+ *describeName: (devname: String, resources: ResourceBindings) => String*: get the device name string
-  + for a valid device, the name is "*prefix*/*devname*@*base_addr*"
-+ *reg: _ => Seq(Resource(this, "reg"))*: ??
++ **prefix** `String = "soc/"*` prefix
++ **describeName** `(devname: String, resources: ResourceBindings) => String`
+
+    Get the device name string. For a valid device, the name is `$prefix/$devname@$base_addr`
+
++ **reg** `_ => Seq(Resource(this, "reg"))`
+
+    ??
 
 class SimpleDevice(devname: String, devcompat: Seq[String])
 -------------------
@@ -136,21 +155,33 @@ trait BindingScope
 -----------
 *(extensible only to LazyModule)*
 
++ **bindingTree** `_ => ResourceMap`
+
+    Generate device tree map.
+
 object BindingScope
 ------------
-+ **find** `(m: Option[LazyModule]) => Option[BindingScope]` : return the first parent `LazyModule` extended with `BindingScope`.
++ **active** `Option[BindingScope]`
+
+    The current active LazyModule needing binding.
+
++ **find** `(m: Option[LazyModule]) => Option[BindingScope]`
+
+    Return the first parent `LazyModule` extended with `BindingScope`.
 
 object ResourceBinding
 -------------
 *An global function object that is called with extension (weird Scala code pattern) in a device to initialize all binding functions.*
 
-+ **apply** `(block: => Unit): Unit` : accept a code segement `block` as the initial binding function and append the binding function list with other functions from the immediate parent `LazyModule` extended with `BindingScope`. 
++ **apply** `(block: => Unit): Unit`
+
+    Add a new code segement `block` into the binding functions.
 
 
 **********************
 
 ```scala
-last modified = 12/03/2017
+last modified = 13/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
