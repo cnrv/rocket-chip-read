@@ -7,7 +7,7 @@ abstract class LazyModule
 ----------------------
 *Module generator. Allow run-time module configuration and generation.*
 
-+ *bindings: List[() => Unit]*: ??
++ **bindings** `List[() => Unit]` A list of port connection functions called during instantiation.
 + *children: List[LazyModule]*: list of inner components (LazyModules).
 + *nodes: List[BaseNode]*: ?? what is the difference between node and module?
 + *info: SourceInfo*: source information (line number, etc.) for better error/warning messages.
@@ -45,7 +45,7 @@ abstract class LazyModuleImp
 **********************
 
 ```scala
-last modified = 12/03/2017
+last modified = 14/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```

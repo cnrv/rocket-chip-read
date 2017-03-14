@@ -60,21 +60,32 @@ case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
 
 case object BIND\_ONCE
 ---------------------------------
+*Normal one to one connection*
 
 case object BIND\_QUERY
 ---------------------------------
+*A shared sink port?*
 
 case object BIND\_STAR
 ---------------------------------
+*A shared source port?*
 
 
 trait InwardNodeHandle[DI, UI, BI <: Data]
 ---------------------------
 
 + *inward: InwardNode[DI, UI, BI]*: self object pointer
-+ *operator (:=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** (once) get a LazyModule for inward from outward??
-+ *operator (&ast;=): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** (star) get a LazyModule for inward from outward??
-+ *operator (=&ast;): OutwardNodeHandle => Option[LazyModule]*: <br> **TODO** (query) get a LazyModule for inward from outward??
++ **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`
+
+    Connect this input port to an output port `h`.
+
++ **&ast;=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`
+
+    Connect this input multi-port to an output `h`??
+
++ **=&ast;** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`
+
+    Connect this input port to an output multi-port `h`??
 
 
 trait InwardNode[DI, UI, BI <: Data]
@@ -114,12 +125,14 @@ trait OutwardNode[DO, UO, BO <: Data]
 
 abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data]
 ---------------------------
-    abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
-      inner: InwardNodeImp [DI, UI, EI, BI],
-      outer: OutwardNodeImp[DO, UO, EO, BO])(
-      protected[diplomacy] val numPO: Range.Inclusive,
-      protected[diplomacy] val numPI: Range.Inclusive)
-      extends BaseNode with InwardNode[DI, UI, BI] with OutwardNode[DO, UO, BO]
+~~~scala
+abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
+    inner: InwardNodeImp [DI, UI, EI, BI],
+    outer: OutwardNodeImp[DO, UO, EO, BO])(
+    protected[diplomacy] val numPO: Range.Inclusive,
+    protected[diplomacy] val numPI: Range.Inclusive)
+    extends BaseNode with InwardNode[DI, UI, BI] with OutwardNode[DO, UO, BO]
+~~~
 
 + *oPorts: (Int, (Int, InwardNode [DO, UO, BO]))*: mapping from outer node to inner nodes?
 + *iPorts: (Int, (Int, OutwardNode [DO, UO, BO]))*: mapping from inner node to outer nodes?
@@ -129,7 +142,7 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data]
 **********************
 
 ```scala
-last modified = 12/03/2017
+last modified = 14/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
