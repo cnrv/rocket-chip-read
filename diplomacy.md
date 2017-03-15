@@ -1,8 +1,13 @@
 
 [Rocket](Readme.md)/[diplomacy](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/diplomacy)
 ========================
+*Definitions for the LazyModule design patterns.*
 
 **********************
+
+[DeviceTree](diplomacy/DeviceTree.md)
+-------------
+Device tree generation functions.
 
 [LayzModule](diplomacy/LazyModule.md)
 -------------
@@ -27,7 +32,7 @@ Detailed definition of a resource (device).
 **********************
 
 ```scala
-last_modified = 14/03/2017
+last_modified = 15/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```

@@ -1,3 +1,10 @@
+[Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Bundles](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Bundles.scala)
+=====================
+*TileLink2 channel definitions.*
+
+**********************
+
+
 object TLMessages
 -----------------------------
 *Constants to define message types*
@@ -56,3 +63,10 @@ object TLRationalBundle
 
 
 
+**********************
+
+```scala
+last_modified = 15/03/2017
+authors       = Wei Song <wsong83@gmail.com>
+license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
+```
