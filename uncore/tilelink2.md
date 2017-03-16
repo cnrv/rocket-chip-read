@@ -8,6 +8,9 @@
 ---------------
 *TileLink2 channel definitions.*
 
+[Parameters](tilelink2/Parameters.md)
+---------------
+
 [Repeater](tilelink2/Repeater.md)
 --------------
 
@@ -17,7 +20,7 @@
 **********************
 
 ```scala
-last_modified = 15/03/2017
+last_modified = 16/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
