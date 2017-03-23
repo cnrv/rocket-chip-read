@@ -392,7 +392,8 @@ case class TLAsyncManagerPortParameters
 *Async TileLink (cross clock-domain) manager port parameters.*
 
 ~~~scala
-case class TLAsyncManagerPortParameters(depth: Int, base: TLManagerPortParameters) { require (isPow2(depth)) }
+case class TLAsyncManagerPortParameters(
+    depth: Int, base: TLManagerPortParameters)
 ~~~
 
 case class TLAsyncClientPortParameters
@@ -436,6 +437,8 @@ case class TLAsyncEdgeParameters(
     client: TLAsyncClientPortParameters, manager: TLAsyncManagerPortParameters)
 ~~~
 
++ **bundle** `TLAsyncBundleParameters(manager.depth, TLBundleParameters(client.base, manager.base))`
+
 ### Case variables:
 
 + **client** `TLAsyncClientPortParameters`
@@ -450,13 +453,67 @@ case class TLAsyncEdgeParameters(
 
 + **bundle** `TLAsyncBundleParameters(client, manager)`
 
+case class TLRationalManagerPortParameters
+---------------
+*Rational TileLink (cross clock-domain) manager port parameters.*
 
+~~~scala
+case class TLRationalManagerPortParameters(
+    direction: RationalDirection, base: TLManagerPortParameters)
+~~~
+
++ **direction** `RationalDirection`
+
+    The relation between two source synchronised clocks:
+    + `Symmetric` Nor sure which side is slower so put queues on both sides.
+    + `FastToSlow` Register at the slow sink.
+    + `SlowToFast` Register at the slow source.
+
+case class TLRationalClientPortParameters
+-------------
+*Rational TileLink (cross clock-domain) client port parameters.*
+
+~~~scala
+case class TLRationalClientPortParameters(base: TLClientPortParameters)
+~~~
+
+case class TLRationalEdgeParameters
+-------------
+*Parameters for a rational TileLink connection.*
+
+~~~scala
+case class TLRationalEdgeParameters(
+    client: TLRationalClientPortParameters, manager: TLRationalManagerPortParameters)
+~~~
+
++ **bundle** `TLBundleParameters(client.base, manager.base)`
+
+object ManagerUnification
+----------------
+
++ **apply** `(Seq[TLManagerParameters]) => Seq[TLManagerParameters]`
+
+    Merge `TLManagerParameters` that have the same key (transaction types). Key is defined as
+~~~scala
+case class TLManagerKey(
+    regionType:         RegionType.T,
+    executable:         Boolean,
+    lastNode:           BaseNode,
+    supportsAcquireT:   TransferSizes,
+    supportsAcquireB:   TransferSizes,
+    supportsArithmetic: TransferSizes,
+    supportsLogical:    TransferSizes,
+    supportsGet:        TransferSizes,
+    supportsPutFull:    TransferSizes,
+    supportsPutPartial: TransferSizes,
+    supportsHint:       TransferSizes)
+~~~
 
 
 **********************
 
 ```scala
-last_modified = 22/03/2017
+last_modified = 23/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
