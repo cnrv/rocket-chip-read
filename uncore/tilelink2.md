@@ -8,6 +8,9 @@
 ---------------
 *TileLink2 channel definitions.*
 
+[Nodes](tilelink2/Nodes.md)
+---------------
+
 [Parameters](tilelink2/Parameters.md)
 ---------------
 *TileLink2 interconnection parameters.*
@@ -21,7 +24,7 @@
 **********************
 
 ```scala
-last_modified = 22/03/2017
+last_modified = 27/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
