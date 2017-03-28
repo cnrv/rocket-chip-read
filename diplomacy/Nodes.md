@@ -81,10 +81,12 @@ abstract class BaseNode
 
 case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
 ---------------------------
-    case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
-      (inward: InwardNode[DI, UI, BI], outward: OutwardNode[DO, UO, BO])
-      extends Object with InwardNodeHandle[DI, UI, BI] with OutwardNodeHandle[DO, UO, BO]
 
+~~~scala
+case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
+    (inward: InwardNode[DI, UI, BI], outward: OutwardNode[DO, UO, BO])
+    extends Object with InwardNodeHandle[DI, UI, BI] with OutwardNodeHandle[DO, UO, BO]
+~~~
 
 case object BIND\_ONCE
 ---------------------------------
@@ -165,12 +167,88 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + *oPorts: (Int, (Int, InwardNode [DO, UO, BO]))*: mapping from outer node to inner nodes?
 + *iPorts: (Int, (Int, OutwardNode [DO, UO, BO]))*: mapping from inner node to outer nodes?
 
-....
+class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data]
+-----------
+
+~~~scala
+class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
+  inner: InwardNodeImp [DI, UI, EI, BI],
+  outer: OutwardNodeImp[DO, UO, EO, BO])(
+  dFn: DI => DO,
+  uFn: UO => UI,
+  num: Range.Inclusive = 0 to 999)
+  extends MixedNode(inner, outer)(num, num)
+~~~
+
+class AdapterNode[D, U, EO, EI, B <: Data]
+-----------
+*Base node class for a bus adapter.*
+
+~~~scala
+class AdapterNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
+  dFn: D => D,
+  uFn: U => U,
+  num: Range.Inclusive = 0 to 999)
+    extends MixedAdapterNode[D, U, EI, B, D, U, EO, B](imp, imp)(dFn, uFn, num)
+~~~
+
+class NexusNode[D, U, EO, EI, B <: Data]
+-----------
+*Base node for a switch node (crossbar, multiplexer ordemultiplexer).*
+
+~~~scala
+class NexusNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
+  dFn: Seq[D] => D,
+  uFn: Seq[U] => U,
+  numPO: Range.Inclusive = 1 to 999,
+  numPI: Range.Inclusive = 1 to 999)
+    extends MixedNexusNode[D, U, EI, B, D, U, EO, B](imp, imp)(dFn, uFn, numPO, numPI)
+~~~
+
+class IdentityNode[D, U, EO, EI, B <: Data]
+-----------
+
+~~~scala
+class IdentityNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
+  extends AdapterNode(imp)({s => s}, {s => s})
+~~~
+
+class OutputNode[D, U, EO, EI, B <: Data]
+-------------
+
+~~~scala
+class OutputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
+    extends IdentityNode(imp)
+~~~
+
+class InputNode[D, U, EO, EI, B <: Data]
+----------
+
+~~~scala
+class InputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
+    extends IdentityNode(imp)
+~~~
+
+class SourceNode[D, U, EO, EI, B <: Data]
+------------
+
+~~~scala
+class SourceNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(po: Seq[D])
+  extends MixedNode(imp, imp)(po.size to po.size, 0 to 0)
+~~~
+
+class SinkNode[D, U, EO, EI, B <: Data]
+-----------
+
+~~~scala
+class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U])
+  extends MixedNode(imp, imp)(0 to 0, pi.size to pi.size)
+~~~
 
 **********************
 
 ```scala
-last modified = 27/03/2017
+last modified = 28/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```

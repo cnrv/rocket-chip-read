@@ -39,10 +39,33 @@ object TLImp
     Callback to set the bus monitor and port connections.
     Depending on parameter [`TLMonitorBuilder`](../../rocketchip/Configs.md), `Option[LazyModule]` is a `TLMonitor`.
 
+case class TLIdentityNode
+--------------
+
+~~~scala
+case class TLIdentityNode() extends IdentityNode(TLImp)
+~~~
+
+case class TLClientNode
+------------
+
+~~~scala
+case class TLClientNode(portParams: Seq[TLClientPortParameters])
+    extends SourceNode(TLImp)(portParams)
+~~~
+
+case class TLManagerNode
+-------------
+
+~~~scala
+case class TLManagerNode(portParams: Seq[TLManagerPortParameters])
+    extends SinkNode(TLImp)(portParams)
+~~~
+
 **********************
 
 ```scala
-last_modified = 27/03/2017
+last_modified = 28/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
