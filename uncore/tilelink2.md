@@ -4,6 +4,10 @@
 
 **********************
 
+[package](tilelink2/package.md)
+---------------
+*Shared helper variables and functions.*
+
 [Bundles](tilelink2/Bundles.md)
 ---------------
 *TileLink2 channel definitions.*
@@ -28,7 +32,7 @@
 **********************
 
 ```scala
-last_modified = 29/03/2017
+last_modified = 30/03/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
