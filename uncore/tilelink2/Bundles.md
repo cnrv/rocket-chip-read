@@ -9,11 +9,39 @@ object TLMessages
 -----------------------------
 *Constants to define message types*
 
-+ Channel *A*: client -> master, uncached put/get data request, cached acquire data.
-+ Channel *B*: master -> client, uncached put/get data request.
-+ Channel *C*: client -> master, response for packets from channel *B*.
-+ Channel *D*: master -> client, response for packets from channel *A*.
-+ Channel *E*: client -> master, response for Grant from channel *D* for strong ordered transactions.
+### Type of TileLink transactions
+
+| Type            | ID | A | B | C | D | E | Data | Description                 | Response       |
+| :---            |----|---|---|---|---|---| :--: |       :---:                 |     :---:      |
+| PutFullData     | 0  | * | * |   |   |   |  *   | Write a block               | AccessAck      |
+| PutPartialData  | 1  | * | * |   |   |   |  *   | Write a partial block       | AccessAck      |
+| ArithmeticData  | 2  | * | * |   |   |   |  *   | Arithmetic atomic (AMO)     | AccessAckData  |
+| LogicalData     | 3  | * | * |   |   |   |  *   | Logic AMO                   | AccessAckData  |
+| Get             | 4  | * | * |   |   |   |      | Get a block                 | AccessAckData  |
+| Hint            | 5  | * | * |   |   |   |      | Prefetch a block            | HintAck        |
+| Acquire         | 6  | * |   |   |   |   |      | Coherent request            | Grant[Data]    |
+| Probe           | 6  |   | * |   |   |   |      | Coherent enquiry            | ProbeAck[Data] |
+| AccessAck       | 0  |   |   | * | * |   |      | Ack to Put(write)           |                |
+| AccessAckData   | 1  |   |   | * | * |   |      | Ack to Get/AMO              |                |
+| HintAck         | 2  |   |   | * | * |   |      | Ack to Hint                 |                |
+| ProbeAck        | 4  |   |   | * |   |   |      | Ack to Probe without data   |                |
+| ProbeAckData    | 5  |   |   | * |   |   |  *   | Ack to Probe with data      |                |
+| Release         | 6  |   |   | * |   |   |      | Replace clean block         | ReleaseAck     |
+| ReleaseData     | 7  |   |   | * |   |   |  *   | Writeback dirty block       | ReleaseAck     |
+| Grant           | 4  |   |   |   | * |   |      | Permission promotion        | GrantAck       |
+| GrantData       | 5  |   |   |   | * |   |  *   | Fetch data                  | GrantAck       |
+| ReleaseAck      | 6  |   |   |   | * |   |      | Ack to Release[Data]        |                |
+| GrantAck        | 0  |   |   |   |   | * |      | Ack to Grant (strong order) |                |
+
+### TileLink channels
+
+| Name | Direction  | Response | Base classes                              |
+| :--: |            |   :--:   | -------------                             |
+| A    | downwards  | D        | TLChannel < TLDataChannel < TLAddrChannel |
+| B    | upwards    | C        | TLChannel < TLDataChannel < TLAddrChannel |
+| C    | downwards  |          | TLChannel < TLDataChannel < TLAddrChannel |
+| D    | upwards    | E        | TLChannel < TLDataChannel                 |
+| E    | downwards  |          | TLChannel                                 |
 
 Communication pattern:
 + client -> master: *A* -> *D* -> *E*
@@ -66,7 +94,7 @@ object TLRationalBundle
 **********************
 
 ```scala
-last_modified = 15/03/2017
+last_modified = 02/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
