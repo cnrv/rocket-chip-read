@@ -29,16 +29,12 @@ class TLEdge(
   Whether the transaction is a response (AccessAck, ProbeAck, HintAck, Grant, ReleaseAck, GrantAck).
 + **hasData** `(TLChannel) => Bool`<br>
   Whether the transaction has data. See the "[type of TileLink transactions](Bundles.md#type-of-tilelink-transactions)."
-+ Helper functions to get transaction fields<br>
-  **opcode** `(TLDataChannel) => Bool`<br>
-  **param** `(TLDataChannel) => UInt`<br>
-  **size** `(TLDataChannel) => UInt`<br>
-  **data** `(TLDataChannel) => UInt`<br>
-  **mask** `(TLDataChannel) => UInt`<br>
-  **full_mask** `(TLDataChannel) => UInt`<br>
-  **address** `(TLDataChannel) => UInt`<br>
-  **source** `(TLDataChannel) => UInt`<br>
-+ **addr_hi** `(UInt) => UInt` or `(TLAddrChannel) => UInt`<br>
++ Helper functions to get transaction fields
+
+  **opcode**, **param**, **size**, **data**, **mask**, **full_mask**, **address**, and **source**<br>
+  `(TLDataChannel) => UInt`<br>
+
+  **addr_hi** `(UInt) => UInt` or `(TLAddrChannel) => UInt`<br>
   MSBs of an address (to a beat).
 + **addr_lo** `(UInt) => UInt` or `(TLDataChannel) => UInt`<br>
   LSBs of an address (inside a beat).
@@ -46,27 +42,27 @@ class TLEdge(
   Number of beats of this transaction.
 + **numBeats1** `(TLChannel) => UInt`<br>
   Number of beats - 1. (AXI style)
-+ Helpers for counting beats<br>
+
++ Helpers for counting beats
+
   **firstlastHelper** `(TLChannel, fire:Bool) => (first:Bool, last:Bool, done: Bool, count:UInt)`<br>
-  **first** `(TLChannel, fire:Bool) => Bool`<br>
-  **first** `(DecoupledIO[TLChannel]) => Bool`<br>
-  **first** `(ValidIO[TLChannel]) => Bool`<br>
-  **last** `(TLChannel, fire:Bool) => Bool`<br>
-  **last** `(DecoupledIO[TLChannel]) => Bool`<br>
-  **last** `(ValidIO[TLChannel]) => Bool`<br>
-  **done** `(TLChannel, fire:Bool) => Bool`<br>
-  **done** `(DecoupledIO[TLChannel]) => Bool`<br>
-  **done** `(ValidIO[TLChannel]) => Bool`<br>
-  **firstlast** `(TLChannel, fire:Bool) => (first:Bool, last:Bool, done: Bool)`<br>
-  **firstlast** `(DecoupledIO[TLChannel]) => (first:Bool, last:Bool, done: Bool)`<br>
-  **firstlast** `(ValidIO[TLChannel]) => (first:Bool, last:Bool, done: Bool)`<br>
-  **count** `(TLChannel, fire:Bool) => (first:Bool, last:Bool, done: Bool, count:UInt)`<br>
-  **count** `(DecoupledIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, count:UInt)`<br>
-  **count** `(ValidIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, count:UInt)`<br>
-  <br>For the following, `addr = count << log2Ceil(beatBytes)`, the addrress inside a burst.<br>
-  **addr_inc** `(TLChannel, fire:Bool) => (first:Bool, last:Bool, done: Bool, addr:UInt)`<br>
-  **addr_inc** `(DecoupledIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, addr:UInt)`<br>
-  **addr_inc** `(ValidIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, addr:UInt)`<br>
+  **first**, **last** and **done**<br>
+  `(TLChannel, fire:Bool) => Bool`<br>
+  `(DecoupledIO[TLChannel]) => Bool`<br>
+  `(ValidIO[TLChannel]) => Bool`<br>
+  **firstlast**<br>
+  `(TLChannel, fire:Bool) => (first:Bool, last:Bool, done: Bool)`<br>
+  `(DecoupledIO[TLChannel]) => (first:Bool, last:Bool, done: Bool)`<br>
+  `(ValidIO[TLChannel]) => (first:Bool, last:Bool, done: Bool)`<br>
+  **count**<br>
+  `(TLChannel, fire:Bool) => (first:Bool, last:Bool, done: Bool, count:UInt)`<br>
+  `(DecoupledIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, count:UInt)`<br>
+  `(ValidIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, count:UInt)`<br>
+  **addr_inc**<br>
+  `(TLChannel, fire:Bool) => (first:Bool, last:Bool, done: Bool, addr:UInt)`<br>
+  `(DecoupledIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, addr:UInt)`<br>
+  `(ValidIO[TLChannel]) => (first:Bool, last:Bool, done: Bool, addr:UInt)`<br>
+  The return value `addr` is the address inside a burst (`addr = count << log2Ceil(beatBytes)`)
 
 class TLEdgeOut
 ---------------------
@@ -79,58 +75,139 @@ class TLEdgeOut(
   extends TLEdge(client, manager)
 ~~~
 
-+ Arguments:<br>
-  **fromSrc** `UInt` source identifier.<br>
-  **toAddr** `UInt` target address.<br>
-  **lgSize** `UInt` transaction size in `log2(Bytes)`.<br>
-  **growPerm**, **shrinkPerm**, **reportPerm** and **param** `UInt` packet parameter.<br>
-  **data**, `UInt` data.<br>
-  **mask**, `UInt` write byte mask.<br>
-  **atomic**, `UInt` type of atomic packets.
-  **error**, `Bool` error acknowledgement.
-+ Return value:<br>
-  **legal** `Boolean` Transaction type is supported and the target address is legal.<br>
-  **packet** `TLBundleA`, `TLBundleC` or `TLBundleE` the generated packet.
-+ **TLBundleA**<br>
-  **Acquire** `(fromSrc, toAddr, lgSize, growPerm) => (legal, packet)`<br>
-  **Get** `(fromSrc, toAddr, lgSize) => (legal, packet)`<br>
-  **Put** `(fromSrc, toAddr, lgSize, data) => (legal, packet)`<br>
-  **Put** `(fromSrc, toAddr, lgSize, data, mask) => (legal, packet)`<br>
-  **Arithmetic** `(fromSrc, toAddr, lgSize, data, atomic) => (legal, packet)`<br>
-  **Logical** `(fromSrc, toAddr, lgSize, data, atomic) => (legal, packet)`<br>
-  **Hint** `(fromSrc, toAddr, lgSize, param) => (legal, packet)`
-+ **TLBundleC**
-  + **Release**<br>
-  `(fromSrc, toAddr, lgSize, shrinkPerm) => (legal, packet)`<br>
-  `(fromSrc, toAddr, lgSize, shrinkPerm, data) => (legal, packet)`
-  + **ProbeAck**<br>
-  `(b: TLBundleB, reportPerm) => packet`<br>
-  `(b: TLBundleB, reportPerm, data: UInt) => packet`<br>
-  `(fromSrc, toAddr, lgSize, reportPerm) => packet`<br>
-  `(fromSrc, toAddr, lgSize, reportPerm, data) => packet`
-  + **AccessAck**<br>
-  `(b: TLBundleB) => packet`<br>
-  `(b: TLBundleB, data: UInt) => packet`<br>
-  `(b: TLBundleB, error: Bool) => packet`<br>
-  `(b: TLBundleB, data: UInt, error: Bool) => packet`<br>
-  `(fromSrc, toAddr, lgSize) => packet`<br>
-  `(fromSrc, toAddr, lgSize, data) => packet`<br>
-  `(fromSrc, toAddr, lgSize, error) => packet`<br>
-  `(fromSrc, toAddr, lgSize, data, error) => packet`
-  + **HintAck**<br>
-  `(b: TLBundleB) => TLBundleC`<br>
-  `(fromSrc, toAddr, lgSize) => packet`
-+ **TLBundleE**<br>
-  **GrantAck** `(b: TLBundleD) => packet`<br>
-  **GrantAck** `(toSink: UInt) => packet`<br>
+Arguments:
 
+| name       |  type  |  description                    |
+| :--        | :--:   | :--                             |
+| fromSrc    | UInt   | source identifier               |
+| toAddr     | UInt   | target address                  |
+| lgSize     | UInt   | transaction size in log2 bytes  |
+| growPerm   | UInt   | parameter for Acquire           |
+| shrinkPerm | UInt   | parameter for Release           |
+| reportPerm | UInt   | parameter for ProbeAck          |
+| param      | UInt   | parameter for Hint              |
+| data       | UInt   | payload                         |
+| mask       | UInt   | write byte mask                 |
+| atomic     | UInt   | type of atomic packets          |
+| error      | Bool   | error acknowledgement           |
 
+Return value:
+
+| name       |  type     |  description                                                  |
+| :--        | :--:      | :--                                                           |
+| legal      | Boolean   | transaction type is supported and the target address is legal |
+| packetA    | TLBundleA | generated packet for channel A                                |
+| packetC    | TLBundleC | generated packet for channel C                                |
+| packetE    | TLBundleE | generated packet for channel E                                |
+
++ Packet generators for channel A
+
+  **Acquire** `(fromSrc, toAddr, lgSize, growPerm) => (legal, packetA)`<br>
+  **Get** `(fromSrc, toAddr, lgSize) => (legal, packetA)`<br>
+  **Put** `(fromSrc, toAddr, lgSize, data) => (legal, packetA)`<br>
+  **Put** `(fromSrc, toAddr, lgSize, data, mask) => (legal, packetA)`<br>
+  **Arithmetic** `(fromSrc, toAddr, lgSize, data, atomic) => (legal, packetA)`<br>
+  **Logical** `(fromSrc, toAddr, lgSize, data, atomic) => (legal, packetA)`<br>
+  **Hint** `(fromSrc, toAddr, lgSize, param) => (legal, packetA)`
+
++ Packet generators for channel C
+
+  **Release**<br>
+  `(fromSrc, toAddr, lgSize, shrinkPerm) => (legal, packetC)`<br>
+  `(fromSrc, toAddr, lgSize, shrinkPerm, data) => (legal, packetC)`<br>
+  **ProbeAck**<br>
+  `(b: TLBundleB, reportPerm) => packetC`<br>
+  `(b: TLBundleB, reportPerm, data: UInt) => packetC`<br>
+  `(fromSrc, toAddr, lgSize, reportPerm) => packetC`<br>
+  `(fromSrc, toAddr, lgSize, reportPerm, data) => packetC`<br>
+  **AccessAck**<br>
+  `(b: TLBundleB) => packetC`<br>
+  `(b: TLBundleB, data: UInt) => packetC`<br>
+  `(b: TLBundleB, error: Bool) => packetC`<br>
+  `(b: TLBundleB, data, error) => packetC`<br>
+  `(fromSrc, toAddr, lgSize) => packetC`<br>
+  `(fromSrc, toAddr, lgSize, data) => packetC`<br>
+  `(fromSrc, toAddr, lgSize, error) => packetC`<br>
+  `(fromSrc, toAddr, lgSize, data, error) => packetC`<br>
+  **HintAck** `(b: TLBundleB) => packetC`<br>
+  **HintAck** `(fromSrc, toAddr, lgSize) => packetC`
+
++ Packet generators for Channel E
+
+  **GrantAck** `(b: TLBundleD) => packetE`<br>
+  **GrantAck** `(toSink: UInt) => packetE`<br>
+
+class TLEdgeIn
+---------------------
+*Packet generator for upwards channels (B/D).*
+
+~~~scala
+class TLEdgeIn(
+  client:  TLClientPortParameters,
+  manager: TLManagerPortParameters)
+  extends TLEdge(client, manager)
+~~~
+
+Arguments:
+
+| name       |  type  |  description                    |
+| :--        | :--:   | :--                             |
+| fromAddr   | UInt   | source address                  |
+| fromSink   | UInt   | sink identifier                 |
+| toSrc      | UInt   | target identifier               |
+| lgSize     | UInt   | transaction size in log2 bytes  |
+| capPerm    | UInt   | parameter for Probe/Grant       |
+| param      | UInt   | parameter for Hint              |
+| data       | UInt   | payload                         |
+| mask       | UInt   | write byte mask                 |
+| atomic     | UInt   | type of atomic packets          |
+| error      | Bool   | error acknowledgement           |
+
+Return value:
+
+| name       |  type     |  description                                                  |
+| :--        | :--:      | :--                                                           |
+| legal      | Boolean   | transaction type is supported and the target address is legal |
+| packetB    | TLBundleB | generated packet for channel B                                |
+| packetD    | TLBundleD | generated packet for channel D                                |
+
++ Packet generators for channel B
+
+  **Probe** `(fromAddr, toSrc, lgSize, capPerm) => (legal, packetB)`<br>
+  **Get** `(fromAddr, toSrc, lgSize) => (legal, packetB)`<br>
+  **Put** `(fromAddr, toSrc, lgSize, data) => (legal, packetB)`<br>
+  **Put** `(fromAddr, toSrc, lgSize, data, mask) => (legal, packetB)`<br>
+  **Arithmetic** `(fromAddr, toSrc, lgSize, data, atomic) => (legal, packetB)`<br>
+  **Logical** `(fromAddr, toSrc, lgSize, data, atomic) => (legal, packetB)`<br>
+  **Hint** `(fromAddr, toSrc, lgSize, param) => (legal, packetB)`
+
++ Packet generators for channel D
+
+  **Grant**<br>
+  `(fromAddr, fromSink, toSrc, lgSize, capPerm) => packetD`<br>
+  `(fromAddr, fromSink, toSrc, lgSize, capPerm, error) => packetD`<br>
+  `(fromAddr, fromSink, toSrc, lgSize, capPerm, data) => packetD`<br>
+  `(fromAddr, fromSink, toSrc, lgSize, capPerm, data, error) => packetD`
+
+  **Release** `(fromAddr, fromSink, toSrc, lgSize) => packetD`<br>
+  **AccessAck**<br>
+  `(a: TLBundleA, fromSink) => packetD`<br>
+  `(a: TLBundleA, fromSink, data) => packetD`<br>
+  `(a: TLBundleA, fromSink, error) => packetD`<br>
+  `(a: TLBundleA, fromSink, data, error) => packetD`<br>
+  `(fromAddr fromSink, toSrc, lgSize) => packetD`<br>
+  `(fromAddr fromSink, toSrc, lgSize, data) => packetD`<br>
+  `(fromAddr fromSink, toSrc, lgSize, error) => packetD`<br>
+  `(fromAddr fromSink, toSrc, lgSize, data, error) => packetD`<br>
+
+  **HintAck** `(a:TLBundleA, fromSink) => packetD`<br>
+  **HintAck** `(fromAddr fromSink, toSrc, lgSize) => packetD`<br>
 
 
 **********************
 
 ```scala
-last_modified = 04/04/2017
+last_modified = 05/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
