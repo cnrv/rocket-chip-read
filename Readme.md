@@ -15,7 +15,7 @@ The Rocket multi-core generator.
 --------------
 Definitions for the LazyModule design patterns.
 
-[regmapper]
+[regmapper](regmapper.md)
 --------------
 
 [rocket](rocket.md)
@@ -42,7 +42,7 @@ Local helper package.
 **********************
 
 ```scala
-last_modified = 14/03/2017
+last_modified = 06/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
