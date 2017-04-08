@@ -38,6 +38,7 @@ class RegisterWriteCrossing[T <: Data](gen: T, sync: Int = 3) extends Module
 
 | name                   | type                  | direction  | description                       |
 | :---                   | :--:                  | :--:       | :---                              |
+|||||
 | master\_clock          | Clock                 | I          | clock of the master domain        |
 | master\_reset          | Bool                  | I          | reset of the master domain        |
 | master\_port.request   | DecoupledIO\[T\]      | I          | request from master               |
@@ -45,8 +46,7 @@ class RegisterWriteCrossing[T <: Data](gen: T, sync: Int = 3) extends Module
 | master\_bypass         | Bool                  | I          | ignore the next request           |
 |||||
 | slave\_clock           | Clock                 | I          | clock of the slave domain         |
-
-
+| slave\_reset           | Bool                  | I          | reset of the slave domain         |
 
 
 **********************
