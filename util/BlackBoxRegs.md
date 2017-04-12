@@ -38,13 +38,45 @@ always @(posedge clk or posedge rst)
   else if (en) q <= d;
 ~~~
 
+object AsyncResetReg
+-------------
+*Asynchronously reset register generators.*
 
+Arguments:
+
+| name       |  type          |  description                    |
+| :--        | :--:           | :--                             |
+| clk        | Clock          | clock                           |
+| rst        | Bool           | positive active reset           |
+| d          | Bool           | 1-bit register input            |
+| q          | Bool           | 1-bit register output           |
+| init       | Boolean        | 1-bit register initial value    |
+| updateData | UInt           | register input                  |
+| outputData | UInt           | register output                 |
+| resetData  | BigInt         | register initial value          |
+| enable     | Bool           | register enable                 |
+| name       | Option[String] | Verilog entity name             |
+
++ 1-bit register generators:<br>
+  **apply** `(d, clk, rst, init, name) => q`<br>
+  **apply** `(d, clk, rst) => q`<br>
+  **apply** `(d, clk, rst, name) => q`
+
++ register generators:<br>
+  **apply** `(updateData, resetData, enable) => outputData`<br>
+  **apply** `(updateData, resetData, enable, name) => outputData`<br>
+  **apply** `(updateData, resetData) => outputData`<br>
+  **apply** `(updateData, resetData, name) => outputData`<br>
+  **apply** `(updateData, enable) => outputData`<br>
+  **apply** `(updateData, enable, name) => outputData`<br>
+  **apply** `(updateData) => outputData`<br>
+  **apply** `(updateData, name) => outputData`<br>
 
 
 **********************
 
 ```scala
-last_modified = 10/04/2017
+last_modified = 12/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
