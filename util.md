@@ -6,6 +6,11 @@
 
 [Arbiters](util/Arbiters.md)
 ----------------
+*Rocket extended arbiters.*
+
+[AsyncBundle](util/AsyncBundle.md)
+----------------
+*Unified cross clock-domain queue interface.*
 
 [AsyncQueue](util/AsyncQueue.md)
 ----------------

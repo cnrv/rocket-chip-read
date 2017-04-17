@@ -1,7 +1,7 @@
 [Rocket](../Readme.md)/[util](../util.md)/[Arbiters](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util/Arbiters.scala)
 ========================
 *Rocket extended arbiters.*
-*Utilizing the Chisel2 compatability layer*
+*Utilizing the Chisel2 compatability layer.*
 
 ************************
 
