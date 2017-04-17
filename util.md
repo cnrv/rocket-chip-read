@@ -4,6 +4,8 @@
 
 **********************
 
+[Arbiters](util/Arbiters.md)
+----------------
 
 [AsyncQueue](util/AsyncQueue.md)
 ----------------
