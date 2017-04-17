@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[util](../util.md)/[BlackBoxRegs](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util/BlackBoxRegs.scala)
 ========================
-
+*Asynchronous reset registers.*
 
 **********************
 
@@ -76,7 +76,7 @@ Arguments:
 **********************
 
 ```scala
-last_modified = 12/04/2017
+last_modified = 17/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```

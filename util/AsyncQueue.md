@@ -4,7 +4,7 @@
 
 **********************
 
-class AsyncQueue extends [Crossing](Crossing.md)
+class AsyncQueue extends [Crossing](Crossing.md#class-crossing)
 ------------------
 *A cross clock domain queue.*
 
