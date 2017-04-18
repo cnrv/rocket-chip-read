@@ -15,9 +15,11 @@ class AsyncResetReg extends BlackBox
 This is a Verilog blackbox of the following:
 
 ~~~verilog
-always @(posedge clk or posedge rst)
-  if (rst)     q <= 1'b0;
-  else if (en) q <= d;
+module AsyncResetReg(input clk, rst, en, d, output reg q);
+  always @(posedge clk or posedge rst)
+    if (rst)     q <= 1'b0;
+    else if (en) q <= d;
+endmodule // AsyncResetReg
 ~~~
 
 class AsyncResetRegVec
@@ -31,11 +33,11 @@ class AsyncResetRegVec(val w: Int, val init: BigInt) extends Module
 This is a Verilog blackbox of the following:
 
 ~~~verilog
-logic [w-1:0] q;
-
-always @(posedge clk or posedge rst)
-  if (rst)     q <= init;
-  else if (en) q <= d;
+module AsyncResetRegVec#(w,init) (input clk, rst, en, input [w-1:0] d, output reg [w-1:0] q);
+  always @(posedge clk or posedge rst)
+    if (rst)     q <= init;
+    else if (en) q <= d;
+endmodule // AsyncResetRegVec
 ~~~
 
 object AsyncResetReg
@@ -76,7 +78,7 @@ Arguments:
 **********************
 
 ```scala
-last_modified = 17/04/2017
+last_modified = 18/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```

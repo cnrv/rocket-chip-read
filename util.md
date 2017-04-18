@@ -20,13 +20,18 @@
 ----------------
 *Asynchronous reset registers.*
 
+[ClockDivider](util/ClockDivider.md)
+----------------
+*Verilog blackbox of clock divider.*
+
 [Crossing](util/Crossing.md)
 ----------------
+
 
 **********************
 
 ```scala
-last_modified = 17/04/2017
+last_modified = 18/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
