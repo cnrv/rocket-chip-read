@@ -24,6 +24,10 @@
 ----------------
 *Verilog blackbox of clock divider.*
 
+[Counters](util/Counters.md)
+---------------
+*Counters.*
+
 [Crossing](util/Crossing.md)
 ----------------
 
