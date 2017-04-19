@@ -28,15 +28,19 @@ object TLImp
 
 ### Implementation of abstract methods defined in [`abstract class NodeImp`](../../diplomacy/Nodes.md).
 
-+ **edgeO** `(TLClientPortParameters, TLManagerPortParameters) => TLEdgeOut`
-+ **edgeI** `(TLClientPortParameters, TLManagerPortParameters) => TLEdgeIn`
++ **edgeO** `(TLClientPortParameters, TLManagerPortParameters) => TLEdgeOut`<br>
+  Function to get the downwards packet generator (channel A/C/E).
++ **edgeI** `(TLClientPortParameters, TLManagerPortParameters) => TLEdgeIn`<br>
+  Function to get the upwards packet generator (channel B/D).
 + **bundleO** `(TLEdgeOut) => TLBundle`
+  Function to get the downwrads channel bundle (channel A/C/E).
 + **bundleI** `(TLEdgeIn) => TLBundle`
+  Function to get the upwards channel bundle (channel B/D).
 + **colour** `_ => "#000000"` black
-+ **connect** `(() => Seq[(TLEdgeIn, TLBundle, TLBundle)]) => (Option[LazyModule], () => Unit)`
-
-    Overriden callback to set the bus monitor and port connections.
-    Depending on parameter [`TLMonitorBuilder`](../../rocketchip/Configs.md), `Option[LazyModule]` is a `TLMonitor`.
++ **connect** `(bindings:() => Seq[(TLEdgeIn, TLBundle, TLBundle)]) => (monitor:Option[LazyModule], bind:() => Unit)`<br>
+  _bindings_: (packet generator for monitor, input TileLink port, output TileLink port) get the TileLink channel pairs that needs to be connected.<br>
+  _monitor_: The monitor to be connected. Depending on parameter [`TLMonitorBuilder`](../../rocketchip/Configs.md)<br>
+  _bind_: The actual port binding procedure to be processed later.
 
 ### TileLink Extension of basic Nodes
 
@@ -113,7 +117,7 @@ object TLRationalImp
 **********************
 
 ```scala
-last_modified = 29/03/2017
+last_modified = 19/04/2017
 authors       = Wei Song <wsong83@gmail.com>
 license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
 ```
