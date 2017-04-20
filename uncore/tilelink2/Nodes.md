@@ -5,14 +5,17 @@
 
 *TileLink Nodes*
 
-* [Synchronous TileLink Nodes](#object-tlimp)
+* [Synchronous TileLink Nodes](#synchronous-tilelink-nodes)
 * [Asynchronous TileLink Nodes](#object-tlasyncimp)
 * [Rational TileLink Nodes](#object-tlrationalimp)
 
 **********************
 
-object TLImp
----------------
+Synchronous TileLink Nodes
+----------------
+
+### object TLImp
+
 *General TileLink module generator.*
 
 ~~~scala
@@ -26,7 +29,7 @@ object TLImp
         ]
 ~~~
 
-### Implementation of abstract methods defined in [`abstract class NodeImp`](../../diplomacy/Nodes.md).
+#### Implementation of abstract methods defined in [`abstract class NodeImp`](../../diplomacy/Nodes.md).
 
 + **edgeO** `(TLClientPortParameters, TLManagerPortParameters) => TLEdgeOut`<br>
   Function to get the downwards packet generator (channel A/C/E).
@@ -42,13 +45,53 @@ object TLImp
   _monitor_: The monitor to be connected. Depending on parameter [`TLMonitorBuilder`](../../rocketchip/Configs.md)<br>
   _bind_: The actual port binding procedure to be processed later.
 
-### TileLink Extension of basic Nodes
+### case class TLIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynoded-u-eo-ei-b--data)
 
-+ **case class TLIdentityNode extends IdentityNode(TLImp)**
-+ **case class TLClientNode extends SourceNode(TLImp)**
-+ **case class TLManagerNode extends SinkNode(TLImp)**
-+ **case class TLAdapterNode extends AdapterNode(TLImp)**
-+ **case class TLNexusNode extends NexusNode(TLImp)**
+~~~scala
+case class TLIdentityNode() extends IdentityNode(TLImp)
+~~~
+
+### case class TLClientNode extends [SourceNode](../../diplomacy/Nodes.md#class-sourcenoded-u-eo-ei-b-data)
+
+~~~scala
+case class TLClientNode(portParams: Seq[TLClientPortParameters]) extends SourceNode(TLImp)(portParams)
+~~~
+
+#### object TLClientNode
+
++ **apply** `(TLClientParameters) => TLClientNode`
+
+### case class TLManagerNode extends [SinkNode](../../diplomacy/Nodes.md#class-sinknoded-u-eo-ei-b-data)
+
+~~~scala
+case class TLManagerNode(portParams: Seq[TLManagerPortParameters]) extends SinkNode(TLImp)(portParams)
+~~~
+
+#### object TLManagerNode
+
++ **apply** `(beatBytes: Int, TLManagerParameters) => TLManagerNode`<br>
+  _minLatency_ is set to 0.
+
+### case class TLAdapterNode extends [AdapterNode](../../diplomacy/Nodes.md#class-adapternoded-u-eo-ei-b-data)
+
+~~~scala
+case class TLAdapterNode(
+  clientFn:  TLClientPortParameters  => TLClientPortParameters,
+  managerFn: TLManagerPortParameters => TLManagerPortParameters,
+  num:       Range.Inclusive = 0 to 999)
+  extends AdapterNode(TLImp)(clientFn, managerFn, num)
+~~~
+
+### case class TLNexusNode extends [NexusNode](../../diplomacy/Nodes.md#class-nexusnoded-u-eo-ei-b-data)
+
+~~~scala
+case class TLNexusNode(
+  clientFn:        Seq[TLClientPortParameters]  => TLClientPortParameters,
+  managerFn:       Seq[TLManagerPortParameters] => TLManagerPortParameters,
+  numClientPorts:  Range.Inclusive = 1 to 999,
+  numManagerPorts: Range.Inclusive = 1 to 999)
+  extends NexusNode(TLImp)(clientFn, managerFn, numClientPorts, numManagerPorts)
+~~~
 
 object TLAsyncImp
 ------------
@@ -114,10 +157,5 @@ object TLRationalImp
 + **case class TLRationalSinkNode extends MixedAdapterNode(TLRationalImp, TLImp)**
 
 
-**********************
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/04/2017</sub></p>
 
-```scala
-last_modified = 19/04/2017
-authors       = Wei Song <wsong83@gmail.com>
-license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
-```
