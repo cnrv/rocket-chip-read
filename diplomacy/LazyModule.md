@@ -9,7 +9,7 @@ abstract class LazyModule
 
 + **bindings** `List[() => Unit]` A list of port connection functions called during instantiation.
 + *children: List[LazyModule]*: list of inner components (LazyModules).
-+ *nodes: List[BaseNode]*: ?? what is the difference between node and module?
++ **nodes** `List[BaseNode]` the nodes inside this module (think about ports of a crossbar)
 + *info: SourceInfo*: source information (line number, etc.) for better error/warning messages.
 + *parent: Option[LazyModule]*: parent module.
 + *suggestName: (x:String) => Unit*: set the suggested module name?
@@ -42,10 +42,6 @@ abstract class LazyModuleImp
 
 
 
-**********************
 
-```scala
-last modified = 14/03/2017
-authors       = Wei Song <wsong83@gmail.com>
-license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
-```
+
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 21/04/2017</sub></p>

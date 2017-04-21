@@ -1,5 +1,6 @@
 [Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Nodes](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Nodes.scala)
 =====================
+*TileLink nodes.*
 
 **********************
 
@@ -93,6 +94,13 @@ case class TLNexusNode(
   extends NexusNode(TLImp)(clientFn, managerFn, numClientPorts, numManagerPorts)
 ~~~
 
+### case class TLOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnoded-u-eo-ei-b-data)
+### case class TLInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnoded-u-eo-ei-b-data)
+### case class TLBlindOutputNode extends [BlindOutputNode](../../diplomacy/Nodes.md#class-blindoutputnoded-u-eo-ei-b-data)
+### case class TLBlindInputNode extends [BlindInputNode](../../diplomacy/Nodes.md#class-blindinputnoded-u-eo-ei-b-data)
+### case class TLInternalOutputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internaloutputnoded-u-eo-ei-b-data)
+### case class TLInternalInputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internalinputnoded-u-eo-ei-b-data)
+
 object TLAsyncImp
 ------------
 *Asynch TileLink module generator.*
@@ -157,5 +165,4 @@ object TLRationalImp
 + **case class TLRationalSinkNode extends MixedAdapterNode(TLRationalImp, TLImp)**
 
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/04/2017</sub></p>
-
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 21/04/2017</sub></p>
