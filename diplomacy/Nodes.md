@@ -49,7 +49,7 @@ trait OutwardNodeImp[DO, UO, EO, BO <: Data]
 
 abstract class NodeImp
 --------------------------------
-*Abstract typeclass of node parameter*
+*Abstract root of nodes*
 
 ~~~scala
 abstract class NodeImp[D, U, EO, EI, B <: Data]
