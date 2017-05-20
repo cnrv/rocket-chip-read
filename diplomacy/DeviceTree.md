@@ -13,10 +13,5 @@ object DTS
 
 
 
-**********************
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 14/03/2017</sub></p>
 
-```scala
-last modified = 14/03/2017
-authors       = Wei Song <wsong83@gmail.com>
-license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
-```

@@ -4,38 +4,20 @@
 
 **********************
 
-[Arbiters](util/Arbiters.md)
-----------------
-*Rocket extended arbiters.*
-
-[AsyncBundle](util/AsyncBundle.md)
-----------------
-*Unified cross clock-domain queue interface.*
-
-[AsyncQueue](util/AsyncQueue.md)
-----------------
-*An cross clock-domain queue.*
-
-[BlackBoxRegs](util/BlackBoxRegs.md)
-----------------
-*Asynchronous reset registers.*
-
-[ClockDivider](util/ClockDivider.md)
-----------------
-*Verilog blackbox of clock divider.*
-
-[Counters](util/Counters.md)
----------------
-*Counters.*
-
-[Crossing](util/Crossing.md)
-----------------
++ [Arbiters](util/Arbiters.md)<br>
+  Rocket extended arbiters.
++ [AsyncBundle](util/AsyncBundle.md)<br>
+  Unified cross clock-domain queue interface.
++ [AsyncQueue](util/AsyncQueue.md)<br>
+  An cross clock-domain queue.
++ [BlackBoxRegs](util/BlackBoxRegs.md)<br>
+  Asynchronous reset registers.
++ [ClockDivider](util/ClockDivider.md)<br>
+  Verilog blackbox of clock divider.
++ [Counters](util/Counters.md)<br>
+  Counters.
++ [Crossing](util/Crossing.md)
 
 
-**********************
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 18/04/2017</sub></p>
 
-```scala
-last_modified = 18/04/2017
-authors       = Wei Song <wsong83@gmail.com>
-license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
-```

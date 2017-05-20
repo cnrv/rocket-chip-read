@@ -16,10 +16,6 @@ object TLArbiter
 + **apply** `[T <: Data](policy: Policy)(sink: DecoupledIO[T], sources: (UInt, DecoupledIO[T])*) => Unit`<br>
   Use the specified policy to arbitrate sources. Support bursts.
 
-**********************
 
-```scala
-last_modified = 19/04/2017
-authors       = Wei Song <wsong83@gmail.com>
-license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
-```
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 19/04/2017</sub></p>
+

@@ -120,10 +120,5 @@ When safe is set high, sink side is able to read when the write pointer is valid
 (sync+1 cycle delay).
 
 
-**********************
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 16/04/2017</sub></p>
 
-```scala
-last_modified = 16/04/2017
-authors       = Wei Song <wsong83@gmail.com>
-license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
-```

@@ -49,10 +49,5 @@ class RegisterWriteCrossing[T <: Data](gen: T, sync: Int = 3) extends Module
 | slave\_reset           | Bool                  | I          | reset of the slave domain         |
 
 
-**********************
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 08/04/2017</sub></p>
 
-```scala
-last_modified = 08/04/2017
-authors       = Wei Song <wsong83@gmail.com>
-license       = CC-BY <https://creativecommons.org/licenses/by/3.0/>
-```
