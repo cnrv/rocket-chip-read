@@ -1,5 +1,5 @@
 
-[Rocket](Readme.md)/[diplomacy](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/diplomacy)
+[Rocket](Readme.md)/[diplomacy](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/diplomacy)
 ========================
 *Definitions for the LazyModule design patterns.*
 

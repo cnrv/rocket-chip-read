@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[LazyModule](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/LazyModule.scala)
+[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[LazyModule](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/diplomacy/LazyModule.scala)
 =====================
 
 **********************

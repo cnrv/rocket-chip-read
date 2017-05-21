@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[util](../util.md)/[ClockDivider](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util/ClockDivider.scala)
+[Rocket](../Readme.md)/[util](../util.md)/[ClockDivider](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/util/ClockDivider.scala)
 ========================
 *Verilog blackbox of clock divider.*
 *Utilizing the Chisel2 compatability layer.*

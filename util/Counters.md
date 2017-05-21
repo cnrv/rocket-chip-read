@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[util](../util.md)/[Counters](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util/Counters.scala)
+[Rocket](../Readme.md)/[util](../util.md)/[Counters](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/util/Counters.scala)
 ========================
 *Counters.*
 *Utilizing the Chisel2 compatability layer.*

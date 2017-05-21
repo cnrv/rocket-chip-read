@@ -1,4 +1,4 @@
-[Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Edges](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Edges.scala)
+[Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Edges](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Edges.scala)
 =====================
 
 **********************

@@ -1,4 +1,4 @@
-Notes for [Rocket-Chip](https://github.com/ucb-bar/rocket-chip)
+Notes for [Rocket-Chip](https://github.com/freechipsproject/rocket-chip)
 ================
 
 **************

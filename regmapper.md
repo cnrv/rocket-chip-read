@@ -1,4 +1,4 @@
-[Rocket](Readme.md)/[regmapper](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/regmapper)
+[Rocket](Readme.md)/[regmapper](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/regmapper)
 ========================
 
 

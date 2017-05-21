@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Parameters](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/Parameters.scala)
+[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Parameters](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/diplomacy/Parameters.scala)
 =====================
 
 **********************

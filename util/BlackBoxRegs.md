@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[util](../util.md)/[BlackBoxRegs](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util/BlackBoxRegs.scala)
+[Rocket](../Readme.md)/[util](../util.md)/[BlackBoxRegs](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/util/BlackBoxRegs.scala)
 ========================
 *Asynchronous reset registers.*
 

@@ -1,4 +1,4 @@
-[Rocket](Readme.md)/[uncore](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/uncore)
+[Rocket](Readme.md)/[uncore](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/uncore)
 ========================
 *On-chip interconnects.*
 

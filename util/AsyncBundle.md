@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[util](../util.md)/[AsyncBundle](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util/AsyncBundle.scala)
+[Rocket](../Readme.md)/[util](../util.md)/[AsyncBundle](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/util/AsyncBundle.scala)
 ========================
 *Unified cross clock-domain queue interface.*
 *Utilizing the Chisel2 compatability layer.*

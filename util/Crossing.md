@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[util](../util.md)/[Crossing](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util/Crossing.scala)
+[Rocket](../Readme.md)/[util](../util.md)/[Crossing](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/util/Crossing.scala)
 ========================
 
 

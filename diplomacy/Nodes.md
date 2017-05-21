@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Node](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/Nodes.scala)
+[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Node](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/diplomacy/Nodes.scala)
 =====================
 *The base classes of nodes on on-chip interconnects.*
 

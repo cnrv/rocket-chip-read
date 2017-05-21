@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[regmapper](../regmapper.md)/[RegisterCrossing](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/regmapper/RegisterCrossing.scala)
+[Rocket](../Readme.md)/[regmapper](../regmapper.md)/[RegisterCrossing](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/regmapper/RegisterCrossing.scala)
 ========================
 *Register interface for crossing power domains.*
 

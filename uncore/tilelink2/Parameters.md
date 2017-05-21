@@ -1,4 +1,4 @@
-[Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Parameters](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Parameters.scala)
+[Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Parameters](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Parameters.scala)
 =====================
 
 *TileLink2 interconnection parameters.*

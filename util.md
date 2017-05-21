@@ -1,4 +1,4 @@
-[Rocket](Readme.md)/[util](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/util)
+[Rocket](Readme.md)/[util](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/util)
 ========================
 
 

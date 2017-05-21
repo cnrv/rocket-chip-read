@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[uncore](../uncore.md)/[tilelink2](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/uncore/tilelink2)
+[Rocket](../Readme.md)/[uncore](../uncore.md)/[tilelink2](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/uncore/tilelink2)
 ========================
 *The new TileLink intercoonect.*
 

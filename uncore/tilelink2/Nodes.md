@@ -1,4 +1,4 @@
-[Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Nodes](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Nodes.scala)
+[Rocket](../../Readme.md)/[uncore](../../uncore.md)/[tilelink2](../tilelink2.md)/[Nodes](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/uncore/tilelink2/Nodes.scala)
 =====================
 *TileLink nodes.*
 

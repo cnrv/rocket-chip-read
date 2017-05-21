@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[rocketchip](../rocketchip.md)/[Configs](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/rocketchip/Configs.scala)
+[Rocket](../Readme.md)/[rocketchip](../rocketchip.md)/[Configs](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/rocketchip/Configs.scala)
 =====================
 
 *Available configuration parameters for the Rocket-Chip generator.*

@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[regmapper](../regmapper.md)/[RegField](https://github.com/ucb-bar/rocket-chip/tree/master/src/main/scala/regmapper/RegField.scala)
+[Rocket](../Readme.md)/[regmapper](../regmapper.md)/[RegField](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/regmapper/RegField.scala)
 ========================
 
 

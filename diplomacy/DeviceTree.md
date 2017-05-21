@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[DeviceTree](https://github.com/ucb-bar/rocket-chip/blob/master/src/main/scala/diplomacy/DeviceTree.scala)
+[Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[DeviceTree](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/diplomacy/DeviceTree.scala)
 =====================
 
 **********************
