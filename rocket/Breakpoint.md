@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[rocket](../rocket.md)/[Breakpoint](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/rocket/Breakpoint.scala)
 ========================
-*Brach target buffer.*
+*Breakpoint unit.*
 
 *****************
 
