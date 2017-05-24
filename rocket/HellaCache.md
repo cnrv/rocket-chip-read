@@ -6,6 +6,7 @@
 
 + [Definitions](#definitions)
 + [Base for L1 data caches](#base-for-l1-data-caches)
++ [Traits for Tiles](#traits-for-tiles)
 
 *****************
 Definitions
@@ -45,6 +46,32 @@ Definitions
 | ordered                | Bool             | I          | load/store fence is enforced          |
 | perf                   | HellaCachePerfEvents | I      | collection performance events         |
 
+### class L1Metadata
+*Base for metadata entry*
+
++ **coh** `ClientMetadata` The actual metadata of each cache line.
++ **tag** `UInt` Address tag.
+
+### class L1MetadataArray
+*L1 metadata array*
+
+~~~scala
+class L1MetadataArray[T <: L1Metadata](onReset: () => T)(implicit p: Parameters)
+    extends L1HellaCacheModule()(p)
+~~~
+
++ I/O, type and parameters
+
+| name                   | type             | direction  | description                           |
+| :---                   | :--:             | :--:       | :---                                  |
+| T                      | <: L1Metadata    | type       | the metadata class type               |
+| onReset                | () => T          | param      | reset function for metadata           |
+| p                      | Parameters       | param      | configuration                         |
+| read                   | DecoupledIO[L1MetaReadReq] | I | read request                         |
+| write                  | DecoupledIO[L1MetaWriteReq] | O | write request                       |
+| resp                   | Vec[T]           | O          | read response from all ways           |
+
+
 Base for L1 data caches
 ------------------------
 
@@ -83,9 +110,39 @@ class HellaCacheModule(outer: HellaCache) extends LazyModuleImp(outer)
 ### object HellaCache
 *L1 cache generator function*
 
-+ **apply** `(blocking:Boolean, scratch: () => Option[AAddressSet]) => LazyModule`
++ **apply** `(blocking:Boolean, scratch: () => Option[AAddressSet]) => LazyModule[HellaCacheModule]`
   + *blocking* generate a blocking cache or a scratch pad; otherwise, a non-blocing cache.
   + *scratch* the base address of the scratch pad.
+
+
+Traits for Tiles
+-----------------------------
+
+### trait HasHelaCache
+
+~~~scala
+trait HasHellaCache extends HasTileLinkMasterPort with HasTileParameters
+~~~
+
++ **module** `HasHellaCacheModule`
++ **implicit p** `Parameters` Tile has its own parameter object.
++ **dcache** `LazyModule[HellaCacheModule]`
+
+### trait HasHellaCacheBundle
+
+~~~scala
+trait HasHellaCacheBundle extends HasTileLinkMasterPortBundle
+~~~
+
+### trait HasHellaCacheModule
+
+~~~scala
+trait HasHellaCacheModule extends HasTileLinkMasterPortModule
+~~~
+
++ **dcachePorts** `ListBuffer[HellaCacheIO]` Dynamic built cache requesting channels.
++ **dcacheArb** `Module[HellaCacheArbiter]` The cahnnel arbiter.
+
 
 
 <br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 24/05/2017</sub></p>
