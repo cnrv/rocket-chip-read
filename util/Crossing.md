@@ -26,7 +26,7 @@ class CrossingIO[T <: Data](gen: T) extends Bundle
 | deq                    | DecoupledIO[T]   | O          | sink side write port                  |
 
 
-class Crossing
+abstract class Crossing
 ---------------
 *Base module of cross clock domain modules.*
 
@@ -37,5 +37,5 @@ abstract class Crossing[T <: Data] extends Module {
 ~~~
 
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 17/04/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/05/2017</sub></p>
 

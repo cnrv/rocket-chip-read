@@ -26,7 +26,7 @@ class BusyRegisterCrossing extends Module
 | crossing_request_valid | Bool   | O          | a request forwarded to slave      |
 | crossing_request_ready | Bool   | I          | a request is received by slave    |
 
-RegisterWriteCrossing
+class RegisterWriteCrossing
 -----------------
 *Register crossing write interface module.*
 

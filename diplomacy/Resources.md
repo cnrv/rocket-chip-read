@@ -5,7 +5,7 @@
 
 **********************
 
-case class ResourceAddress(address: Seq[AddressSet], r: Boolean, w: Boolean, x: Boolean)
+case class ResourceAddress
 -----------------
 ```scala
 final case class ResourceAddress(address: Seq[AddressSet], r: Boolean, w: Boolean, x: Boolean)
@@ -19,44 +19,44 @@ final case class ResourceAddress(address: Seq[AddressSet], r: Boolean, w: Boolea
 + **w** `Boolean` writable.
 + **x** `Boolean` executable.
 
-case class ResourceMapping(address: Seq[AddressSet], offset: BigInt)
+case class ResourceMapping
 -----------------------
 ```scala
 final case class ResourceMapping(address: Seq[AddressSet], offset: BigInt) extends ResourceValue
 ```
 
 
-case class ResourceInt(value: BigInt)
+case class ResourceInt
 -----------------------
 ```scala
 final case class ResourceInt(value: BigInt) extends ResourceValue
 ```
 
-case class ResourceString(value: String)
+case class ResourceString
 -----------------------
 ```scala
 final case class ResourceString(value: String) extends ResourceValue
 ```
 
-case class ResourceReference(value: String)
+case class ResourceReference
 -----------------------
 ```scala
 final case class ResourceReference(value: String) extends ResourceValue
 ```
 
-case class ResourceMap(value: Map[String, Seq[ResourceValue]], labels: Seq[String])
+case class ResourceMap
 -----------------------
 ```scala
 final case class ResourceMap(value: Map[String, Seq[ResourceValue]], labels: Seq[String] = Nil)
     extends ResourceValue
 ```
 
-case class Binding(device: Option[Device], value: ResourceValue)
+case class Binding
 ----------------------
 *Bind a device to a resource configuration. If device is None, the value is global.*
 
 
-case class ResourceBindings(map: Map[String, Seq[Binding]])
+case class ResourceBindings
 ----------------------
 *A map of resource bindings.*
 
@@ -64,7 +64,7 @@ case class ResourceBindings(map: Map[String, Seq[Binding]])
 
     Get the bindings of ("int").
 
-case class Description(name: String, mapping: Map[String, Seq[ResourceValue]])
+case class Description
 ----------------------
 *The discription of a device. Serialization friendly?*
 
@@ -111,7 +111,7 @@ trait DeviceRegName
 
     ??
 
-class SimpleDevice(devname: String, devcompat: Seq[String])
+class SimpleDevice
 -------------------
 ```scala
 class SimpleDevice(devname: String, devcompat: Seq[String])
@@ -145,7 +145,7 @@ Description(describeName("memory", resources),
 ```
 
 
-case class Resource(owner: Device, key: String)
+case class Resource
 ----------
 
 + **bind** `(user: Device, value: ResourceValue) => Unit`

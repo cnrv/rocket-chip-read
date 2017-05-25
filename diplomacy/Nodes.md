@@ -180,7 +180,7 @@ class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
   extends MixedNode(inner, outer)(num, num)
 ~~~
 
-class AdapterNode[D, U, EO, EI, B <: Data]
+class AdapterNode
 -----------
 *Base node class for a bus adapter.*
 
