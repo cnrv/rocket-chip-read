@@ -118,7 +118,7 @@ class HellaCacheModule(outer: HellaCache) extends LazyModuleImp(outer)
 Traits for Tiles
 -----------------------------
 
-### trait HasHelaCache
+### trait HasHellaCache
 
 ~~~scala
 trait HasHellaCache extends HasTileLinkMasterPort with HasTileParameters

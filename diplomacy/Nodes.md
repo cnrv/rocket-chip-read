@@ -79,7 +79,7 @@ abstract class BaseNode
 
 
 
-case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
+case class NodeHandle
 ---------------------------
 
 ~~~scala
@@ -101,7 +101,7 @@ case object BIND\_STAR
 *A shared source port?*
 
 
-trait InwardNodeHandle[DI, UI, BI <: Data]
+trait InwardNodeHandle
 ---------------------------
 
 + *inward: InwardNode[DI, UI, BI]*: self object pointer
@@ -118,7 +118,7 @@ trait InwardNodeHandle[DI, UI, BI <: Data]
     Connect this input port to an output multi-port `h`??
 
 
-trait InwardNode[DI, UI, BI <: Data]
+trait InwardNode
 ------------------------
     trait InwardNode[DI, UI, BI <: Data] extends BaseNode with InwardNodeHandle[DI, UI, BI]
 
@@ -132,13 +132,13 @@ trait InwardNode[DI, UI, BI <: Data]
 + *iParams: Seq[UI]*: inner node parameters
 + *bundleIn: Vec[BI]*: inner node bundles
 
-trait OutwardNodeHandle[DO, UO, BO <: Data]
+trait OutwardNodeHandle
 ---------------------------
 
 + *outward: OutwardNode[DO, UO, BO]*: self object pointer
 
 
-trait OutwardNode[DO, UO, BO <: Data]
+trait OutwardNode
 ----------------------------
     trait OutwardNode[DO, UO, BO <: Data] extends BaseNode with OutwardNodeHandle[DO, UO, BO]
 
@@ -153,7 +153,7 @@ trait OutwardNode[DO, UO, BO <: Data]
 + *bundleOut: vec[BO]*: outer node bundles
 
 
-abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data]
+abstract class MixedNode
 ---------------------------
 ~~~scala
 abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
@@ -167,7 +167,7 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + *oPorts: (Int, (Int, InwardNode [DO, UO, BO]))*: mapping from outer node to inner nodes?
 + *iPorts: (Int, (Int, OutwardNode [DO, UO, BO]))*: mapping from inner node to outer nodes?
 
-class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data]
+class MixedAdapterNode
 -----------
 
 ~~~scala
@@ -192,7 +192,7 @@ class AdapterNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
     extends MixedAdapterNode[D, U, EI, B, D, U, EO, B](imp, imp)(dFn, uFn, num)
 ~~~
 
-class NexusNode[D, U, EO, EI, B <: Data]
+class NexusNode
 -----------
 *Base node for a switch node (crossbar, multiplexer ordemultiplexer).*
 
@@ -205,7 +205,7 @@ class NexusNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
     extends MixedNexusNode[D, U, EI, B, D, U, EO, B](imp, imp)(dFn, uFn, numPO, numPI)
 ~~~
 
-class IdentityNode[D, U, EO, EI, B <: Data]
+class IdentityNode
 -----------
 
 ~~~scala
@@ -213,7 +213,7 @@ class IdentityNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
   extends AdapterNode(imp)({s => s}, {s => s})
 ~~~
 
-class OutputNode[D, U, EO, EI, B <: Data]
+class OutputNode
 -------------
 
 ~~~scala
@@ -221,7 +221,7 @@ class OutputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
     extends IdentityNode(imp)
 ~~~
 
-class InputNode[D, U, EO, EI, B <: Data]
+class InputNode
 ----------
 
 ~~~scala
@@ -229,7 +229,7 @@ class InputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
     extends IdentityNode(imp)
 ~~~
 
-class SourceNode[D, U, EO, EI, B <: Data]
+class SourceNode
 ------------
 
 ~~~scala
@@ -237,7 +237,7 @@ class SourceNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(po: Seq
   extends MixedNode(imp, imp)(po.size to po.size, 0 to 0)
 ~~~
 
-class SinkNode[D, U, EO, EI, B <: Data]
+class SinkNode
 -----------
 
 ~~~scala
@@ -247,4 +247,4 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
 
 
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 21/04/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/05/2017</sub></p>

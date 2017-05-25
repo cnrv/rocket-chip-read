@@ -23,6 +23,7 @@ Notes for [Rocket-Chip](https://github.com/freechipsproject/rocket-chip)
 
 *******************
 
++ [Class index](other/index.md)
 + [Chisel operators](other/chisel_op.md)
 
 
