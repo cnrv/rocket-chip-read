@@ -137,6 +137,12 @@ Class index
 
 + TileLink2<br>
   uncore.tilelink2.TLAdapterNode [case class](../uncore/tilelink2/Nodes.md#tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLAsyncImp [object](../uncore/tilelink2/Nodes.md#object-tlasyncimp)<br>
+  uncore.tilelink2.TLAsyncIdentityNode [object](../uncore/tilelink2/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLAsyncInputNode [object](../uncore/tilelink2/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLAsyncOutputNode [object](../uncore/tilelink2/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLAsyncSinkNode [object](../uncore/tilelink2/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLAsyncSourceNode [object](../uncore/tilelink2/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLAtomics [object](../uncore/tilelink2/Bundles.md#object-tlatomics)<br>
   uncore.tilelink2.TLBlindInputNode [case class](../uncore/tilelink2/Nodes.md#tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLBlindOutputNode [case class](../uncore/tilelink2/Nodes.md#tilelink-extension-of-basic-nodes)<br>
@@ -161,6 +167,12 @@ Class index
   uncore.tilelink2.TLNexusNode [case class](../uncore/tilelink2/Nodes.md#tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLOutputNode [case class](../uncore/tilelink2/Nodes.md#tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLPermissions [object](../uncore/tilelink2/Bundles.md#object-tlpermissions)<br>
-  uncore.tilelink2.RationalBundle [object](../uncore/tilelink2/Bundles.md#object-tlrationalbundle)<br>
+  uncore.tilelink2.TLRationalBundle [object](../uncore/tilelink2/Bundles.md#object-tlrationalbundle)<br>
+  uncore.tilelink2.TLRationalImp [object](../uncore/tilelink2/Nodes.md#object-tlrationalimp)<br>
+  uncore.tilelink2.TLRationalIdentityNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLRationalInputNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLRationalOutputNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLRationalSinkNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
+  uncore.tilelink2.TLRationalSourceNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
 
 <br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/05/2017</sub></p>
