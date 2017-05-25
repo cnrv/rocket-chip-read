@@ -21,5 +21,9 @@ Notes for [Rocket-Chip](https://github.com/freechipsproject/rocket-chip)
 + [util](util.md)<br>
   Local helper package.
 
+*******************
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/04/2017</sub></p>
++ [Chisel operators](other/chisel_op.md)
+
+
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/05/2017</sub></p>

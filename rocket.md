@@ -14,7 +14,8 @@
   Breakpoint module.
 + [HellaCache](rocket/HellaCache.md)<br>
   Base module of cachesxs.
-
++ [IBuf](rocket/IBuf.md)<br>
+  A buffer in between of IF and ID to handle RVC.
 
 <br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 24/05/2017</sub></p>
 
