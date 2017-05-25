@@ -20,7 +20,7 @@ class Instruction
 | replay                 | Bool             | replay this instruction due to instruction cache |
 | btb\_hit               | Bool             | indicated a predicted branch target (taken) |
 | rvc                    | Bool             | RVC instructions                      |
-| inst                   | ExpandedInstruction | expanded instruction               |
+| inst                   | [ExpandedInstruction](./RVC.md#class-expandedinstruction) | expanded instruction               |
 | raw                    | UInt             | raw instruction                       |
 
 class IBuf
@@ -37,7 +37,7 @@ class IBuf
 | kill                   | Bool             | I          | kill instructions from core pipe      |
 | pc                     | UInt             | O          | current PC of IF                      |
 | btb\_resp              | BTBResp          | O          | update to BTB for RAS                 |
-| inst                   | Vec[DecoupledIO[Instruction]] | O | instructions for core pipe        |
+| inst                   | Vec[DecoupledIO[[Instruction](#class-instruction)]] | O | instructions for core pipe        |
 
 
 
