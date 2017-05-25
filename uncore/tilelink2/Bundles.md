@@ -36,7 +36,7 @@ object TLMessages
 ### TileLink channels
 
 | Name | Direction  | Response | Base classes                              |
-| :--: |            |   :--:   | -------------                             |
+| :--: | :--:       |   :--:   | -------------                             |
 | A    | downwards  | D        | TLChannel < TLDataChannel < TLAddrChannel |
 | B    | upwards    | C        | TLChannel < TLDataChannel < TLAddrChannel |
 | C    | downwards  |          | TLChannel < TLDataChannel < TLAddrChannel |
@@ -62,7 +62,7 @@ object TLHints
 *Type of prefetch hints*
 
 final class TLBundle{A,B,C,D,E}
-------------------------------
+--------------------------
 *Channel definitions*
 + *channelName*: channel name.
 + *opcode*: **TODO** message type?.

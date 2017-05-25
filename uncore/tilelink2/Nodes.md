@@ -46,60 +46,21 @@ object TLImp
   _monitor_: The monitor to be connected. Depending on parameter [`TLMonitorBuilder`](../../rocketchip/Configs.md)<br>
   _bind_: The actual port binding procedure to be processed later.
 
-### case class TLIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynoded-u-eo-ei-b--data)
+### TileLink Extension of basic Nodes
 
-~~~scala
-case class TLIdentityNode() extends IdentityNode(TLImp)
-~~~
-
-### case class TLClientNode extends [SourceNode](../../diplomacy/Nodes.md#class-sourcenoded-u-eo-ei-b-data)
-
-~~~scala
-case class TLClientNode(portParams: Seq[TLClientPortParameters]) extends SourceNode(TLImp)(portParams)
-~~~
-
-#### object TLClientNode
-
-+ **apply** `(TLClientParameters) => TLClientNode`
-
-### case class TLManagerNode extends [SinkNode](../../diplomacy/Nodes.md#class-sinknoded-u-eo-ei-b-data)
-
-~~~scala
-case class TLManagerNode(portParams: Seq[TLManagerPortParameters]) extends SinkNode(TLImp)(portParams)
-~~~
-
-#### object TLManagerNode
-
-+ **apply** `(beatBytes: Int, TLManagerParameters) => TLManagerNode`<br>
-  _minLatency_ is set to 0.
-
-### case class TLAdapterNode extends [AdapterNode](../../diplomacy/Nodes.md#class-adapternoded-u-eo-ei-b-data)
-
-~~~scala
-case class TLAdapterNode(
-  clientFn:  TLClientPortParameters  => TLClientPortParameters,
-  managerFn: TLManagerPortParameters => TLManagerPortParameters,
-  num:       Range.Inclusive = 0 to 999)
-  extends AdapterNode(TLImp)(clientFn, managerFn, num)
-~~~
-
-### case class TLNexusNode extends [NexusNode](../../diplomacy/Nodes.md#class-nexusnoded-u-eo-ei-b-data)
-
-~~~scala
-case class TLNexusNode(
-  clientFn:        Seq[TLClientPortParameters]  => TLClientPortParameters,
-  managerFn:       Seq[TLManagerPortParameters] => TLManagerPortParameters,
-  numClientPorts:  Range.Inclusive = 1 to 999,
-  numManagerPorts: Range.Inclusive = 1 to 999)
-  extends NexusNode(TLImp)(clientFn, managerFn, numClientPorts, numManagerPorts)
-~~~
-
-### case class TLOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnoded-u-eo-ei-b-data)
-### case class TLInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnoded-u-eo-ei-b-data)
-### case class TLBlindOutputNode extends [BlindOutputNode](../../diplomacy/Nodes.md#class-blindoutputnoded-u-eo-ei-b-data)
-### case class TLBlindInputNode extends [BlindInputNode](../../diplomacy/Nodes.md#class-blindinputnoded-u-eo-ei-b-data)
-### case class TLInternalOutputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internaloutputnoded-u-eo-ei-b-data)
-### case class TLInternalInputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internalinputnoded-u-eo-ei-b-data)
++ case class TLIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynode)
++ case class TLClientNode extends [SourceNode](../../diplomacy/Nodes.md#class-sourcenode)
++ object TLClientNode
++ case class TLManagerNode extends [SinkNode](../../diplomacy/Nodes.md#class-sinknode)
++ object TLManagerNode
++ case class TLAdapterNode extends [AdapterNode](../../diplomacy/Nodes.md#class-adapternode)
++ case class TLNexusNode extends [NexusNode](../../diplomacy/Nodes.md#class-nexusnode)
++ case class TLOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnode)
++ case class TLInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnode)
++ case class TLBlindOutputNode extends [BlindOutputNode](../../diplomacy/Nodes.md#class-blindoutputnode)
++ case class TLBlindInputNode extends [BlindInputNode](../../diplomacy/Nodes.md#class-blindinputnode)
++ case class TLInternalOutputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internaloutputnode)
++ case class TLInternalInputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internalinputnode)
 
 object TLAsyncImp
 ------------
@@ -127,11 +88,11 @@ object TLAsyncImp
 
 ### Asynchronous TileLink Extension of basic Nodes
 
-+ **case class TLAsyncIdentityNode extends IdentityNode(TLAsyncImp)**
-+ **case class TLAsyncOutputNode extends OutputNode(TLAsyncImp)**
-+ **case class TLAsyncInputNode extends InputNode(TLAsyncImp)**
-+ **case class TLAsyncSourceNode extends MixedAdapterNode(TLImp, TLAsyncImp)**
-+ **case class TLAsyncSinkNode extends MixedAdapterNode(TLAsyncImp, TLImp)**
++ case class TLAsyncIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynode)
++ case class TLAsyncOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnode)
++ case class TLAsyncInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnode)
++ case class TLAsyncSourceNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
++ case class TLAsyncSinkNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
 
 object TLRationalImp
 ------------
@@ -148,7 +109,7 @@ object TLRationalImp
         ]
 ~~~
 
-### Implementation of abstract methods defined in [`abstract class NodeImp`](../../diplomacy/Nodes.md).
+### Implementation of abstract methods defined in [NodeImp](../../diplomacy/Nodes.md#abstract-class-nodeimp).
 
 + **edgeO** `(TLRationalClientPortParameters, TLRationalManagerPortParameters) => TLRationalEdgeParameters`
 + **edgeI** `(TLRationalClientPortParameters, TLRationalManagerPortParameters) => TLRationalEdgeParameters`
@@ -158,11 +119,11 @@ object TLRationalImp
 
 ### Rational TileLink Extension of basic Nodes
 
-+ **case class TLRationalIdentityNode extends IdentityNode(TLRationalImp)**
-+ **case class TLRationalOutputNode extends OutputNode(TLRationalImp)**
-+ **case class TLRationalInputNode extends InputNode(TLRationalImp)**
-+ **case class TLRationalSourceNode extends MixedAdapterNode(TLImp, TLRationalImp)**
-+ **case class TLRationalSinkNode extends MixedAdapterNode(TLRationalImp, TLImp)**
++ case class TLRationalIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynode)
++ case class TLRationalOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnode)
++ case class TLRationalInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnode)
++ case class TLRationalSourceNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
++ case class TLRationalSinkNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
 
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 21/04/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/05/2017</sub></p>
