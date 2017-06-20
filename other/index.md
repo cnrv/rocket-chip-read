@@ -41,6 +41,14 @@ Class index
 + Configs<br>
   rocketchip.BasePlatformConfig [class](../rocketchip/Configs.md#class-baseplatformconfig)
 
++ Coreplex<br>
+  coreplex.BareCoreplex [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
+  coreplex.BareCoreplexBundle [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
+  coreplex.BareCoreplexModule [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
+  coreplex.BaseCoreplex [abstract class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
+  coreplex.BaseCoreplexBundle [class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
+  coreplex.BaseCoreplexModule [class](../coreplex/BaseCoreplex.md#basecoreplex)
+
 + Counter<br>
   util.TwoWayCounter [object](../util/Counters.md#object-twowaycounter)<br>
   util.WideCounter [case class](../util/Counters.md#case-class-widecounter)
@@ -175,4 +183,4 @@ Class index
   uncore.tilelink2.TLRationalSinkNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLRationalSourceNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/05/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/06/2017</sub></p>
