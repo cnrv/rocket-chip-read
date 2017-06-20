@@ -88,34 +88,28 @@ case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
     extends Object with InwardNodeHandle[DI, UI, BI] with OutwardNodeHandle[DO, UO, BO]
 ~~~
 
-case object BIND\_ONCE
----------------------------------
-*Normal one to one connection*
+Connection types
+---------------------------
+*Always look from the input port's perspective.*
 
-case object BIND\_QUERY
----------------------------------
-*A shared sink port?*
-
-case object BIND\_STAR
----------------------------------
-*A shared source port?*
++ **BIND\_ONCE**<br>
+  Normal one to one connection.
++ **BIND\_QUERY**<br>
+  M to 1 connection, multiplexing.
++ **BIND\_STAR**<br>
+  1 to M connection, demultiplexing.
 
 
 trait InwardNodeHandle
 ---------------------------
 
 + *inward: InwardNode[DI, UI, BI]*: self object pointer
-+ **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`
-
-    Connect this input port to an output port `h`.
-
-+ **&ast;=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`
-
-    Connect this input multi-port to an output `h`??
-
-+ **=&ast;** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`
-
-    Connect this input port to an output multi-port `h`??
++ **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
+  Connect `h` to the only output port of this, 1 to 1 connection.
++ **&ast;=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
+  Connect `h` to all output ports of this, 1 to M connection.
++ **=&ast;** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
+  Add `h` to the input ports list of this, M to 1 connection.
 
 
 trait InwardNode
@@ -247,4 +241,4 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
 
 
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/05/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/06/2017</sub></p>

@@ -10,6 +10,7 @@ For a design that uses cake pattern, 3 classes are needed.
 
   * `abstract class Design(implicit p: Parameters) extends LazyModule with BindingScope`<br>
     The design generator (LazyModule).
+    * **module** `LazyModuleImp`
   * `class DesignBundle[+L <: Design](_outer: L) extends GenericParameterizedBundle(_outer)`<br>
     The I/O (bundle) definition of the design.
   * `class DesignModule[+L <: Design, +B <: DesignBundle[L]](_outer: L, _io: () => B) extends LazyModuleImp(_outer)` <br>
