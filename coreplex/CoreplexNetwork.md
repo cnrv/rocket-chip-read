@@ -12,15 +12,21 @@ trait CoreplexNetwork extends HasCoreplexParameters
 ~~~
 
 + **module** `CoreplexNetworkModule` pointer to the generated module.
-+ **tile_splitter** `LazyModule(new TLSplitter)`
-+ **l1tol2** `LazyModule(new TLXbar)` the crossbar between L1$ and L2$.
-+ **cbus** `LazyModule(new TLXbar)` the coherent bus
-+ **intBar** `LazyModule(new IntXbar)` interrupt crossbar.
-+ **mmio** `TLOutputNode()` MMIO port.
-+ **mmioInt** `IntInputNode()` MMIO interrupt port.
-+ **l2in** `TLInputNode()` DDR to L2$ port.
-+ **l2out** `TLOutputNode()` L1$ to DDR port.
++ **sbus** `LazyModule(new TLXbar)` globally-visible high-bandwidth devices.
++ **pbus** `LazyModule(new TLXbar)` globally-visible low-bandwidth devices.
++ **tile_splitter** `LazyModule(new TLSplitter)` cycle-free connection to external networks.
++ **int_xbar** `LazyModule(new IntXbar)` interrupt crossbar.
++ **mmio** `TLOutputNode()` external memory-mapped IO slaves.
++ **mmioInt** `IntInputNode()` external devices' interrupts.
++ **l2in** `TLInputNode()` external masters talking to the frontside of the shared cache.
++ **l2out** `TLOutputNode()` external slaves hanging off the backside of the shared cache.
++ **root** `Device` the root (`/`) desciption in the device tree.
++ **soc** `Device` the `soc` desciption in the device tree.
++ **cpus** `Device` the `cpus` desciption in the device tree.
++ **topManagers** `Some(ManagerUnification)` ??
+
+![Coreplex Network](../figure/coreplex/coreplex_network.png)
 
 
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/06/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 21/06/2017</sub></p>
