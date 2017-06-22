@@ -47,7 +47,13 @@ Class index
   coreplex.BareCoreplexModule [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
   coreplex.BaseCoreplex [abstract class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
   coreplex.BaseCoreplexBundle [class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
-  coreplex.BaseCoreplexModule [class](../coreplex/BaseCoreplex.md#basecoreplex)
+  coreplex.BaseCoreplexModule [class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
+  coreplex.CoreplexNetwork [trait](../coreplex/CoreplexNetwork.md#coreplexnetwork)<br>
+  coreplex.CoreplexNetworkBundle [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkbundle)<br>
+  coreplex.CoreplexNetworkModule [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkmodule)<br>
+  coreplex.BankedL2CoherenceManagers [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagers)<br>
+  coreplex.BankedL2CoherenceManagersBundle [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle)<br>
+  coreplex.BankedL2CoherenceManagersModule [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersmodule)<br>
 
 + Counter<br>
   util.TwoWayCounter [object](../util/Counters.md#object-twowaycounter)<br>
@@ -183,4 +189,4 @@ Class index
   uncore.tilelink2.TLRationalSinkNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLRationalSourceNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/06/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 22/06/2017</sub></p>
