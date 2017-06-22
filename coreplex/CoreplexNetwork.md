@@ -25,8 +25,22 @@ trait CoreplexNetwork extends HasCoreplexParameters
 + **cpus** `Device` the `cpus` desciption in the device tree.
 + **topManagers** `Some(ManagerUnification)` ??
 
-![Coreplex Network](../figure/coreplex/coreplex_network.png)
+<img align="center" src="../figure/coreplex/coreplex_network.png" width="600">
+
+### CoreplexNetworkBundle
+*Bundle trait for Rocket-chip with on-chip interconnects.*
+
+~~~scala
+trait CoreplexNetworkBundle extends HasCoreplexParameters
+~~~
+
++ **outer** `CoreplexNetwork` pointer to the LazyModule.
++ **mmio** `HeterogeneousBag[TLBundle] = outer.mmio.bundleOut` mmio ports.
++ **interrupts** `HeterogeneousBag[TLBundle] = outer.mmioInt.bundleIn` external interrupts.
++ **l2in** `HeterogeneousBag[TLBundle] = outer.l2in.bundleIn` external master ports to the shared cache.
++ **l2out** `HeterogeneousBag[TLBundle] = outer.l2out.bundleOut` external slave ports from the shared cache.
+
+### 
 
 
-
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 21/06/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 22/06/2017</sub></p>
