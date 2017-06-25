@@ -8,7 +8,9 @@
   The base class of a Rocket-chip.
 + [CoreplexNetwork](coreplex/CoreplexNetwork.md)<br>
   On-chip interconnect of a Rocket-chip.
++ [RISCVPlatform](coreplex/RISCVPlatform.md)<br>
+  RISCV SoC Platform.
++ [RocketTiles](coreplex/RocketTiles.md)
 
-
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 20/06/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/06/2017</sub></p>
 

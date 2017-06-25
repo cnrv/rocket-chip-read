@@ -42,18 +42,26 @@ Class index
   rocketchip.BasePlatformConfig [class](../rocketchip/Configs.md#class-baseplatformconfig)
 
 + Coreplex<br>
-  coreplex.BareCoreplex [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
-  coreplex.BareCoreplexBundle [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
-  coreplex.BareCoreplexModule [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
-  coreplex.BaseCoreplex [abstract class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
-  coreplex.BaseCoreplexBundle [class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
-  coreplex.BaseCoreplexModule [class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
-  coreplex.CoreplexNetwork [trait](../coreplex/CoreplexNetwork.md#coreplexnetwork)<br>
-  coreplex.CoreplexNetworkBundle [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkbundle)<br>
-  coreplex.CoreplexNetworkModule [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkmodule)<br>
-  coreplex.BankedL2CoherenceManagers [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagers)<br>
-  coreplex.BankedL2CoherenceManagersBundle [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle)<br>
-  coreplex.BankedL2CoherenceManagersModule [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersmodule)<br>
+  + coreplex.BankedL2CoherenceManagers<br>
+    LazyModule [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagers);
+    Bundle [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle);
+    Module [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersmodule)<br>
+  + coreplex.BareCoreplex<br>
+    LazyModule [abstract class](../coreplex/BaseCoreplex.md#barecoreplex);
+    Bundle [abstract class](../coreplex/BaseCoreplex.md#barecoreplex);
+    Module [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
+  + coreplex.BaseCoreplex<br>
+    LazyModule [abstract class](../coreplex/BaseCoreplex.md#basecoreplex);
+    Bundle [class](../coreplex/BaseCoreplex.md#basecoreplex);
+    Module [class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
+  + coreplex.CoreplexNetwork<br>
+    LazyModule [trait](../coreplex/CoreplexNetwork.md#coreplexnetwork);
+    Bundle [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkbundle);
+    Module [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkmodule)<br>
+  + coreplex.CoreplexRISCVPlatform<br>
+    LazyModule [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatform);
+    Bundle [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatformbundle);
+    Module [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatformmodule)<br>
 
 + Counter<br>
   util.TwoWayCounter [object](../util/Counters.md#object-twowaycounter)<br>
@@ -189,4 +197,4 @@ Class index
   uncore.tilelink2.TLRationalSinkNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLRationalSourceNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 22/06/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/06/2017</sub></p>

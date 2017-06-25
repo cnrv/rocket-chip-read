@@ -66,6 +66,7 @@ trait BankedL2CoherenceManagers extends CoreplexNetwork {
 }
 ~~~
 
++ Derived from [CoreplexNetwork](CoreplexNetwork.md#coreplexnetwork)
 + **mem** `Seq[TLOutputNode]` output ports to the backing memory.
 
 #### BankedL2CoherenceManagersBundle
@@ -76,6 +77,8 @@ trait BankedL2CoherenceManagersBundle extends CoreplexNetworkBundle {
 }
 ~~~
 
++ Derived from [CoreplexNetwork](CoreplexNetwork.md#coreplexnetworkbundle)
+
 #### BankedL2CoherenceManagersModule
 ~~~scala
 trait BankedL2CoherenceManagersModule extends CoreplexNetworkModule {
@@ -84,4 +87,6 @@ trait BankedL2CoherenceManagersModule extends CoreplexNetworkModule {
 }
 ~~~
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 22/06/2017</sub></p>
++ Derived from [CoreplexNetwork](CoreplexNetwork.md#coreplexnetworkmodule)
+
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/06/2017</sub></p>
