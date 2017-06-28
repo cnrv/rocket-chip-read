@@ -62,6 +62,10 @@ Class index
     LazyModule [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatform);
     Bundle [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatformbundle);
     Module [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatformmodule)<br>
+  + coreplex.HasRocketTiles<br>
+    LazyModule [trait](../coreplex/RocketTiles.md#hasrockettiles);
+    Bundle [trait](../coreplex/RocketTiles.md#hasrockettilesbundle);
+    Module [trait](../coreplex/RocketTiles.md#hasrockettilesmodule)<br>
 
 + Counter<br>
   util.TwoWayCounter [object](../util/Counters.md#object-twowaycounter)<br>
@@ -197,4 +201,4 @@ Class index
   uncore.tilelink2.TLRationalSinkNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
   uncore.tilelink2.TLRationalSourceNode [object](../uncore/tilelink2/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/06/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 28/06/2017</sub></p>
