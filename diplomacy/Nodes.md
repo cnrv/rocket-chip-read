@@ -111,6 +111,20 @@ trait InwardNodeHandle
 + **=&ast;** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
   Add `h` to the input ports list of this, M to 1 connection.
 
+Reference: https://github.com/freechipsproject/rocket-chip/pull/536
+>In some places we would like to pass multiple connections through an edge.
+>
+>For example, at the TL master port for the Coreplex, we want to accept multiple masters that are then connected to the l1tol2 crossbar. However, within the Coreplex we do not know how many such edges are needed.
+>
+>For some time, diplomacy has supported multiple connections via a single Node. However, there was no way to leverage this for a flexible number of connections. This patch changes that.
+>
+>foo :=* bar // indicates that foo should be connected to bar as many times as bar requires<br>
+>bar := baz1<br>
+>bar := baz2 // there will be two connections from bar to foo
+>
+>foo :*= bar // indicates that bar should be connected to foo as many times as foo requires<br>
+>baz1 := foo<br>
+>baz2 := foo // two times
 
 trait InwardNode
 ------------------------
