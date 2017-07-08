@@ -39,7 +39,7 @@ Class index
   util.Pow2ClockDivider [class](../util/ClockDivider.md#class-pow2clockdivider2)
 
 + Configs<br>
-  rocketchip.BasePlatformConfig [class](../rocketchip/Configs.md#class-baseplatformconfig)
+  chip.BasePlatformConfig [class](../chip/Configs.md#class-baseplatformconfig)
 
 + Coreplex<br>
   + coreplex.BankedL2CoherenceManagers<br>

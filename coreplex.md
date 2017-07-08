@@ -1,6 +1,8 @@
 [Rocket](Readme.md)/[coreplex](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/coreplex)
 ========================
-*Rocket-chip generators.*
+This RTL package generates a complete coreplex by gluing together a variety of components from other packages,
+including: tiled Rocket cores, a system bus network, coherence agents, debug devices, interrupt handlers, externally-facing peripherals,
+clock-crossers and converters from TileLink to external bus protocols (e.g. AXI or AHB).
 
 **********************
 
@@ -13,5 +15,12 @@
 + [RocketTiles](coreplex/RocketTiles.md)<br>
   Negotiate the interrupt, clock and reset connections for Rocket Tiles.
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 29/06/2017</sub></p>
 
+<br><br><br><p align="right">
+<sub>
+Last updated: 08/07/2017<br>
+[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
+[BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)<br>
+[Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc
+</sub>
+</p>

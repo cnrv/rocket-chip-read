@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[rocketchip](../rocketchip.md)/[Configs](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/rocketchip/Configs.scala)
+[Rocket](../Readme.md)/[chip](../chip.md)/[Configs](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/chip/Configs.scala)
 =====================
 
 *Available configuration parameters for the Rocket-Chip generator.*
@@ -34,5 +34,13 @@
   + **ExtBus** `MasterConfig(base=0x60000000L, size=0x20000000L, beatBytes=8, idBits=4)`
   + **ExtIn** `SlaveConfig(beatBytes=8, idBits=8, sourceBits=4)`
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 15/06/2017</sub></p>
+<br><br><br><p align="right">
+<sub>
+Last updated: 08/07/2017<br>
+[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
+[BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)<br>
+[Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc
+</sub>
+</p>
+
 
