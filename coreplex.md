@@ -10,7 +10,8 @@
   On-chip interconnect of a Rocket-chip.
 + [RISCVPlatform](coreplex/RISCVPlatform.md)<br>
   RISCV SoC Platform.
-+ [RocketTiles](coreplex/RocketTiles.md)
++ [RocketTiles](coreplex/RocketTiles.md)<br>
+  Negotiate the interrupt, clock and reset connections for Rocket Tiles.
 
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 25/06/2017</sub></p>
+<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 29/06/2017</sub></p>
 

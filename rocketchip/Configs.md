@@ -3,8 +3,9 @@
 
 *Available configuration parameters for the Rocket-Chip generator.*
 
-class BasePlatformConfig
-----------------
+**********************
+
+## class BasePlatformConfig
 *Basic configuration parameters*
 
 + device tree (DTS) descriptive parameters
