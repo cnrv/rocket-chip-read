@@ -1,4 +1,4 @@
-[Rocket](../Readme.md)/[rocket](../rocket.md)/[Arbiters](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/rocket/Arbiter.scala)
+[Rocket](../Readme.md)/[rocket](../rocket.md)/[HellaCacheArbiter](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/rocket/HellaCacheArbiter.scala)
 ========================
 *The Arbiters used in the Rocket core.*
 
@@ -29,14 +29,12 @@ class HellaCacheArbiter(n: Int)(implicit p: Parameters) extends Module
     cycle 1: send out kill and write data<br>
     cycle 2: collect response from DCache
 
-class InOrderArbiter
--------------------------
-*Legacy arbiter used in ROCC.*
 
-~~~scala
-class InOrderArbiter[T <: Data, U <: Data](reqTyp: T, respTyp: U, n: Int)
-    (implicit p: Parameters) extends Module
-~~~
-
-
-<br><br><br><p align="right"><sub>[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), 21/05/2017</sub></p>
+<br><br><br><p align="right">
+<sub>
+Last updated: 08/07/2017<br>
+[CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
+[Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
+[BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
+</sub>
+</p>

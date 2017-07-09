@@ -1,13 +1,10 @@
-[Rocket](Readme.md)/[regmapper](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/regmapper)
+[Rocket](Readme.md)/[amba](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/amba)
 ========================
-
+This RTL package uses diplomacy to generate bus implementations of AMBA protocols, including AXI4, AHB-lite, and APB.
 
 **********************
 
-+ [RegField](regmapper/RegField.md)
-+ [RegisterCrossing](regmapper/RegisterCrossing.md)
-+ [RegMapper](regmapper/RegMapper.md)
-
++ [apb](amba/apb.md)
 
 
 <br><br><br><p align="right">
@@ -18,4 +15,5 @@ Last updated: 08/07/2017<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
 </sub>
 </p>
+
 

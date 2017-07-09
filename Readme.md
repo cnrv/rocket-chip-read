@@ -3,7 +3,7 @@ Notes for [Rocket-Chip](https://github.com/freechipsproject/rocket-chip)
 
 **************
 
-+ **amba**
++ **[amba](amba.md)**
 This RTL package uses diplomacy to generate bus implementations of AMBA protocols, including AXI4, AHB-lite, and APB.
 + **[chip](chip.md)**
 This top-level utility package invokes Chisel to elaborate a particular configuration of a coreplex,
@@ -15,7 +15,7 @@ parameterization library.
 This RTL package generates a complete coreplex by gluing together a variety of components from other packages,
 including: tiled Rocket cores, a system bus network, coherence agents, debug devices, interrupt handlers, externally-facing peripherals,
 clock-crossers and converters from TileLink to external bus protocols (e.g. AXI or AHB).
-+ **devices**
++ **[devices](devices.md)**
 This RTL package contains implementations for peripheral devices, including the Debug module and various TL slaves.
 + **[diplomacy](diplomacy.md)**
 This utility package extends Chisel by allowing for two-phase hardware elaboration, in which certain parameters
