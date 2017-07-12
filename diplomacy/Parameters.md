@@ -92,7 +92,10 @@ case class AddressSet(base: BigInt, mask: BigInt) extends Ordered[AddressSet]
 + **contiguous** `() => Boolean` whether the address space is contiguous(mask: 0x0000ffff => true, mask:0x0000ff0f => false)
 + **finite** `() => Boolean` mask &ge; 0 ??
 + **max** `() => BigInt` the address upper bound
-+ **widen** `(imask: BitInt) => AddressSet` get a larger space using imask
++ **widen** `(imask: BitInt) => AddressSet`<br>
+  Get a larger space using imask.<br>
+  Widen the match function to ignore all bits in imask:<br>
+  `AddressSet(base, mask) => AddressSet(base & ~imask, mask | imask)`
 + **toString** `() => String` convert to string
 + **toRange** `() => AddressRange` convert to AddressRange
 
@@ -106,7 +109,7 @@ object AddressSet
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/07/2017<br>
+Last updated: 12/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

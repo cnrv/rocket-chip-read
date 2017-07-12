@@ -16,6 +16,8 @@ of adapters and protocol converters.
   TileLink Nodes
 + [Parameters](tilelink/Parameters.md)<br>
   TileLink interconnection parameters.
++ [Xbar](tilelink/Xbar.md)<br>
+  Generic Tilelink crossbar.
 
 
 
