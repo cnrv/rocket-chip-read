@@ -34,7 +34,7 @@ This library is intended to be used by a chip generator that instantiates the
 core within a memory system and connects it to the outside world.
 + **tile**
 This RTL package contains components that can be combined with cores to construct tiles, such as FPUs and accelerators.
-+ **tilelink**
++ **[tilelink](tilelink.md)**
 This RTL package uses diplomacy to generate bus implementations of the TileLink protocol. It also contains a variety
 of adapters and protocol converters.
 + **unittest**
@@ -53,7 +53,7 @@ The document is partially based on commit \#[29f5f77](https://github.com/freechi
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/07/2017<br>
+Last updated: 12/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
