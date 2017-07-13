@@ -2,17 +2,6 @@ Class index
 ========================
 ***************************
 
-+ AdapterNode<br>
-  diplomacy.AdapterNode [class](../diplomacy/Nodes.md#class-adapternode)<br>
-  diplomacy.IdentityNode [class](../diplomacy/Nodes.md#class-identitynode)<br>
-  diplomacy.InputNode [class](../diplomacy/Nodes.md#class-inputnode)<br>
-  diplomacy.MixedAdapterNode [class](../diplomacy/Nodes.md#class-mixedadapternode)<br>
-  diplomacy.MixedNode [abstract class](../diplomacy/Nodes.md#abstract-class-mixednode)<br>
-  diplomacy.NexusNode [class](../diplomacy/Nodes.md#class-nexusnode)<br>
-  diplomacy.OutputNode [class](../diplomacy/Nodes.md#class-outputnode)<br>
-  diplomacy.SinkNode [class](../diplomacy/Nodes.md#class-sinknode)<br>
-  diplomacy.SourceNode [class](../diplomacy/Nodes.md#class-sourcenode)
-
 + ALU<br>
   rocket.ALU [class](../rocket/ALU.md#class-alu)
 
@@ -41,7 +30,7 @@ Class index
 + Configs<br>
   chip.BasePlatformConfig [class](../chip/Configs.md#class-baseplatformconfig)
 
-+ Coreplex<br>
++ Coreplex
   + coreplex.BankedL2CoherenceManagers<br>
     LazyModule [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagers);
     Bundle [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle);
@@ -84,22 +73,38 @@ Class index
   util.ToAsyncBundle [object](../util/AsyncBundle.md#object-toasyncbundle)<br>
   util.UIntSyncChain [object](../util/AsyncQueue.md#object-uintsyncchain)<br>
 
-+ Diplomacy: Device<br>
-  diplomacy.Description [case class](../diplomacy/Resources.md#case-class-description)<br>
-  diplomacy.Device [abstract class](../diplomacy/Resources.md#abstract-class-device)<br>
-  diplomacy.DeviceInterrupts [trait](../diplomacy/Resources.md#trait-deviceinterrupts)<br>
-  diplomacy.DeviceRegName [trait](../diplomacy/Resources.md#trait-deviceregname)<br>
-  diplomacy.MemoryDevice [class](../diplomacy/Resources.md#class-memorydevice)<br>
-  diplomacy.SimpleDevice [class](../diplomacy/Resources.md#class-simpledevice)<br>
+## Diplomacy
 
-+ Diplomacy: DTS<br>
-  diplomacy.DTS [object](../diplomacy/DeviceTree.md#object-dts)<br>
+### Nodes
+`AdapterNode`      [class](../diplomacy/Nodes.md#class-adapternode)
+`IdentityNode`     [class](../diplomacy/Nodes.md#class-identitynode)
+`InputNode`        [class](../diplomacy/Nodes.md#class-inputnode)
+`MixedAdapterNode` [class](../diplomacy/Nodes.md#class-mixedadapternode)
+`MixedNode`        [abstract class](../diplomacy/Nodes.md#abstract-class-mixednode)
+`NexusNode`        [class](../diplomacy/Nodes.md#class-nexusnode)
+`OutputNode`       [class](../diplomacy/Nodes.md#class-outputnode)
+`SinkNode`         [class](../diplomacy/Nodes.md#class-sinknode)
+`SourceNode`       [class](../diplomacy/Nodes.md#class-sourcenode)
 
-+ Diplomacy: Other<br>
-  diplomacy.AddressRange [case class](../diplomacy/Parameters.md#case-class-addressrange); [object](../diplomacy/Parameters.md#object-addressrange)<br>
-  diplomacy.AddressSet [case class](../diplomacy/Parameters.md#case-class-addressset); [object](../diplomacy/Parameters.md#object-addressset)<br>
-  diplomacy.IdRange [case class](../diplomacy/Parameters.md#case-class-idrange)<br>
-  diplomacy.TransferSizes [case class](../diplomacy/Parameters.md#case-class-transfersizes)<br>
+### Resources
+`Description`      [case class](../diplomacy/Resources.md#case-class-description)
+`Device`           [abstract class](../diplomacy/Resources.md#abstract-class-device)
+`DeviceInterrupts` [trait](../diplomacy/Resources.md#trait-deviceinterrupts)
+`DeviceRegName`    [trait](../diplomacy/Resources.md#trait-deviceregname)
+`MemoryDevice`     [class](../diplomacy/Resources.md#class-memorydevice)
+`SimpleDevice`     [class](../diplomacy/Resources.md#class-simpledevice)
+
+### DeviceTree
+`DTS`              [[object](../diplomacy/DeviceTree.md#object-dts)
+
+### Parameters
+
+`AddressRange`     [case class](../diplomacy/Parameters.md#case-class-addressrange),
+                   [object](../diplomacy/Parameters.md#object-addressrange)
+`AddressSet`       [case class](../diplomacy/Parameters.md#case-class-addressset),
+                   [object](../diplomacy/Parameters.md#object-addressset)
+`IdRange`          [case class](../diplomacy/Parameters.md#case-class-idrange)
+`TransferSizes`    [case class](../diplomacy/Parameters.md#case-class-transfersizes)
 
 + Instruction<br>
   rocket.ExpandedInstruction [class](../rocket/RVC.md#class-expandedinstruction)<br>
