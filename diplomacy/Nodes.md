@@ -17,16 +17,13 @@ trait InwardNodeImp[DI, UI, EI, BI <: Data]
 + **EI** Packet parameters (generators) for this node.
 + **BI** Bundle type
 <br><br>
-+ **edgeI** `(pd: DI, pu: UI) => EI`<br>
-    Get the parameters for an input channel.
-+ **bundleI** `(ei: EI) => BI`<br>
-    Generate the input channel.
-+ **colour** `_ => String`<br>
-    Get the color in node connection graph.
-+ **connect** `(bindings: () => Seq[(EI, BI, BI)]) => (monitor:Option[LazyModule], bind:() => Unit)`<br>
-    The callback for the actually binding operation.<br>
-    _bindings_: (packet parameter, input channel, output channel), the pairs of channels to be connected.<br>
-    _monitor_: The optional monitor node to be connected.<br>
++ **edgeI** `(pd: DI, pu: UI) => EI` get the parameters for an input channel.
++ **bundleI** `(ei: EI) => BI` generate the input channel.
++ **colour** `_ => String` get the color in node connection graph.
++ **connect** `(()=>Seq[EI], ()=>Seq[(BI, BI)], enM:Boolean) => (m:Option[LazyModule], bind:()=>Unit)`<br>
+    Generate the port connection callback function _bind()_<br>
+    _enM_: whether to insert a bus monitor.<br>
+    _m_: The optional monitor node to be connected.<br>
     _bind_: The actual connection procedure to be called later by LazyModule.
 
 trait OutwardNodeImp
@@ -42,10 +39,8 @@ trait OutwardNodeImp[DO, UO, EO, BO <: Data]
 + **EO** Edge Parameters describing a connection on the outer side of the node
 + **BO** Bundle type used when connecting to the outer side of the node
 <br><br>
-+ **edgeO** `(pd: DO, pu: UO) => EO`<br>
-    Get the parameters for an output channel.
-+ **bundleO** `(eo: EO) => BO`<br>
-    Generate the output channel.
++ **edgeO** `(pd: DO, pu: UO) => EO` get the parameters for an output channel.
++ **bundleO** `(eo: EO) => BO` generate the output channel.
 
 abstract class NodeImp
 --------------------------------
@@ -64,10 +59,10 @@ abstract class BaseNode
 ---------------------------
 *Base class of all Node parameter*
 
-+ **lazyModule** `LazyModule` pointer to the lazyModule
-+ **index** `Int` index of the node in this lazyModule (think about the index of a port in a crossbar)
-+ **externalIn** `Boolean` ??
-+ **externalOut** `Boolean` ??
++ **lazyModule** `LazyModule` pointer to the parent lazyModule for error report.
++ **index** `Int` index of this node in stack.
++ **externalIn** `Boolean` generate input bundle for port connection.
++ **externalOut** `Boolean` generate output bundle for port connection.
 + **nodename** `() => String` node name
 + **name** `() => String` hierarchical node name
 + **omitGraphML** `() => Bool` a portless node does not need a connection graph
@@ -88,20 +83,31 @@ case class NodeHandle[DI, UI, BI <: Data, DO, UO, BO <: Data]
     extends Object with InwardNodeHandle[DI, UI, BI] with OutwardNodeHandle[DO, UO, BO]
 ~~~
 
-Connection types
+trait NodeBinding
 ---------------------------
 *Always look from the input port's perspective.*
 
-+ **BIND\_ONCE**<br>
-  Normal one to one connection.
-+ **BIND\_QUERY**<br>
-  M to 1 connection, multiplexing.
-+ **BIND\_STAR**<br>
-  1 to M connection, demultiplexing.
+~~~scala
+sealed trait NodeBinding
+case object BIND_ONCE  extends NodeBinding
+case object BIND_QUERY extends NodeBinding
+case object BIND_STAR  extends NodeBinding
+~~~
+
++ **BIND\_ONCE** normal one to one connection.
++ **BIND\_QUERY**  M to 1 connection, multiplexing.
++ **BIND\_STAR** 1 to M connection, demultiplexing.
 
 
 trait InwardNodeHandle
 ---------------------------
+
+~~~scala
+trait InwardNodeHandle[DI, UI, BI <: Data]
+{
+    val inward: InwardNode[DI, UI, BI]
+}
+~~~
 
 + *inward: InwardNode[DI, UI, BI]*: self object pointer
 + **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
@@ -128,37 +134,50 @@ Reference: https://github.com/freechipsproject/rocket-chip/pull/536
 
 trait InwardNode
 ------------------------
-    trait InwardNode[DI, UI, BI <: Data] extends BaseNode with InwardNodeHandle[DI, UI, BI]
 
-+ *inward: InwardNode[DI, UI, BI]*: self object pointer
-+ *numPI: Range.Inclusive*: number of inner nodes (numPI >= 0)
-+ *iPushed: _ => Int*: number of inner nodes being processed
-+ *iPush: (node:Int, node: OutwardNode[DI, UI, BI], binding: NodeBinding) => Unit*: process an inner node
-+ *iBindings: List[(Int, OutwardNode[DI, UI, BI], NodeBinding)]*: list of inner nodes (index, input, binding)
-+ *iStar: Int*: ??
-+ *iPortMapping: Seq[(Int, Int)]*: range of each inner nodes
-+ *iParams: Seq[UI]*: inner node parameters
-+ *bundleIn: Vec[BI]*: inner node bundles
+~~~scala
+trait InwardNode[DI, UI, BI <: Data] extends BaseNode with InwardNodeHandle[DI, UI, BI]
+~~~
+
++ **inward** `InwardNode[DI, UI, BI] = this` pointer to the LazyModule.
++ **numPI** `Range.Inclusive` range of input ports.
++ **iPushed** `() => Int` number of inner nodes being processed.
++ **iPush** `(node:Int, node: OutwardNode[DI, UI, BI], binding: NodeBinding) => Unit` process a port connection.
++ **iBindings** `List[(Int, OutwardNode[DI, UI, BI], NodeBinding)]` list of output ports to be binded (index, port, bind-type).
++ **iStar** `Int` ??
++ **iPortMapping** `Seq[(Int, Int)]` range of each inner node.
++ **iParams** `Seq[UI]` inner node parameters.
++ **bundleIn** `Vec[BI]` (lazy) the actual heterogeneous list of input port Bundles in hardware.
 
 trait OutwardNodeHandle
 ---------------------------
 
-+ *outward: OutwardNode[DO, UO, BO]*: self object pointer
+~~~scala
+trait OutwardNodeHandle[DO, UO, BO <: Data]
+{
+  val outward: OutwardNode[DO, UO, BO]
+}
+~~~
+
++ **outward** `OutwardNode[DO, UO, BO]` pointer to the LazyModule.
 
 
 trait OutwardNode
 ----------------------------
-    trait OutwardNode[DO, UO, BO <: Data] extends BaseNode with OutwardNodeHandle[DO, UO, BO]
 
-+ *outward: OutwardNode[DO, UO, BO]*: self object pointer
-+ *numPO: Range.Inclusive*: number of putputs (numPO >= 0)
-+ *oPushed: _ => Int*: number of outer nodes being processed
-+ *oPush: (index: Int, node: InwardNode [DO, UO, BO], binding: NodeBinding) => Unit*: process an outer node
-+ *oBindings: List[(Int, InwardNode [DO, UO, BO], NodeBinding)]*: list of outer nodes (index, output, binding)
-+ *oStar: Int*: ??
-+ *oPortMapping: Seq[(Int, Int)]*: Range of each outer nodes
-+ *oParams: Seq[DO]*: outer node parameters
-+ *bundleOut: vec[BO]*: outer node bundles
+~~~scala
+trait OutwardNode[DO, UO, BO <: Data] extends BaseNode with OutwardNodeHandle[DO, UO, BO]
+~~~
+
++ **outward** `OutwardNode[DO, UO, BO] = this` pointer to the LazyModule.
++ **numPO** `Range.Inclusive` number of putputs.
++ **oPushed** `() => Int` number of outer nodes being processed.
++ **oPush** `(index: Int, node: InwardNode [DO, UO, BO], binding: NodeBinding) => Unit` process a port connection.
++ **oBindings** `List[(Int, InwardNode [DO, UO, BO], NodeBinding)]` list of input port to be binded (index, port, bind-type)
++ **oStar** `Int` ??
++ **oPortMapping** `Seq[(Int, Int)]` range of each outer node.
++ **oParams** `Seq[DO]` outer node parameters.
++ **bundleOut** `Vec[BO]` (lazy) the actual heterogeneous list of output port Bundles in hardware.
 
 
 abstract class MixedNode
@@ -172,8 +191,8 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
     extends BaseNode with InwardNode[DI, UI, BI] with OutwardNode[DO, UO, BO]
 ~~~
 
-+ *oPorts: (Int, (Int, InwardNode [DO, UO, BO]))*: mapping from outer node to inner nodes?
-+ *iPorts: (Int, (Int, OutwardNode [DO, UO, BO]))*: mapping from inner node to outer nodes?
++ **oPorts** `Seq[(Int, InwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its output ports.
++ **iPorts** `Seq[(Int, OutwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its input ports.
 
 class MixedAdapterNode
 -----------
@@ -257,7 +276,7 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/07/2017<br>
+Last updated: 13/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

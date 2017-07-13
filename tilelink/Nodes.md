@@ -30,7 +30,7 @@ object TLImp
         ]
 ~~~
 
-#### Implementation of abstract methods defined in [`abstract class NodeImp`](../../diplomacy/Nodes.md).
+#### Implementation of abstract methods defined in NodeImp
 
 + **edgeO** `(TLClientPortParameters, TLManagerPortParameters) => TLEdgeOut`<br>
   Function to get the downwards packet generator (channel A/C/E).
@@ -43,24 +43,24 @@ object TLImp
 + **colour** `_ => "#000000"` black
 + **connect** `(bindings:() => Seq[(TLEdgeIn, TLBundle, TLBundle)]) => (monitor:Option[LazyModule], bind:() => Unit)`<br>
   _bindings_: (packet generator for monitor, input TileLink port, output TileLink port) get the TileLink channel pairs that needs to be connected.<br>
-  _monitor_: The monitor to be connected. Depending on parameter [`TLMonitorBuilder`](../../rocketchip/Configs.md)<br>
+  _monitor_: The monitor to be connected. Depending on parameter TLMonitorBuilder
   _bind_: The actual port binding procedure to be processed later.
 
 ### TileLink Extension of basic Nodes
 
-+ case class TLIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynode)
-+ case class TLClientNode extends [SourceNode](../../diplomacy/Nodes.md#class-sourcenode)
++ case class TLIdentityNode extends IdentityNode
++ case class TLClientNode extends SourceNode
 + object TLClientNode
-+ case class TLManagerNode extends [SinkNode](../../diplomacy/Nodes.md#class-sinknode)
++ case class TLManagerNode extends SinkNode
 + object TLManagerNode
-+ case class TLAdapterNode extends [AdapterNode](../../diplomacy/Nodes.md#class-adapternode)
-+ case class TLNexusNode extends [NexusNode](../../diplomacy/Nodes.md#class-nexusnode)
-+ case class TLOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnode)
-+ case class TLInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnode)
-+ case class TLBlindOutputNode extends [BlindOutputNode](../../diplomacy/Nodes.md#class-blindoutputnode)
-+ case class TLBlindInputNode extends [BlindInputNode](../../diplomacy/Nodes.md#class-blindinputnode)
-+ case class TLInternalOutputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internaloutputnode)
-+ case class TLInternalInputNode extends [InternalOutputNode](../../diplomacy/Nodes.md#class-internalinputnode)
++ case class TLAdapterNode extends AdapterNode
++ case class TLNexusNode extends NexusNode
++ case class TLOutputNode extends OutputNode
++ case class TLInputNode extends InputNode
++ case class TLBlindOutputNode extends BlindOutputNode
++ case class TLBlindInputNode extends BlindInputNode
++ case class TLInternalOutputNode extends InternalOutputNode
++ case class TLInternalInputNode extends InternalOutputNode
 
 object TLAsyncImp
 ------------
@@ -77,7 +77,7 @@ object TLAsyncImp
         ]
 ~~~
 
-### Implementation of abstract methods defined in [`abstract class NodeImp`](../../diplomacy/Nodes.md).
+### Implementation of abstract methods defined in NodeImp
 
 + **edgeO** `(TLAsyncClientPortParameters, TLAsyncManagerPortParameters) => TLAsyncEdgeParameters`
 + **edgeI** `(TLAsyncClientPortParameters, TLAsyncManagerPortParameters) => TLAsyncEdgeParameters`
@@ -88,11 +88,11 @@ object TLAsyncImp
 
 ### Asynchronous TileLink Extension of basic Nodes
 
-+ case class TLAsyncIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynode)
-+ case class TLAsyncOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnode)
-+ case class TLAsyncInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnode)
-+ case class TLAsyncSourceNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
-+ case class TLAsyncSinkNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
++ case class TLAsyncIdentityNode extends IdentityNode
++ case class TLAsyncOutputNode extends OutputNode
++ case class TLAsyncInputNode extends InputNode
++ case class TLAsyncSourceNode extends MixedAdapterNode
++ case class TLAsyncSinkNode extends MixedAdapterNode
 
 object TLRationalImp
 ------------
@@ -109,7 +109,7 @@ object TLRationalImp
         ]
 ~~~
 
-### Implementation of abstract methods defined in [NodeImp](../../diplomacy/Nodes.md#abstract-class-nodeimp).
+### Implementation of abstract methods defined in NodeImp
 
 + **edgeO** `(TLRationalClientPortParameters, TLRationalManagerPortParameters) => TLRationalEdgeParameters`
 + **edgeI** `(TLRationalClientPortParameters, TLRationalManagerPortParameters) => TLRationalEdgeParameters`
@@ -119,16 +119,16 @@ object TLRationalImp
 
 ### Rational TileLink Extension of basic Nodes
 
-+ case class TLRationalIdentityNode extends [IdentityNode](../../diplomacy/Nodes.md#class-identitynode)
-+ case class TLRationalOutputNode extends [OutputNode](../../diplomacy/Nodes.md#class-outputnode)
-+ case class TLRationalInputNode extends [InputNode](../../diplomacy/Nodes.md#class-inputnode)
-+ case class TLRationalSourceNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
-+ case class TLRationalSinkNode extends [MixedAdapterNode](../../diplomacy/Nodes.md#class-mixedadapternode)
++ case class TLRationalIdentityNode extends IdentityNode
++ case class TLRationalOutputNode extends OutputNode
++ case class TLRationalInputNode extends InputNode
++ case class TLRationalSourceNode extends MixedAdapterNode
++ case class TLRationalSinkNode extends MixedAdapterNode
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 12/07/2017<br>
+Last updated: 13/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

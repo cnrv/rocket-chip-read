@@ -35,16 +35,16 @@ object TLMessages
 
 ### TileLink channels
 
-| Name | Direction  | Response | Base classes                              |
-| :--: | :--:       |   :--:   | -------------                             |
-| A    | downwards  | D        | TLChannel < TLDataChannel < TLAddrChannel |
-| B    | upwards    | C        | TLChannel < TLDataChannel < TLAddrChannel |
-| C    | downwards  |          | TLChannel < TLDataChannel < TLAddrChannel |
-| D    | upwards    | E        | TLChannel < TLDataChannel                 |
-| E    | downwards  |          | TLChannel                                 |
+| Name | Direction  | Response | Base classes                              | Coherence  |
+| :--: | :--:       |   :--:   | -------------                             | :---:      |
+| A    | downwards  | D        | TLChannel < TLDataChannel < TLAddrChannel | U/C        |
+| B    | upwards    | C        | TLChannel < TLDataChannel < TLAddrChannel |  C         |
+| C    | downwards  |          | TLChannel < TLDataChannel < TLAddrChannel |  C         |
+| D    | upwards    | E        | TLChannel < TLDataChannel                 | U/C        |
+| E    | downwards  |          | TLChannel                                 |  C         |
 
 Communication pattern:
-+ client -> master: *A* -> *D* -> *E*
++ client -> master: *A* -> *D* ( -> *E* if cached)
 + master -> client: *B* -> *C*
 
 object TLPermissions
@@ -65,16 +65,16 @@ final class TLBundle{A,B,C,D,E}
 --------------------------
 *Channel definitions*
 + *channelName*: channel name.
-+ *opcode*: **TODO** message type?.
++ *opcode*: message type.
 + *param*: command for either Atomic, Permission or Hint.
 + *size*: **TODO** number of beats?
-+ *source*: **TODO** client id?
++ *source*: to be used as a part of the client id.
 + *address*: address to identify master.
 + *mask*: byte mask (assume 1-bit per byte!).
 + *data*: data (so must be integer number of bytes).
 + *error*: indicating error in response packets.
 + *addr_lo*: lower address in channel *D* (beat id).
-+ *sink*: **TODO** ?
++ *sink*: to be used as a part of the manager id.
 
 Assumption: **TODO**
 + The beats in a burst on channel *A*, *B* and *C* must be in order.
@@ -92,7 +92,7 @@ object TLRationalBundle
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 12/07/2017<br>
+Last updated: 13/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

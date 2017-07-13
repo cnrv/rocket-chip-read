@@ -77,11 +77,15 @@ Class index
 
 ### Nodes
 `AdapterNode`      [class](../diplomacy/Nodes.md#class-adapternode)
+`BIND_ONCE`        [case object](../diplomacy/Nodes.md#trait-nodebinding)
+`BIND_QUERY`       [case object](../diplomacy/Nodes.md#trait-nodebinding)
+`BIND_STAR`        [case object](../diplomacy/Nodes.md#trait-nodebinding)
 `IdentityNode`     [class](../diplomacy/Nodes.md#class-identitynode)
 `InputNode`        [class](../diplomacy/Nodes.md#class-inputnode)
 `MixedAdapterNode` [class](../diplomacy/Nodes.md#class-mixedadapternode)
 `MixedNode`        [abstract class](../diplomacy/Nodes.md#abstract-class-mixednode)
 `NexusNode`        [class](../diplomacy/Nodes.md#class-nexusnode)
+`NodeBinding`      [trait](../diplomacy/Nodes.md#trait-nodebinding)
 `OutputNode`       [class](../diplomacy/Nodes.md#class-outputnode)
 `SinkNode`         [class](../diplomacy/Nodes.md#class-sinknode)
 `SourceNode`       [class](../diplomacy/Nodes.md#class-sourcenode)
