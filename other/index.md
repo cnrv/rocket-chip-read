@@ -11,10 +11,6 @@ Class index
   util.HellaPeekingArbiter [class](../util/Arbiters.md#class-hellapeekingarbiter)<br>
   devices.tilelink.TLArbiter [object](../devices/tilelink/Arbiter.md#object-tlarbiter)<br>
 
-+ Binding<br>
-  diplomacy.Binding [case class](../diplomacy/Resources.md#case-class-binding)<br>
-  diplomacy.BindingScope [trait](../diplomacy/Resources.md#trait-bindingscope); [object](../diplomacy/Resources.md#object-bindingscope)<br>
-
 + Blackbox<br>
   util.AsyncResetReg [class](../util/BackBoxRegs.md#class-asyncresetreg); [object](../util/BackBoxRegs.md#object-asyncresetreg)<br>
   util.AsyncResetRegVec [class](../util/BackBoxRegs.md#class-asyncresetregvec)<br>
@@ -75,41 +71,64 @@ Class index
 
 ## Diplomacy
 
-### Nodes
-`AdapterNode`      [class](../diplomacy/Nodes.md#class-adapternode)
-`BIND_ONCE`        [case object](../diplomacy/Nodes.md#trait-nodebinding)
-`BIND_QUERY`       [case object](../diplomacy/Nodes.md#trait-nodebinding)
-`BIND_STAR`        [case object](../diplomacy/Nodes.md#trait-nodebinding)
-`IdentityNode`     [class](../diplomacy/Nodes.md#class-identitynode)
-`InputNode`        [class](../diplomacy/Nodes.md#class-inputnode)
-`MixedAdapterNode` [class](../diplomacy/Nodes.md#class-mixedadapternode)
-`MixedNode`        [abstract class](../diplomacy/Nodes.md#abstract-class-mixednode)
-`NexusNode`        [class](../diplomacy/Nodes.md#class-nexusnode)
-`NodeBinding`      [trait](../diplomacy/Nodes.md#trait-nodebinding)
-`OutputNode`       [class](../diplomacy/Nodes.md#class-outputnode)
-`SinkNode`         [class](../diplomacy/Nodes.md#class-sinknode)
-`SourceNode`       [class](../diplomacy/Nodes.md#class-sourcenode)
-
-### Resources
-`Description`      [case class](../diplomacy/Resources.md#case-class-description)
-`Device`           [abstract class](../diplomacy/Resources.md#abstract-class-device)
-`DeviceInterrupts` [trait](../diplomacy/Resources.md#trait-deviceinterrupts)
-`DeviceRegName`    [trait](../diplomacy/Resources.md#trait-deviceregname)
-`MemoryDevice`     [class](../diplomacy/Resources.md#class-memorydevice)
-`SimpleDevice`     [class](../diplomacy/Resources.md#class-simpledevice)
-
 ### DeviceTree
-`DTS`              [[object](../diplomacy/DeviceTree.md#object-dts)
+`DTS`              [[object](       ../diplomacy/DeviceTree.md#object-dts                )
+
+### LazyModule
+`LazyModule`       [abstract class](../diplomacy/LazyModule/abstract-class-lazymodule    ),
+                   [object](        ../diplomacy/LazyModule/object-lazymodule            )
+`LazyModuleImp`    [abstract class](../diplomacy/LazyModule/abstract-class-lazymoduleimp )
+
+### Nodes
+`NodeHandle`       [case class](    ../diplomacy/Nodes.md#case-class-nodehandle          )
+`NodeImp`          [abstract class](../diplomacy/Nodes.md#abstract-class-nodeimp         )
+`InwardNode`       [trait](         ../diplomacy/Nodes.md#trait-inwardnode               )
+`InwardNodeHandle` [trait](         ../diplomacy/Nodes.md#trait-inwardnodehandle         )
+`InwardNodeImp`    [trait](         ../diplomacy/Nodes.md#trait-inwardnodeimp            )
+`OutwardNode`      [trait](         ../diplomacy/Nodes.md#trait-outwardnode              )
+`OutwardNodeHandle`[trait](         ../diplomacy/Nodes.md#trait-outwardnodehandle        )
+`OutwardNodeImp`   [trait](         ../diplomacy/Nodes.md#trait-outwardnodeimp           )
+
+`NodeBinding`      [trait](         ../diplomacy/Nodes.md#trait-nodebinding              )
+`BIND_ONCE`        [case object](   ../diplomacy/Nodes.md#trait-nodebinding              )
+`BIND_QUERY`       [case object](   ../diplomacy/Nodes.md#trait-nodebinding              )
+`BIND_STAR`        [case object](   ../diplomacy/Nodes.md#trait-nodebinding              )
+
+`BaseNode`         [abstract class](../diplomacy/Nodes.md#abstract-class-basenode        )
+`AdapterNode`      [class](        ../diplomacy/Nodes.md#class-adapternode               )
+`IdentityNode`     [class](         ../diplomacy/Nodes.md#class-identitynode             )
+`InputNode`        [class](         ../diplomacy/Nodes.md#class-inputnode                )
+`MixedAdapterNode` [class](         ../diplomacy/Nodes.md#class-mixedadapternode         )
+`MixedNode`        [abstract class](../diplomacy/Nodes.md#abstract-class-mixednode       )
+`NexusNode`        [class](         ../diplomacy/Nodes.md#class-nexusnode                )
+`OutputNode`       [class](         ../diplomacy/Nodes.md#class-outputnode               )
+`SinkNode`         [class](         ../diplomacy/Nodes.md#class-sinknode                 )
+`SourceNode`       [class](         ../diplomacy/Nodes.md#class-sourcenode               )
 
 ### Parameters
 
-`AddressRange`     [case class](../diplomacy/Parameters.md#case-class-addressrange),
-                   [object](../diplomacy/Parameters.md#object-addressrange)
-`AddressSet`       [case class](../diplomacy/Parameters.md#case-class-addressset),
-                   [object](../diplomacy/Parameters.md#object-addressset)
-`IdRange`          [case class](../diplomacy/Parameters.md#case-class-idrange)
-`TransferSizes`    [case class](../diplomacy/Parameters.md#case-class-transfersizes)
+`AddressRange`     [case class](    ../diplomacy/Parameters.md#case-class-addressrange   ),
+                   [object](        ../diplomacy/Parameters.md#object-addressrange       )
+`AddressSet`       [case class](    ../diplomacy/Parameters.md#case-class-addressset     ),
+                   [object](        ../diplomacy/Parameters.md#object-addressset         )
+`IdRange`          [case class](    ../diplomacy/Parameters.md#case-class-idrange        )
+`RegionType`       [object](        ../diplomacy/Parameters.md#object-regiontype         )
+`TransferSizes`    [case class](    ../diplomacy/Parameters.md#case-class-transfersizes  )
 
+
+
+### Resources
+`Binding`          [case class](    ../diplomacy/Resources.md#case-class-binding          )
+`BindingScope`     [trait](         ../diplomacy/Resources.md#trait-bindingscope          ),
+                   [object](        ../diplomacy/Resources.md#object-bindingscope         )
+`Description`      [case class](    ../diplomacy/Resources.md#case-class-description      )
+`Device`           [abstract class](../diplomacy/Resources.md#abstract-class-device       )
+`DeviceInterrupts` [trait](         ../diplomacy/Resources.md#trait-deviceinterrupts      )
+`DeviceRegName`    [trait](         ../diplomacy/Resources.md#trait-deviceregname         )
+`MemoryDevice`     [class](         ../diplomacy/Resources.md#class-memorydevice          )
+`SimpleDevice`     [class](         ../diplomacy/Resources.md#class-simpledevice          )
+
++ Region<br>
 + Instruction<br>
   rocket.ExpandedInstruction [class](../rocket/RVC.md#class-expandedinstruction)<br>
   rocket.Instruction [class](../rocket/IBuf.md#class-instruction)
@@ -132,30 +151,6 @@ Class index
   rocket.BTB [class](../rocket/BTB.md#class-btb)
   rocket.RAS [class](../rocket/BTB.md#class-ras)
 
-+ LazyModule<br>
-  diplomacy.LazyModule [abstract class](../diplomacy/LazyModule/abstract-class-lazymodule); [object](../diplomacy/LazyModule/object-lazymodule)<br>
-  diplomacy.LazyModuleImp [abstract class](../diplomacy/LazyModule/abstract-class-lazymoduleimp)
-
-+ Node<br>
-  diplomacy.BaseNode [abstract class](../diplomacy/Nodes.md#abstract-class-basenode)<br>
-  diplomacy.BIND\_ONCE [case object](../diplomacy/Nodes.md#case-object-bind_once)<br>
-  diplomacy.BIND\_QUERY [case object](../diplomacy/Nodes.md#case-object-bind_query)<br>
-  diplomacy.BIND\_STAR [case object](../diplomacy/Nodes.md#case-object-bind_star)<br>
-  diplomacy.InwardNode [trait](../diplomacy/Nodes.md#trait-inwardnode)<br>
-  diplomacy.InwardNodeHandle [trait](../diplomacy/Nodes.md#trait-inwardnodehandle)<br>
-  diplomacy.InwardNodeImp [trait](../diplomacy/Nodes.md#trait-inwardnodeimp)<br>
-  diplomacy.NodeHandle [case class](../diplomacy/Nodes.md#case-class-nodehandle)<br>
-  diplomacy.NodeImp [abstract class](../diplomacy/Nodes.md#abstract-class-nodeimp)<br>
-  diplomacy.OutwardNode [trait](../diplomacy/Nodes.md#trait-outwardnode)<br>
-  diplomacy.OutwardNodeHandle [trait](../diplomacy/Nodes.md#trait-outwardnodehandle)<br>
-  diplomacy.OutwardNodeImp [trait](../diplomacy/Nodes.md#trait-outwardnodeimp)
-
-+ Region<br>
-  diplomacy.AddressRange [case class](../diplomacy/Parameters.md#case-class-addressrange); [object](../diplomacy/Parameters.md#object-addressrange)<br>
-  diplomacy.AddressSet [case class](../diplomacy/Parameters.md#case-class-addressset); [object](../diplomacy/Parameters.md#object-addressset)<br>
-  diplomacy.IdRange [case class](../diplomacy/Parameters.md#case-class-idrange)<br>
-  diplomacy.RegionType [object](../diplomacy/Parameters.md#object-regiontype)<br>
-  diplomacy.TransferSizes [case class](../diplomacy/Parameters.md#case-class-transfersizes)
 
 + RegisterCrossing<br>
   regmapper.BusyRegisterCrossing [class](../regmapper/RegisterCrossing.md#class-busyregistercrossing)<br>
