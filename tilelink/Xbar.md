@@ -20,6 +20,7 @@ class TLXbar(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Parame
   - **outputPorts** `(addr: UInt) => Seq[Bool]` one-hot address route function.
   - **wide_bundle** `TLBundleParameters`<br>
     A Bundle parameter wide enough to represent all input and output ports. **_Resolved at module generation time._**
+  - **AddressA, AddressC** `UInt` target addresses of channel A and C.
 
 
 ### object TLXbar

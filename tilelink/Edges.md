@@ -18,7 +18,7 @@ class TLEdge(
   Whether `address` is aligned to `1 << lgSize`.
 + **mask** `(address: UInt, lgSize: UInt) => UInt`<br>
   Generate mask for a TileLink transaction.
-+ **statucHasData** `(TLChannel) => Option[Boolean]`<br>
++ **staticHasData** `(TLChannel) => Option[Boolean]`<br>
   Compile time analysis, return whether data is needed for a channel.<br>
   Yes: `Some(true)`;<br>
   No:  `Some(false)`;<br>

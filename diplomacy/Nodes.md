@@ -186,8 +186,8 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
     extends BaseNode with InwardNode[DI, UI, BI] with OutwardNode[DO, UO, BO]
 ~~~
 
-+ **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) input node (manager side) parameters.
-+ **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) output node (client side) parameters.
++ **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) input node parameters.
++ **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) output node parameters.
 + **numPO** `Range.Inclusive` (param) output range.
 + **numPI** `Range.Inclusive` (param) input range.
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
@@ -292,8 +292,8 @@ class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
   extends MixedNode(inner, outer)(numPO, numPI)
 ~~~
 
-+ **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) input node (manager side) parameters.
-+ **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) output node (client side) parameters.
++ **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) input node parameters.
++ **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) output node parameters.
 + **dFn** `(Seq[DI]) => DO` used to resolve oParams.
 + **uFn** `(Seq[DO]) => DI` used to resolve iParams.
 + **numPO** `Range.Inclusive = 1 to 999` (param) output range.
