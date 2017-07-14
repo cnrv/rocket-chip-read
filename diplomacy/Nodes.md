@@ -17,9 +17,9 @@ trait InwardNodeImp[DI, UI, EI, BI <: Data]
 + **EI** Packet parameters (generators) for this node.
 + **BI** Bundle type
 <br><br>
-+ **edgeI** `(pd: DI, pu: UI) => EI` get the parameters for an input channel.
-+ **bundleI** `(ei: EI) => BI` generate the input channel.
-+ **colour** `_ => String` get the color in node connection graph.
++ **edgeI** `(pd: DI, pu: UI) => EI` (virtual) get the parameters for an input channel.
++ **bundleI** `(ei: EI) => BI` (virtual) generate the input channel.
++ **colour** `() => String` (virtual) get the color in node connection graph.
 + **connect** `(()=>Seq[EI], ()=>Seq[(BI, BI)], enM:Boolean) => (m:Option[LazyModule], bind:()=>Unit)`<br>
     Generate the port connection callback function _bind()_<br>
     _enM_: whether to insert a bus monitor.<br>
@@ -39,8 +39,8 @@ trait OutwardNodeImp[DO, UO, EO, BO <: Data]
 + **EO** Edge Parameters describing a connection on the outer side of the node
 + **BO** Bundle type used when connecting to the outer side of the node
 <br><br>
-+ **edgeO** `(pd: DO, pu: UO) => EO` get the parameters for an output channel.
-+ **bundleO** `(eo: EO) => BO` generate the output channel.
++ **edgeO** `(pd: DO, pu: UO) => EO` (virtual) get the parameters for an output channel.
++ **bundleO** `(eo: EO) => BO` (virtual) generate the output channel.
 
 abstract class NodeImp
 --------------------------------
@@ -61,8 +61,8 @@ abstract class BaseNode
 
 + **lazyModule** `LazyModule` pointer to the parent lazyModule for error report.
 + **index** `Int` index of this node in stack.
-+ **externalIn** `Boolean` generate input bundle for port connection.
-+ **externalOut** `Boolean` generate output bundle for port connection.
++ **externalIn** `Boolean` (virtual) generate input bundle for external port connection.
++ **externalOut** `Boolean` (virtual) generate output bundle for external port connection.
 + **nodename** `() => String` node name
 + **name** `() => String` hierarchical node name
 + **omitGraphML** `() => Bool` a portless node does not need a connection graph
@@ -94,9 +94,12 @@ case object BIND_QUERY extends NodeBinding
 case object BIND_STAR  extends NodeBinding
 ~~~
 
-+ **BIND\_ONCE** normal one to one connection.
-+ **BIND\_QUERY**  M to 1 connection, multiplexing.
-+ **BIND\_STAR** 1 to M connection, demultiplexing.
++ **BIND\_ONCE**<br>
+  Label normal one to one connection.
++ **BIND\_QUERY**<br>
+  Label inputs of 1-to-M (demux) or outputs of M-to-1 (mux).
++ **BIND\_STAR**<br>
+  Label outputs of 1-to-M (demux) or inputs of M-to-1 (mux).
 
 
 trait InwardNodeHandle
@@ -109,13 +112,122 @@ trait InwardNodeHandle[DI, UI, BI <: Data]
 }
 ~~~
 
-+ *inward: InwardNode[DI, UI, BI]*: self object pointer
-+ **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
-  Connect `h` to the only output port of this, 1 to 1 connection.
-+ **&ast;=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
-  Connect `h` to all output ports of this, 1 to M connection.
-+ **=&ast;** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[LazyModule]`<br>
-  Add `h` to the input ports list of this, M to 1 connection.
++ *inward: InwardNode[DI, UI, BI]*: (virtual) self object pointer
++ **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]` (virtual) 1-to-1 bind.
++ **&ast;=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]` (virtual) 1-to-M bind.
++ **=&ast;** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]` (virtual) M-to-1 bind.
+
+trait InwardNode
+------------------------
+
+~~~scala
+trait InwardNode[DI, UI, BI <: Data] extends BaseNode with InwardNodeHandle[DI, UI, BI]
+~~~
+
++ **inward** `InwardNode[DI, UI, BI] = this` pointer to the LazyModule.
++ **numPI** `Range.Inclusive` (virtual) range of input ports.
++ **iPushed** `() => Int` number of inner nodes being processed.
++ **iPush** `(node:Int, node: OutwardNode[DI, UI, BI], binding: NodeBinding) => Unit`<br>
+  Process a port connection.
++ **iBindings** `List[(Int, OutwardNode[DI, UI, BI], NodeBinding)]`<br>
+  (lazy) A list of output ports to be binded (index, port, bind-type).
++ **iStar** `Int` (virtual) ??
++ **iPortMapping** `Seq[(Int, Int)]` (virtual) range of each input port.
++ **iParams** `Seq[UI]` (virtual) input port parameters.
++ **bundleIn** `Vec[BI]` (virtual) the actual heterogeneous list of input port Bundles in hardware.
+
+trait OutwardNodeHandle
+---------------------------
+
+~~~scala
+trait OutwardNodeHandle[DO, UO, BO <: Data]
+{
+  val outward: OutwardNode[DO, UO, BO]
+}
+~~~
+
++ **outward** `OutwardNode[DO, UO, BO]` (virtual) tpointer to the LazyModule.
+
+
+trait OutwardNode
+----------------------------
+
+~~~scala
+trait OutwardNode[DO, UO, BO <: Data] extends BaseNode with OutwardNodeHandle[DO, UO, BO]
+~~~
+
++ **outward** `OutwardNode[DO, UO, BO] = this` pointer to the LazyModule.
++ **numPO** `Range.Inclusive` (virtual) number of putputs.
++ **oPushed** `() => Int` number of outer nodes being processed.
++ **oPush** `(index: Int, node: InwardNode [DO, UO, BO], binding: NodeBinding) => Unit`<br>
+  Process a port connection.
++ **oBindings** `List[(Int, InwardNode [DO, UO, BO], NodeBinding)]`<br>
+  (lazy) A list of input port to be binded (index, port, bind-type)
++ **oStar** `Int` (virtual) ??
++ **oPortMapping** `Seq[(Int, Int)]` (virtual) range of each output port.
++ **oParams** `Seq[DO]` (virtual) output port node parameters.
++ **bundleOut** `Vec[BO]` (virtual) the actual heterogeneous list of output port Bundles in hardware.
+
+
+abstract class MixedNode
+---------------------------
+~~~scala
+abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
+    inner: InwardNodeImp [DI, UI, EI, BI],
+    outer: OutwardNodeImp[DO, UO, EO, BO])(
+    protected[diplomacy] val numPO: Range.Inclusive,
+    protected[diplomacy] val numPI: Range.Inclusive)
+    extends BaseNode with InwardNode[DI, UI, BI] with OutwardNode[DO, UO, BO]
+~~~
+
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
+  (virtual) A function to resolve the number of star type input and output ports.
++ **mapParamsD** `(Int, Seq[DI]) => Seq[DO]`<br>
+  (virtual) A function to resolve oParams.
++ **mapParamsU** `(Int, Seq[DO]) => Seq[DI]`<br>
+  (virtual) A function to resolve iParams.
++ **oPortMapping** `Seq[(Int, Int)]` (lazy)range of each output port.
++ **iPortMapping** `Seq[(Int, Int)]` (lazy)range of each input port.
++ **oStar** `Int` (lazy) ??
++ **iStar** `Int` (lazy) ??
++ **oPorts** `Seq[(Int, InwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its output ports.
++ **iPorts** `Seq[(Int, OutwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its input ports.
++ **oParams** `Seq[DO]` (lazy) output port node parameters.
++ **iParams** `Seq[DI]` (lazy) input port node parameters.
++ **edgesOut** `Seq[EO]` (lazy) output port edge parameters.
++ **edgesIn** `Seq[EI]` (lazy) input port edge parameters.
++ **externalEdgesOut** `Seq[EO]` (lazy) output edge parameter for external port connection.
++ **externalEdgesIn** `Seq[EI]` (lazy) input edge parameter for external port connection.
++ **flip** `Boolean = false` flip the port directions (needed for blind nodes).
++ **wire** `Boolean = false` wire the ports if you want to grab access to from inside a module.
++ **bunleOut** `Seq[BO]` output bundles.
++ **bundleIn** `Seq[BI]` input bundles.
+
+
++ **connectButDontMonitor** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
+  Equal to `:=` but without a monitor.
++ **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
+  Connect `h` to the only output port of this, 1 to 1 connection. Add a monitor.
+~~~
+(h)-->(x)
+x.iPush(h, BIND_ONCE)
+h.oPush(x, BIND_ONCE)
+~~~
++ **&ast;=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
+  Connect `h` to all output ports of this, 1 output to M input connection. Add a monitor.
+~~~
+(h)-->(x,...)
+x.iPush(h, BIND_STAR)
+h.oPush(x, BIND_QUERY)
+~~~
++ **=&ast;** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
+  Add `h` to the input ports list of this, M output to 1 input connection. Add a monitor.
+~~~
+(h,...)-->(x)
+x.iPush(h, BIND_QUERY)
+h.oPush(x, BIND_STAR)
+~~~
+
 
 Reference: https://github.com/freechipsproject/rocket-chip/pull/536
 >In some places we would like to pass multiple connections through an edge.
@@ -132,67 +244,6 @@ Reference: https://github.com/freechipsproject/rocket-chip/pull/536
 >baz1 := foo<br>
 >baz2 := foo // two times
 
-trait InwardNode
-------------------------
-
-~~~scala
-trait InwardNode[DI, UI, BI <: Data] extends BaseNode with InwardNodeHandle[DI, UI, BI]
-~~~
-
-+ **inward** `InwardNode[DI, UI, BI] = this` pointer to the LazyModule.
-+ **numPI** `Range.Inclusive` range of input ports.
-+ **iPushed** `() => Int` number of inner nodes being processed.
-+ **iPush** `(node:Int, node: OutwardNode[DI, UI, BI], binding: NodeBinding) => Unit` process a port connection.
-+ **iBindings** `List[(Int, OutwardNode[DI, UI, BI], NodeBinding)]` list of output ports to be binded (index, port, bind-type).
-+ **iStar** `Int` ??
-+ **iPortMapping** `Seq[(Int, Int)]` range of each inner node.
-+ **iParams** `Seq[UI]` inner node parameters.
-+ **bundleIn** `Vec[BI]` (lazy) the actual heterogeneous list of input port Bundles in hardware.
-
-trait OutwardNodeHandle
----------------------------
-
-~~~scala
-trait OutwardNodeHandle[DO, UO, BO <: Data]
-{
-  val outward: OutwardNode[DO, UO, BO]
-}
-~~~
-
-+ **outward** `OutwardNode[DO, UO, BO]` pointer to the LazyModule.
-
-
-trait OutwardNode
-----------------------------
-
-~~~scala
-trait OutwardNode[DO, UO, BO <: Data] extends BaseNode with OutwardNodeHandle[DO, UO, BO]
-~~~
-
-+ **outward** `OutwardNode[DO, UO, BO] = this` pointer to the LazyModule.
-+ **numPO** `Range.Inclusive` number of putputs.
-+ **oPushed** `() => Int` number of outer nodes being processed.
-+ **oPush** `(index: Int, node: InwardNode [DO, UO, BO], binding: NodeBinding) => Unit` process a port connection.
-+ **oBindings** `List[(Int, InwardNode [DO, UO, BO], NodeBinding)]` list of input port to be binded (index, port, bind-type)
-+ **oStar** `Int` ??
-+ **oPortMapping** `Seq[(Int, Int)]` range of each outer node.
-+ **oParams** `Seq[DO]` outer node parameters.
-+ **bundleOut** `Vec[BO]` (lazy) the actual heterogeneous list of output port Bundles in hardware.
-
-
-abstract class MixedNode
----------------------------
-~~~scala
-abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
-    inner: InwardNodeImp [DI, UI, EI, BI],
-    outer: OutwardNodeImp[DO, UO, EO, BO])(
-    protected[diplomacy] val numPO: Range.Inclusive,
-    protected[diplomacy] val numPI: Range.Inclusive)
-    extends BaseNode with InwardNode[DI, UI, BI] with OutwardNode[DO, UO, BO]
-~~~
-
-+ **oPorts** `Seq[(Int, InwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its output ports.
-+ **iPorts** `Seq[(Int, OutwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its input ports.
 
 class MixedAdapterNode
 -----------
@@ -276,7 +327,7 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 13/07/2017<br>
+Last updated: 14/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
