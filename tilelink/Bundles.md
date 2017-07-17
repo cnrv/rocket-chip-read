@@ -68,13 +68,13 @@ final class TLBundle{A,B,C,D,E}
 + *opcode*: message type.
 + *param*: command for either Atomic, Permission or Hint.
 + *size*: **TODO** number of beats?
-+ *source*: to be used as a part of the client id.
++ *source*: to be used as a part of the target client id for B and D.
 + *address*: address to identify master.
 + *mask*: byte mask (assume 1-bit per byte!).
 + *data*: data (so must be integer number of bytes).
 + *error*: indicating error in response packets.
 + *addr_lo*: lower address in channel *D* (beat id).
-+ *sink*: to be used as a part of the manager id.
++ *sink*: to be used as a part of the target manager id for E.
 
 Assumption: **TODO**
 + The beats in a burst on channel *A*, *B* and *C* must be in order.
@@ -92,7 +92,7 @@ object TLRationalBundle
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 13/07/2017<br>
+Last updated: 17/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

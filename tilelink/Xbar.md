@@ -13,14 +13,20 @@ class TLXbar(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Parame
 + **node** `TLNexusNode`
 + **module** `LazyModuleImp`
   - **io** `Bundle` module I/O ports:<br>
-    **in** `HeterogeneousBag[AXI4Bundle]` input ports.<br>
-    **out** `HeterogeneousBag[AXI4Bundle]` output ports.<br>
+    **in** `HeterogeneousBag[TLBundle]` input ports.<br>
+    **out** `HeterogeneousBag[TLBundle]` output ports.<br>
   - **inputIdRanges** `Seq[IdRange]` ranges of input (client) ports. **_Resolved at module generation time._**
   - **outputIdRanges** `Seq[IdRange]` ranges of output (manager) ports. **_Pre-assigned._**
-  - **outputPorts** `(addr: UInt) => Seq[Bool]` one-hot address route function.
+  - **outputPorts** `Seq[(addr: UInt) => Bool]` address route functions.
   - **wide_bundle** `TLBundleParameters`<br>
     A Bundle parameter wide enough to represent all input and output ports. **_Resolved at module generation time._**
-  - **AddressA, AddressC** `UInt` target addresses of channel A and C.
+  - **addressA, addressC** `Seq[UInt]` target addresses of channel A and C.
+  - **requestAIO, requestCIO** `Seq[Bool]` client to manager (I to O) one-hot route result for channel A and C.
+  - **requestBOI, requestDOI** `Seq[Bool]` manager to client (O to I) one-hot route result for channel B and D.
+  - **requestEIO** `Seq[Bool]` client to manager (I to O) one-hot route result for channel E.
+  - **beatsAI, beatsBO, beatsCI, beatsDO, beatsEI** `Seq[UInt]` number of beats in the busrt (AXI style, N-1).
+  - **portsAOI, portsBIO, portsCOI, portsDIO, portsEOI**, `Seq[Seq[TLBundleX]]`<br>
+    Demulplexed connections from input to outputs.
 
 
 ### object TLXbar
@@ -34,7 +40,7 @@ class TLXbar(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Parame
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 13/07/2017<br>
+Last updated: 17/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
