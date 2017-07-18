@@ -185,9 +185,13 @@ Class index
 `TLBundleC`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
 `TLBundleD`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
 `TLBundleE`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
+`TLBundle`         [class](         ../tilelink/Bundles.md#class-tlbundle               ),
+                   [class](         ../tilelink/Bundles.md#object-tlbundle              )
 
-`TLBundleSnoop`    [object](        ../tilelink/Bundles.md#object-tlbundlesnoop         )
-`TLRationalBundle` [object](        ../tilelink/Bundles.md#object-tlrationalbundle      )
+`TLBundleSnoop`    [class](         ../tilelink/Bundles.md#class-tlbundlesnoop          ),
+                   [object](        ../tilelink/Bundles.md#object-tlbundlesnoop         )
+`TLAsyncBundle`    [class](         ../tilelink/Bundles.md#class-tlasyncbundle          )
+`TLRationalBundle` [class](         ../tilelink/Bundles.md#class-tlrationalbundle       )
 
 ### Edges
 `TLEdge`           [class](         ../tilelink/Edges.md#class-tledge                   )

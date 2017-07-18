@@ -5,8 +5,7 @@
 **********************
 
 
-object TLMessages
------------------------------
+## object TLMessages
 *Constants to define message types*
 
 ### Type of TileLink transactions
@@ -47,22 +46,72 @@ Communication pattern:
 + client -> master: *A* -> *D* ( -> *E* if cached)
 + master -> client: *B* -> *C*
 
-object TLPermissions
------------------------------
-**TODO** ?? (T)runk, (B)ranch, (N)one
+## object TLPermissions
+
+> The three primary TileLink permissions are:
+> - (T)runk: the agent is (or is on inwards path to) the global point of serialization.
+> - (B)ranch: the agent is on an outwards path to
+> - (N)one:
+>
+> These permissions are permuted by transfer operations in various ways.
+> Operations can cap permissions, request for them to be grown or shrunk,
+> or for a report on their current status.
 
 
-object TLAtomics
------------------------------
+#### Cap types (Grant = new permissions, Probe = permisions <= target)
+
+- **toT** `() => 0.U`
+- **toB** `() => 1.U`
+- **toN** `() => 2.U`
+- **isCap** `(x: UInt) => x <= toN`
+
+#### Grow types (Acquire = permissions >= target)
+
+- **NtoB** `() => 0.U`
+- **NtoT** `() => 1.U`
+- **BtoT** `() => 2.U`
+- **isGrow** `(x: UInt) => x <= BtoT`
+
+#### Shrink types (ProbeAck, Release)
+
+- **TtoB** `() => 0.U`
+- **TtoN** `() => 1.U`
+- **BtoN** `() => 2.U`
+- **isShrink** `(x: UInt) => x <= BtoN`
+
+#### Report types (ProbeAck)
+
+- **TtoT** `() => 3.U`
+- **BtoB** `() => 4.U`
+- **NtoN** `() => 5.U`
+- **isReport** `(x: UInt) => x <= NtoN`
+
+
+## object TLAtomics
 *Command for atomic operations*
 
+#### Arithmetic types
+- **MIN** `() => 0.U`
+- **MAX** `() => 1.U`
+- **MINU** `() => 2.U`
+- **MAXU** `() => 3.U`
+- **ADD** `() => 4.U`
+- **isArithmetic** `(x: UInt) => x <= ADD`
 
-object TLHints
------------------------------
+#### Logical types
+- **XOR** `() => 0.U`
+- **OR** `() => 1.U`
+- **AND** `() => 2.U`
+- **SWAP** `() => 3.U`
+- **isLogical** `(x: UInt) => x <= SWAP`
+
+## object TLHints
 *Type of prefetch hints*
 
-final class TLBundle{A,B,C,D,E}
---------------------------
+- **PREFETCH_READ** `() => 0.U`
+- **PREFETCH_WRITE** `() => 1.U`
+
+## final class TLBundle{A,B,C,D,E}
 *Channel definitions*
 + *channelName*: channel name.
 + *opcode*: message type.
@@ -80,19 +129,38 @@ Assumption: **TODO**
 + The beats in a burst on channel *A*, *B* and *C* must be in order.
 + The beats in a burst on channel *D* can be out of order? **TODO**
 
-object TLBundleSnoop
-------------------------------
+## class TLBundle
+
+- **a,b,c,d,e** `DecoupledIO[TLBundleX]` the tilelink sub-channels.
+
+## object TLBundle
+
+- **apply** `() => TLBundle` TLBundle generator.
+
+## class TLBundleSnoop
+
+- **a,b,c,d,e** `DecoupledIO[TLBundleX]` the tilelink sub-channel. All directionless.
+
+## object TLBundleSnoop
 *A snoop point for a monitor to passively monitor a bus*
 
-object TLRationalBundle
-------------------------------
-**TODO** *A bus connection for rational clock domains?*
+- **apply** `() => TLBundleSnoop` TLBundleSnoop generator.
 
+
+## class TLAsyncBundle
+*Tilink channel for asynchronous crossing.*
+
+- **a,b,c,d,e** `AsyncBundle[TLBundleX]` the tilelink sub-channels.
+
+## class TLRationalBundle
+*Tilink channel for rational crossing.*
+
+- **a,b,c,d,e** `RationalIO[TLBundleX]` the tilelink sub-channels.
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 17/07/2017<br>
+Last updated: 18/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
