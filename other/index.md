@@ -172,49 +172,66 @@ Class index
   rocket.IBuf [class](../rocket/IBuf.md#class-ibuf)
   rocket.RVCExpander [class](../rocket/RVC.md#class-rvcexpander)
 
-+ Tilelink<br>
-  tilelink.TLAdapterNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLAsyncImp [object](../tilelink/Nodes.md#object-tlasyncimp)<br>
-  tilelink.TLAsyncIdentityNode [object](../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLAsyncInputNode [object](../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLAsyncOutputNode [object](../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLAsyncSinkNode [object](../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLAsyncSourceNode [object](../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLAtomics [object](../tilelink/Bundles.md#object-tlatomics)<br>
-  tilelink.TLBlindInputNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLBlindOutputNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLBundleA [final class](../tilelink/Bundles.md#final-class-tlbundleabcde)<br>
-  tilelink.TLBundleB [final class](../tilelink/Bundles.md#final-class-tlbundleabcde)<br>
-  tilelink.TLBundleC [final class](../tilelink/Bundles.md#final-class-tlbundleabcde)<br>
-  tilelink.TLBundleD [final class](../tilelink/Bundles.md#final-class-tlbundleabcde)<br>
-  tilelink.TLBundleE [final class](../tilelink/Bundles.md#final-class-tlbundleabcde)<br>
-  tilelink.TLBundleSnoop [object](../tilelink/Bundles.md#object-tlbundlesnoop)<br>
-  tilelink.TLClientNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes); [object](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLEdge [class](../tilelink/Edges.md#class-tledge)<br>
-  tilelink.TLEdgeIn [class](../tilelink/Edges.md#class-tledgein)<br>
-  tilelink.TLEdgeOut [class](../tilelink/Edges.md#class-tledgeout)<br>
-  tilelink.TLHints [object](../tilelink/Bundles.md#object-tlhints)<br>
-  tilelink.TLInputNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLIdentityNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLImp [object](../tilelink/Nodes.md#object-tlimp)<br>
-  tilelink.TLInternalInputNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLInternalOutputNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLManagerNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes); [object](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLMessages [object](../tilelink/Bundles.md#object-tlmessages)<br>
-  tilelink.TLNexusNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLOutputNode [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLPermissions [object](../tilelink/Bundles.md#object-tlpermissions)<br>
-  tilelink.TLRationalBundle [object](../tilelink/Bundles.md#object-tlrationalbundle)<br>
-  tilelink.TLRationalImp [object](../tilelink/Nodes.md#object-tlrationalimp)<br>
-  tilelink.TLRationalIdentityNode [object](../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLRationalInputNode [object](../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLRationalOutputNode [object](../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLRationalSinkNode [object](../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
-  tilelink.TLRationalSourceNode [object](../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)<br>
+## Tilelink
+
+### Bundles
+`TLMessages`       [object](        ../tilelink/Bundles.md#object-tlmessages            )
+`TLAtomics`        [object](        ../tilelink/Bundles.md#object-tlatomics             )
+`TLHints`          [object](        ../tilelink/Bundles.md#object-tlhints               )
+`TLPermissions`    [object](        ../tilelink/Bundles.md#object-tlpermissions         )
+
+`TLBundleA`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
+`TLBundleB`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
+`TLBundleC`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
+`TLBundleD`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
+`TLBundleE`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
+
+`TLBundleSnoop`    [object](        ../tilelink/Bundles.md#object-tlbundlesnoop         )
+`TLRationalBundle` [object](        ../tilelink/Bundles.md#object-tlrationalbundle      )
+
+### Edges
+`TLEdge`           [class](         ../tilelink/Edges.md#class-tledge                   )
+`TLEdgeIn`         [class](         ../tilelink/Edges.md#class-tledgein                 )
+`TLEdgeOut`        [class](         ../tilelink/Edges.md#class-tledgeout                )
+
+### Nodes
+`TLImp`            [object](        ../tilelink/Nodes.md#object-tlimp                    )
+`TLAdapterNode`    [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLBlindInputNode` [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLBlindOutputNode`[case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLClientNode`     [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes),
+                   [object](        ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLInputNode`      [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLIdentityNode`   [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLInternalInputNode` [case class]( ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLInternalOutputNode` [case class](../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLManagerNode`    [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes),
+                   [object](        ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLNexusNode`      [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+`TLOutputNode`     [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
+
+`TLAsyncImp`       [object](        ../tilelink/Nodes.md#object-tlasyncimp              )
+`TLAsyncIdentityNode` [object](     ../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)
+`TLAsyncInputNode` [object](        ../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)
+`TLAsyncOutputNode`[object](        ../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)
+`TLAsyncSinkNode`  [object](        ../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)
+`TLAsyncSourceNode`[object](        ../tilelink/Nodes.md#object-asynchronous-tilelink-extension-of-basic-nodes)
+
+`TLRationalImp`    [object](        ../tilelink/Nodes.md#object-tlrationalimp            )
+`TLRationalIdentityNode` [object](  ../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
+`TLRationalInputNode` [object](     ../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
+`TLRationalOutputNode` [object](    ../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
+`TLRationalSinkNode` [object](      ../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
+`TLRationalSourceNode` [object](    ../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
+
+
+### Xbar
+`TLXbar`           [[class](        ../tilelink/Xbar.md#class-tlxbar                     ),
+                   [[object](       ../tilelink/Xbar.md#object-tlxbar                    )
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 12/07/2017<br>
+Last updated: 18/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
