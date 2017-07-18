@@ -10,7 +10,7 @@
 class TLXbar(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Parameters) extends LazyModule
 ~~~
 
-+ **node** `TLNexusNode`
++ **node** `TLNexusNode` The diplomacy object to record port connections for module generation.
 + **module** `LazyModuleImp`
   - **io** `Bundle` module I/O ports:<br>
     **in** `HeterogeneousBag[TLBundle]` input ports.<br>
@@ -28,6 +28,10 @@ class TLXbar(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Parame
   - **portsAOI, portsBIO, portsCOI, portsDIO, portsEOI**, `Seq[Seq[TLBundleX]]`<br>
     Demulplexed connections from input to outputs.
 
+The data-width of all ports must be equal.
+The sourceId and fifoId are reordered to reduce their range.
+This range shrink is defined in the case variables of `node`: `clientFn` and `managerFn`.
+
 
 ### object TLXbar
 
@@ -35,12 +39,14 @@ class TLXbar(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Parame
   Resolve id range of input ports at binding time. **_All input port should have a non-zero range, otherwise exception!_**
 + **mapOutputIds** `(Seq[TLClientPortParameters]) => Seq[IdRange]`<br>
   Get the assigned output id range of all managers.
-+ **assignRanges** `(Seq[Int] => Seq[IdRange])` Internal function used by mapInputIds().
++ **assignRanges** `(Seq[Int] => Seq[IdRange])` Internal function used by mapInputIds() and mapOutputIds().
++ **relabeler** `(Int) => Int` shrink the range of fifoId. Internal function used by TLXbar.node.managerFn().
++ **fanout** `(DecoupledIO[T], Seq[Bool]) => Vec[DecoupledIO[T]]` demultiplexing input port for output connection.
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 17/07/2017<br>
+Last updated: 18/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

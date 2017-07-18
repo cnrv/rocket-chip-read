@@ -61,7 +61,9 @@ case class TLManagerParameters(
   + **supportsPutFull**    `TransferSizes = TransferSizes.none`
   + **supportsPutPartial** `TransferSizes = TransferSizes.none`
   + **supportsHint**       `TransferSizes = TransferSizes.none`
-+ **fifoId**             `Option[Int] = None`
++ **fifoId**             `Option[Int] = None`<br>
+  If fifoId=Some, all accesses sent to the same fifoId are executed and ACK'd in FIFO order.<br>
+  Note: you can only rely on this FIFO behaviour if your TLClientParameters include requestFifo.
 
 ### Member variables and functions:
 
@@ -512,7 +514,7 @@ case class TLManagerKey(
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 12/07/2017<br>
+Last updated: 18/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

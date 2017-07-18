@@ -302,8 +302,8 @@ class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **externalOut** `Boolean = true` generate external output port bundles.
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
   resolve `iStar` and `oStar`. NexusNode does not allow any input or output star connections.
-+ **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn(), use the most inclusive parameter?
-+ **mapParamsU** `(Int, p:Seq[DO]) => Seq[DI]` resolve iParams using uFn(), use the most inclusive parameter?
++ **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn().
++ **mapParamsU** `(Int, p:Seq[DO]) => Seq[DI]` resolve iParams using uFn().
 + **oStar** `Int = 0` (const)
 + **iStar** `Int = 0` (const)
 
@@ -378,7 +378,7 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 14/07/2017<br>
+Last updated: 18/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
