@@ -112,6 +112,8 @@ Class index
                    [object](        ../diplomacy/Parameters.md#object-addressrange       )
 `AddressSet`       [case class](    ../diplomacy/Parameters.md#case-class-addressset     ),
                    [object](        ../diplomacy/Parameters.md#object-addressset         )
+`BufferParams`     [case class](    ../diplomacy/Parameters.md#case-class-bufferparams   ),
+                   [object](        ../diplomacy/Parameters.md#object-bufferparams       )
 `IdRange`          [case class](    ../diplomacy/Parameters.md#case-class-idrange        )
 `RegionType`       [object](        ../diplomacy/Parameters.md#object-regiontype         )
 `TransferSizes`    [case class](    ../diplomacy/Parameters.md#case-class-transfersizes  )
@@ -174,6 +176,10 @@ Class index
 
 ## Tilelink
 
+### Buffer
+`TLBuffer`         [class](         ../tilelink/Buffer.md#class-tlbuffer                ),
+                   [object](        ../tilelink/Buffer.md#object-tlbuffer               )
+
 ### Bundles
 `TLMessages`       [object](        ../tilelink/Bundles.md#object-tlmessages            )
 `TLAtomics`        [object](        ../tilelink/Bundles.md#object-tlatomics             )
@@ -186,7 +192,7 @@ Class index
 `TLBundleD`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
 `TLBundleE`        [final class](   ../tilelink/Bundles.md#final-class-tlbundleabcde    )
 `TLBundle`         [class](         ../tilelink/Bundles.md#class-tlbundle               ),
-                   [class](         ../tilelink/Bundles.md#object-tlbundle              )
+                   [object](        ../tilelink/Bundles.md#object-tlbundle              )
 
 `TLBundleSnoop`    [class](         ../tilelink/Bundles.md#class-tlbundlesnoop          ),
                    [object](        ../tilelink/Bundles.md#object-tlbundlesnoop         )

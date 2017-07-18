@@ -10,7 +10,8 @@
 class TLXbar(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Parameters) extends LazyModule
 ~~~
 
-+ **node** `TLNexusNode` The diplomacy object to record port connections for module generation.
++ **policy** `TLArbiter.Policy` (param) the arbitration algorithm used in arbiters.
++ **node** `TLNexusNode` the diplomacy object to record port connections for module generation.
 + **module** `LazyModuleImp`
   - **io** `Bundle` module I/O ports:<br>
     **in** `HeterogeneousBag[TLBundle]` input ports.<br>

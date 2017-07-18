@@ -104,12 +104,31 @@ object AddressSet
 + **misaligned** `(BigInt, BigInt, Seq[AddressSet]) => Seq[AddressSet]` ?? not used
 + **unify** `(seq: Seq[AddressSet]) => Seq[AddressSet]` combine ranges which are combinable (order as well)
 
+## case class BufferParams
+*Parameters used to generate a buffer.*
 
+~~~scala
+case class BufferParams(depth: Int, flow: Boolean, pipe: Boolean)
+~~~
+
+- **depth** `Int` depth of the buffer.
+- **flow** `Boolean` whether to allow combinational bypass when empty.
+- **pipe** `Boolean` whether to use a pipeline of registers rather than R/W pointers.
+- **latency** `() => Int` get the minimal latency of the buffer.
+- **apply** `(DecoupledIO[T]) => DecoupledIO[T]` insert a buffer according to the configuration.
+
+## object BufferParams
+
+- **apply** `(d:Int) => BufferParams(d, false, false)`
+- **default** `() => BufferParams(2, false, false)`
+- **none** `() => BufferParams(0, false, false)`
+- **flow** `() => BufferParams(1, true, false)`
+- **pipe** `() => BufferParams(1, false, true)`
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 12/07/2017<br>
+Last updated: 18/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
