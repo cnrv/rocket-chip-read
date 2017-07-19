@@ -2,26 +2,8 @@ Class index
 ========================
 ***************************
 
-+ ALU<br>
-  rocket.ALU [class](../rocket/ALU.md#class-alu)
-
 + Arbiters<br>
-  rocket.HellaCacheArbiter [class](../rocket/HellaCacheArbiter.md#class-hellacachearbiter)<br>
-  util.HellaCountingArbiter [class](../util/Arbiters.md#class-hellacountingarbiter)<br>
-  util.HellaPeekingArbiter [class](../util/Arbiters.md#class-hellapeekingarbiter)<br>
   devices.tilelink.TLArbiter [object](../devices/tilelink/Arbiter.md#object-tlarbiter)<br>
-
-+ Blackbox<br>
-  util.AsyncResetReg [class](../util/BackBoxRegs.md#class-asyncresetreg); [object](../util/BackBoxRegs.md#object-asyncresetreg)<br>
-  util.AsyncResetRegVec [class](../util/BackBoxRegs.md#class-asyncresetregvec)<br>
-
-+ Breakpoint<br>
-  rocket.BPControl [class](../rocket/Breakpoint.md#class-bpcontrol)<br>
-  rocket.BreakpointUnit [class](../rocket/Breakpoint.md#class-breakpointunit)
-
-+ Clock<br>
-  util.ClockDivider2 [class](../util/ClockDivider.md#class-clockdivider2)<br>
-  util.Pow2ClockDivider [class](../util/ClockDivider.md#class-pow2clockdivider2)
 
 + Configs<br>
   chip.BasePlatformConfig [class](../chip/Configs.md#class-baseplatformconfig)
@@ -52,34 +34,22 @@ Class index
     Bundle [trait](../coreplex/RocketTiles.md#hasrockettilesbundle);
     Module [trait](../coreplex/RocketTiles.md#hasrockettilesmodule)<br>
 
-+ Counter<br>
-  util.TwoWayCounter [object](../util/Counters.md#object-twowaycounter)<br>
-  util.WideCounter [case class](../util/Counters.md#case-class-widecounter)
++ RegisterCrossing<br>
+  regmapper.BusyRegisterCrossing [class](../regmapper/RegisterCrossing.md#class-busyregistercrossing)<br>
+  regmapper.RegisterWriteCrossing [class](../regmapper/RegisterCrossing.md#class-registerwritecrossing)
 
-+ Crossing<br>
-  util.AsyncBundle [final class](../util/AsyncBundle.md#final-class-asyncbundle)<br>
-  util.AsyncQueue [class](../util/AsyncQueue.md#class-asyncqueue)<br>
-  util.AsyncQueueSink [class](../util/AsyncQueue.md#class-asyncqueuesink)<br>
-  util.AsyncQueueSource [class](../util/AsyncQueue.md#class-asyncqueuesource)<br>
-  util.AsyncValidSync [class](../util/AsyncQueue.md#class-asyncvalidsync)<br>
-  util.Crossing [abstract class](../util/Crossing.md#abstract-class-crossing)<br>
-  util.CrossingIO [class](../util/Crossing.md#class-crossingio)<br>
-  util.FromAsyncBundle [object](../util/AsyncBundle.md#object-fromasyncbundle)<br>
-  util.GrayCounter [object](../util/AsyncQueue.md#object-graycounter)<br>
-  util.ToAsyncBundle [object](../util/AsyncBundle.md#object-toasyncbundle)<br>
-  util.UIntSyncChain [object](../util/AsyncQueue.md#object-uintsyncchain)<br>
+# Diplomacy
+***************************
 
-## Diplomacy
-
-### DeviceTree
+#### DeviceTree
 `DTS`              [[object](       ../diplomacy/DeviceTree.md#object-dts                )
 
-### LazyModule
+#### LazyModule
 `LazyModule`       [abstract class](../diplomacy/LazyModule/abstract-class-lazymodule    ),
                    [object](        ../diplomacy/LazyModule/object-lazymodule            )
 `LazyModuleImp`    [abstract class](../diplomacy/LazyModule/abstract-class-lazymoduleimp )
 
-### Nodes
+#### Nodes
 `NodeHandle`       [case class](    ../diplomacy/Nodes.md#case-class-nodehandle          )
 `NodeImp`          [abstract class](../diplomacy/Nodes.md#abstract-class-nodeimp         )
 `InwardNode`       [trait](         ../diplomacy/Nodes.md#trait-inwardnode               )
@@ -106,7 +76,7 @@ Class index
 `SinkNode`         [class](         ../diplomacy/Nodes.md#class-sinknode                 )
 `SourceNode`       [class](         ../diplomacy/Nodes.md#class-sourcenode               )
 
-### Parameters
+#### Parameters
 
 `AddressRange`     [case class](    ../diplomacy/Parameters.md#case-class-addressrange   ),
                    [object](        ../diplomacy/Parameters.md#object-addressrange       )
@@ -118,9 +88,7 @@ Class index
 `RegionType`       [object](        ../diplomacy/Parameters.md#object-regiontype         )
 `TransferSizes`    [case class](    ../diplomacy/Parameters.md#case-class-transfersizes  )
 
-
-
-### Resources
+#### Resources
 `Binding`          [case class](    ../diplomacy/Resources.md#case-class-binding          )
 `BindingScope`     [trait](         ../diplomacy/Resources.md#trait-bindingscope          ),
                    [object](        ../diplomacy/Resources.md#object-bindingscope         )
@@ -131,56 +99,63 @@ Class index
 `MemoryDevice`     [class](         ../diplomacy/Resources.md#class-memorydevice          )
 `SimpleDevice`     [class](         ../diplomacy/Resources.md#class-simpledevice          )
 
-+ Region<br>
-+ Instruction<br>
-  rocket.ExpandedInstruction [class](../rocket/RVC.md#class-expandedinstruction)<br>
-  rocket.Instruction [class](../rocket/IBuf.md#class-instruction)
-
-+ L1 cache<br>
-  rocket.HasHellaCache [trait](../rocket/HellaCache.md#trait-hashellacache)<br>
-  rocket.HasHellaCacheBundle [trait](../rocket/HellaCache.md#trait-hashellacachebundle)<br>
-  rocket.HasHellaCacheModule [trait](../rocket/HellaCache.md#trait-hashellacachemodule)<br>
-  rocket.HellaCache [class](../rocket/HellaCache.md#class-hellacache); [object](../rocket/HellaCache.md#object-hellacache)<br>
-  rocket.HellaCacheBundle [class](../rocket/HellaCache.md#class-hellacachebundle)<br>
-  rocket.HellaCacheIO [class](../rocket/HellaCache.md#class-hellacacheio)<br>
-  rocket.HellaCacheModule [class](../rocket/HellaCache.md#class-hellacachemodule)<br>
-  rocket.L1Metadata [class](../rocket/HellaCache.md#class-l1metadata)
-
-+ L1 data cache<br>
-  rocket.DCacheParams [case class](../rocket/HellaCache.md#case-class-dcacheparams)
-
-+ L1 instruction cache<br>
-  rocket.BHT [class](../rocket/BTB.md#class-bht)<br>
-  rocket.BTB [class](../rocket/BTB.md#class-btb)
-  rocket.RAS [class](../rocket/BTB.md#class-ras)
+`Resource`         [case class](    ../diplomacy/Resources.md#case-class-resource         )
+`ResourceAddress`  [case class](    ../diplomacy/Resources.md#case-class-resourceaddress  )
+`ResourceBinding`  [object](        ../diplomacy/Resources.md#object-resourcebindings     )
+`ResourceBindings` [case class](    ../diplomacy/Resources.md#case-class-resourcebindings )
+`ResourceInt`      [case class](    ../diplomacy/Resources.md#case-class-resourceint      )
+`ResourceMapping`  [case class](    ../diplomacy/Resources.md#case-class-resourcemapping  )
+`ResourceMap`      [case class](    ../diplomacy/Resources.md#case-class-resourcemap      )
+`ResourceReference`[case class](    ../diplomacy/Resources.md#case-class-resourcereference)
+`ResourceString`   [case class](    ../diplomacy/Resources.md#case-class-resourcestring   )
 
 
-+ RegisterCrossing<br>
-  regmapper.BusyRegisterCrossing [class](../regmapper/RegisterCrossing.md#class-busyregistercrossing)<br>
-  regmapper.RegisterWriteCrossing [class](../regmapper/RegisterCrossing.md#class-registerwritecrossing)
+# Rocket
+***************************
 
-+ Resource<br>
-  diplomacy.Resource [case class](../diplomacy/Resources.md#case-class-resource)<br>
-  diplomacy.ResourceAddress [case class](../diplomacy/Resources.md#case-class-resourceaddress)<br>
-  diplomacy.ResourceBinding [object](../diplomacy/Resources.md#object-resourcebindings)<br>
-  diplomacy.ResourceBindings [case class](../diplomacy/Resources.md#case-class-resourcebindings)<br>
-  diplomacy.ResourceInt [case class](../diplomacy/Resources.md#case-class-resourceint)<br>
-  diplomacy.ResourceMapping [case class](../diplomacy/Resources.md#case-class-resourcemapping)<br>
-  diplomacy.ResourceMap [case class](../diplomacy/Resources.md#case-class-resourcemap)<br>
-  diplomacy.ResourceReference [case class](../diplomacy/Resources.md#case-class-resourcereference)<br>
-  diplomacy.ResourceString [case class](../diplomacy/Resources.md#case-class-resourcestring)
+#### ALU
+`ALU`              [class](         ../rocket/ALU.md#class-alu                          )
 
-+ RVC<br>
-  rocket.IBuf [class](../rocket/IBuf.md#class-ibuf)
-  rocket.RVCExpander [class](../rocket/RVC.md#class-rvcexpander)
+#### BTB
+`BHT`              [class](         ../rocket/BTB.md#class-bht                          )
+`BTB`              [class](         ../rocket/BTB.md#class-btb                          )
+`RAS`              [class](         ../rocket/BTB.md#class-ras                          )
 
-## Tilelink
+#### Breakpoint
+`BPControl`        [class](         ../rocket/Breakpoint.md#class-bpcontrol             )
+`BreakpointUnit`   [class](         ../rocket/Breakpoint.md#class-breakpointunit        )
 
-### Buffer
+#### HellaCacheArbiter
+`HellaCacheArbiter` [class](        ../rocket/HellaCacheArbiter.md#class-hellacachearbiter)
+
+#### HellaCache
+`DCacheParams`     [case class](    ../rocket/HellaCache.md#case-class-dcacheparams     )
+`HasHellaCache`    [trait](         ../rocket/HellaCache.md#trait-hashellacache         )
+`HasHellaCacheBundle` [trait](      ../rocket/HellaCache.md#trait-hashellacachebundle   )
+`HasHellaCacheModule` [trait](      ../rocket/HellaCache.md#trait-hashellacachemodule   )
+`HellaCache`       [class](         ../rocket/HellaCache.md#class-hellacache            ),
+                   [object](        ../rocket/HellaCache.md#object-hellacache           )
+`HellaCacheBundle` [class](         ../rocket/HellaCache.md#class-hellacachebundle      )
+`HellaCacheIO`     [class](         ../rocket/HellaCache.md#class-hellacacheio          )
+`HellaCacheModule` [class](         ../rocket/HellaCache.md#class-hellacachemodule      )
+`L1Metadata`       [class](         ../rocket/HellaCache.md#class-l1metadata            )
+
+#### IBuf
+`IBuf`             [class](         ../rocket/IBuf.md#class-ibuf                        )
+`Instruction`      [class](         ../rocket/IBuf.md#class-instruction                 )
+
+#### RVC
+`ExpandedInstruction` [class](      ../rocket/RVC.md#class-expandedinstruction          )
+`RVCExpander`      [class](         ../rocket/RVC.md#class-rvcexpander                  )
+
+# Tilelink
+***************************
+
+#### Buffer
 `TLBuffer`         [class](         ../tilelink/Buffer.md#class-tlbuffer                ),
                    [object](        ../tilelink/Buffer.md#object-tlbuffer               )
 
-### Bundles
+#### Bundles
 `TLMessages`       [object](        ../tilelink/Bundles.md#object-tlmessages            )
 `TLAtomics`        [object](        ../tilelink/Bundles.md#object-tlatomics             )
 `TLHints`          [object](        ../tilelink/Bundles.md#object-tlhints               )
@@ -199,16 +174,16 @@ Class index
 `TLAsyncBundle`    [class](         ../tilelink/Bundles.md#class-tlasyncbundle          )
 `TLRationalBundle` [class](         ../tilelink/Bundles.md#class-tlrationalbundle       )
 
-### Edges
+#### Edges
 `TLEdge`           [class](         ../tilelink/Edges.md#class-tledge                   )
 `TLEdgeIn`         [class](         ../tilelink/Edges.md#class-tledgein                 )
 `TLEdgeOut`        [class](         ../tilelink/Edges.md#class-tledgeout                )
 
-### FIFOFixer
+#### FIFOFixer
 `TLFIFOFixer`      [class](         ../tilelink/FIFOFixer.md#class-tlfifofixer          ),
                    [object](        ../tilelink/FIFOFixer.md#object-tlfifofixer         )
 
-### Nodes
+#### Nodes
 `TLImp`            [object](        ../tilelink/Nodes.md#object-tlimp                   )
 `TLAdapterNode`    [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
 `TLBlindInputNode` [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)
@@ -238,10 +213,48 @@ Class index
 `TLRationalSinkNode` [object](      ../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
 `TLRationalSourceNode` [object](    ../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
 
-
-### Xbar
+#### Xbar
 `TLXbar`           [[class](        ../tilelink/Xbar.md#class-tlxbar                     ),
                    [[object](       ../tilelink/Xbar.md#object-tlxbar                    )
+
+# util
+***************************
+
+#### AsyncBundle
+`AsyncBundle`      [final class](   ../util/AsyncBundle.md#final-class-asyncbundle       )
+`FromAsyncBundle`  [object](        ../util/AsyncBundle.md#object-fromasyncbundle        )
+`ToAsyncBundle`    [object](        ../util/AsyncBundle.md#object-toasyncbundle          )
+
+#### AsyncQueue
+`AsyncQueue`       [class](         ../util/AsyncQueue.md#class-asyncqueue               )
+`AsyncQueueSink`   [class](         ../util/AsyncQueue.md#class-asyncqueuesink           )
+`AsyncQueueSource` [class](         ../util/AsyncQueue.md#class-asyncqueuesource         )
+`AsyncValidSync`   [class](         ../util/AsyncQueue.md#class-asyncvalidsync           )
+`GrayCounter`      [object](        ../util/AsyncQueue.md#object-graycounter             )
+`UIntSyncChain`    [object](        ../util/AsyncQueue.md#object-uintsyncchain           )
+
+
+#### Arbiters
+`HellaCountingArbiter` [class](     ../util/Arbiters.md#class-hellacountingarbiter       )
+`HellaPeekingArbiter` [class](      ../util/Arbiters.md#class-hellapeekingarbiter        )
+
+#### BackBoxRegs
+`AsyncResetReg`    [class](         ../util/BackBoxRegs.md#class-asyncresetreg           ),
+                   [object](        ../util/BackBoxRegs.md#object-asyncresetreg          )
+`AsyncResetRegVec` [class](         ../util/BackBoxRegs.md#class-asyncresetregvec        )
+
+#### ClockDivider
+`ClockDivider2`    [class](         ../util/ClockDivider.md#class-clockdivider2          )
+`Pow2ClockDivider` [class](         ../util/ClockDivider.md#class-pow2clockdivider2      )
+
+#### Counters
+`TwoWayCounter`    [object](        ../util/Counters.md#object-twowaycounter             )
+`WideCounter`      [case class](    ../util/Counters.md#case-class-widecounter           )
+
+#### Crossing
+`Crossing`         [abstract class](../util/Crossing.md#abstract-class-crossing          )
+`CrossingIO`       [class](         ../util/Crossing.md#class-crossingio                 )
+
 
 <br><br><br><p align="right">
 <sub>
