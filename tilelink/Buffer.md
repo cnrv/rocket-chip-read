@@ -1,5 +1,6 @@
 [Rocket](../Readme.md)/[tilelink](../tilelink.md)/[Buffer](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/tilelink/Buffer.scala)
 =====================
+*Buffer for TileLink channels.*
 
 **********************
 
