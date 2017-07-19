@@ -43,10 +43,7 @@ case class TLManagerParameters(
 
 ### Case variables:
 
-+ **address**            `Seq[AddressSet]`
-
-    Address range covered by this manager.
-
++ **address**            `Seq[AddressSet]` address range covered by this manager.
 + **resources**          `Seq[Resource] = Seq()`
 + **regionType**         `RegionType.T = RegionType.GET_EFFECTS`
 + **executable**         `Boolean = false`
@@ -66,22 +63,11 @@ case class TLManagerParameters(
 
 ### Member variables and functions:
 
-+ **maxTransfer** `TransferSizes`
-
-    The maximal packet size.
-
-+ **maxAddress** `BigInt`
-
-    The maximal address in all address spaces.
-
++ **maxTransfer** `TransferSizes` the maximal packet size.
++ **maxAddress** `BigInt` the maximal address in all address spaces.
 + **name** `String`
-+ **minAlignment** `BigInt`
-
-    The minimal alignment of all address spaces.
-
-+ **toResource** `_ => ResourceAddress`
-
-    Convert this to `ResourceAddress`.
++ **minAlignment** `BigInt` the minimal alignment of all address spaces.
++ **toResource** `_ => ResourceAddress` convert this to `ResourceAddress`.
 
 case class TLManagerPortParameters
 --------------
@@ -97,26 +83,15 @@ case class TLManagerPortParameters(
 
 ### Case variables:
 
-+ **managers** `Seq[TLManagerParameters]`
-
-    Parameters of the managers sharing this port.
-
-+ **beatBytes** `Int`
-
-    Number of bytes per beat.
-
++ **managers** `Seq[TLManagerParameters]` parameters of the managers sharing this port.
++ **beatBytes** `Int` number of bytes per beat.
 + **endSinkId** `Int = 1`
 + **minLatency** `Int = 0`
 
 ### Member variables and functions:
 
-+ **maxTransfer** `_ => Int`
-
-    The maximal packet size.
-
-+ **maxAddress** `_ => BigInt`
-
-    The maximal address in all address spaces.
++ **maxTransfer** `_ => Int` the maximal packet size.
++ **maxAddress** `_ => BigInt` the maximal address in all address spaces.
 
 + Get the size of supported packets (the maximal size range supported by all managers)
   + **allSupportAcquireT**   `_ => TransferSizes`
@@ -158,34 +133,13 @@ case class TLManagerPortParameters(
   + **supportsPutPartialFast** `(address: UInt, lgSize: UInt) => Bool`
   + **supportsHintFast**       `(address: UInt, lgSize: UInt) => Bool`
 
-+ **routingMask** `BigInt`
-
-    Which bits suffice to distinguish between all managers.
-
-+ **find** `(address: BigInt) => Option[TLManagerParameters]`
-
-    Get the `TLManagerParameters` of an address.
-
-+ **findSafe** `(address: UInt) => Vec()`
-
-    Return a bit vector that identifies the managers containing this address.
-
-+ **containsSafe** `(address: UInt) => Bool`
-
-    Whether this address is managed by this port.
-
-+ **findFast** `(address: UInt) => Vec()`
-
-    A faster version of `findSafe()` by assuming the address is valid.
-
-+ **findFifoIdFast** `(address: UInt) => Int`
-
-    Get the `fifoId + 1` or 0 if none.
-
-+ **hasFifoIdFast** `(address: UInt) => Boolean`
-
-    Whether there is a matched `fifoId`.
-
++ **routingMask** `BigInt` which bits suffice to distinguish between all managers.
++ **find** `(address: BigInt) => Option[TLManagerParameters]` get the `TLManagerParameters` of an address.
++ **findSafe** `(address: UInt) => Vec()` return a bit vector that identifies the managers containing this address.
++ **containsSafe** `(address: UInt) => Bool` wWhether this address is managed by this port.
++ **findFast** `(address: UInt) => Vec()` a faster version of `findSafe()` by assuming the address is valid.
++ **findFifoIdFast** `(address: UInt) => Int` get the `fifoId + 1` or 0 if none.
++ **hasFifoIdFast** `(address: UInt) => Boolean` whether there is a matched `fifoId`.
 
 ## case class TLClientParameters
 *Parameters for a TileLink client.*
@@ -308,10 +262,8 @@ case class TLBundleParameters(
 ## object TLBundleParameters
 
 + **emptyBundleParams** `TLBundleParameters(1,8,1,1,1)` the default (empty) bundle parameter object.
-
 + **union** `(Seq[TLBundleParameters]) => TLBundleParameters`<br>
     Get a parameter that fits all individual parameter objects.
-
 + **apply** `(TLClientPortParameters, TLManagerPortParameters) => TLBundleParameters`<br>
     Generate a bundle parameter according to port parameters.
 
@@ -332,7 +284,6 @@ case class TLEdgeParameters(
 ### Member variables and functions:
 
 + **maxTransfer** `Int` the maximal transfer size in both client/manager sides.
-
 + **maxLgSize** `log2Ceil(maxTransfer)`
 + **bundle** `TLBundleParameters(client, manager)`
 
@@ -358,15 +309,12 @@ case class TLAsyncClientPortParameters(base: TLClientPortParameters)
 case class TLAsyncBundleParameters(depth: Int, base: TLBundleParameters)
 ~~~
 
-+ **union** `(x: TLAsyncBundleParameters) => TLAsyncBundleParameters`
-
-    Get a parameter that fits both `this` and `x`.
++ **union** `(x: TLAsyncBundleParameters) => TLAsyncBundleParameters` get a parameter that fits both `this` and `x`.
 
 ## object TLAsyncBundleParameters
 
 + **emptyBundleParams** `TLAsyncBundleParameters(1, TLBundleParameters.emptyBundleParams)`<br>
     The default (empty) bundle parameter object.
-
 + **union** `(Seq[TLAsyncBundleParameters]) => TLAsyncBundleParameters`<br>
     Get a parameter that fits all individual parameter objects.
 

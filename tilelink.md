@@ -16,6 +16,7 @@ of adapters and protocol converters.
 + **[Edges](tilelink/Edges.md)**
   definitions for the TileLink packets.
 + **[FIFOFixer](tilelink/FIFOFixer.md)**
+  enforce FIFO order if required (related to the order of transactions from a shared port).
 + **[Nodes](tilelink/Nodes.md)**
   TileLink Nodes
 + **[Parameters](tilelink/Parameters.md)**

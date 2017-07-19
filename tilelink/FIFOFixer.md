@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[tilelink](../tilelink.md)/[FIFOFixer](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/tilelink/FIFOFixer.scala)
 =====================
-
+*A FIFO order checker.*
 
 **********************
 
@@ -9,6 +9,16 @@
 ~~~scala
 class TLFIFOFixer(implicit p: Parameters) extends LazyModule
 ~~~
+
+**FIFO** order:
+For a client whose source id is a range > 1 and asks for the FIFO order,
+all TileLink transactions belonging to the same source id should proceed in sequential order.
+To be specific, an A channel packet can be emitted only when either
+the previous A channel packets belongs to the same id (a burst) or
+all previous A channel packets have been responded by a D channel packets (a fresh transaction).
+
+When the FIFO order is requested and violated, stall the TileLink channel (hardware deadlock).
+
 
 + **node** `TLAdapterNode` the diplomacy object to record port connections for module generation.
 + **module** `LazyModuleImp`
@@ -19,11 +29,12 @@ class TLFIFOFixer(implicit p: Parameters) extends LazyModule
   - **a_nid** `UInt` high when no `fifoId` is found.
   - **a_first** `Bool` whether it is the first beat in a burst.
   - **d_first** `Bool` whether it is the first beat in a burst.
-
+  - **stalls** `Seq[Bool]` whether the incoming packet violate any of the FIFO order rules.
 
 
 ## object TLFIFOFixer
 
+- **apply** `(x:TLOutwardNode) => TLOutwardNode` wrap an outward node with a fixer.
 
 
 <br><br><br><p align="right">
