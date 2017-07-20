@@ -65,13 +65,20 @@ Class index
 `BIND_STAR`        [case object](   ../diplomacy/Nodes.md#trait-nodebinding              )
 
 `BaseNode`         [abstract class](../diplomacy/Nodes.md#abstract-class-basenode        )
+`MixedNode`        [abstract class](../diplomacy/Nodes.md#abstract-class-mixednode       )
+
+`MixedAdapterNode` [class](         ../diplomacy/Nodes.md#class-mixedadapternode         )
 `AdapterNode`      [class](         ../diplomacy/Nodes.md#class-adapternode              )
+
+`MixedNexusNode`   [class](         ../diplomacy/Nodes.md#class-mixednexusnode           )
+`NexusNode`        [class](         ../diplomacy/Nodes.md#class-nexusnode                )
+
+`SplitterArg`      [case class](    ../diplomacy/Nodes.md#case-class-splitterarg         )
+`MixedSplitterNode`[class](         ../diplomacy/Nodes.md#class-mixedsplitternode        )
+`SplitterNode`     [class](         ../diplomacy/Nodes.md#class-splitternode             )
+
 `IdentityNode`     [class](         ../diplomacy/Nodes.md#class-identitynode             )
 `InputNode`        [class](         ../diplomacy/Nodes.md#class-inputnode                )
-`MixedNexusNode`   [class](         ../diplomacy/Nodes.md#class-mixednexusnode           )
-`MixedAdapterNode` [class](         ../diplomacy/Nodes.md#class-mixedadapternode         )
-`MixedNode`        [abstract class](../diplomacy/Nodes.md#abstract-class-mixednode       )
-`NexusNode`        [class](         ../diplomacy/Nodes.md#class-nexusnode                )
 `OutputNode`       [class](         ../diplomacy/Nodes.md#class-outputnode               )
 `SinkNode`         [class](         ../diplomacy/Nodes.md#class-sinknode                 )
 `SourceNode`       [class](         ../diplomacy/Nodes.md#class-sourcenode               )

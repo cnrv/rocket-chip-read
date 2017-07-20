@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[tilelink](../tilelink.md)/[Splitter](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/tilelink/Splitter.scala)
 =====================
-**
+*Demultiplexer for TileLink channels.*
 
 **********************
 
@@ -16,8 +16,10 @@ class TLSplitter(policy: TLArbiter.Policy = TLArbiter.roundRobin)(implicit p: Pa
   - **io** `Bundle` module I/O ports:<br>
     **in** `HeterogeneousBag[TLBundle]` input ports.<br>
     **out** `HeterogeneousBag[TLBundle]` output ports.<br>
-
-
+  - **outputIdRanges** `Seq[IdRange]` ranges of output (manager) ports. **_Pre-assigned._**
+  - **outputPorts** `Seq[(addr: UInt) => Bool]` address route functions.
+  - **wide_bundle** `TLBundleParameters`<br>
+    A Bundle parameter wide enough to represent all input and output ports. **_Resolved at module generation time._**
 
 <br><br><br><p align="right">
 <sub>

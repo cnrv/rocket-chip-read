@@ -22,6 +22,7 @@ of adapters and protocol converters.
 + **[Parameters](tilelink/Parameters.md)**
   TileLink interconnection parameters.
 + **[Splitter](tilelink/Splitter.md)**
+  TileLink demultiplexer.
 + **[Xbar](tilelink/Xbar.md)**
   generic Tilelink crossbar.
 

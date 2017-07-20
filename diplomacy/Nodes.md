@@ -200,7 +200,7 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **iPortMapping** `Seq[(Int, Int)]` (lazy)range of each input port.
 + **oStar** `Int` (lazy) ??
 + **iStar** `Int` (lazy) ??
-+ **oPorts** `Seq[(Int, InwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its output ports.
++ **oPorts** `Seq[(Int, InwardNode [DI, UI, BI])]` (lazy) a list of (index, port) binded by its output ports.
 + **iPorts** `Seq[(Int, OutwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by its input ports.
 + **oParams** `Seq[DO]` (lazy) output port node parameters.
 + **iParams** `Seq[DI]` (lazy) input port node parameters.
@@ -295,7 +295,7 @@ class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) input node parameters.
 + **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) output node parameters.
 + **dFn** `(Seq[DI]) => DO` used to resolve oParams.
-+ **uFn** `(Seq[DO]) => DI` used to resolve iParams.
++ **uFn** `(Seq[UO]) => UI` used to resolve iParams.
 + **numPO** `Range.Inclusive = 1 to 999` (param) output range.
 + **numPI** `Range.Inclusive = 1 to 999` (param) input range.
 + **externalIn** `Boolean = true` generate external input port bundles.
@@ -309,8 +309,7 @@ class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 
 
 
-class AdapterNode
------------
+## class AdapterNode
 *Base node class for a bus adapter.*
 
 ~~~scala
@@ -321,8 +320,7 @@ class AdapterNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
     extends MixedAdapterNode[D, U, EI, B, D, U, EO, B](imp, imp)(dFn, uFn, num)
 ~~~
 
-class NexusNode
------------
+## class NexusNode
 *Base node for a switch node (crossbar, multiplexer ordemultiplexer).*
 
 ~~~scala
@@ -334,16 +332,63 @@ class NexusNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
     extends MixedNexusNode[D, U, EI, B, D, U, EO, B](imp, imp)(dFn, uFn, numPO, numPI)
 ~~~
 
-class IdentityNode
------------
+## case class SplitterArg
+
+~~~scala
+case class SplitterArg[T](newSize: Int, ports: Seq[T])
+~~~
+
++ **newSize** `Int` (param) number of output channels (Upwards or downwards depending on T).
++ **ports** `T` (param) port parameter (D and U).
+
+## class MixedSplitterNode
+*Demultiplexer for complicate channel bundles.*
+
+oParams.size == N * iParams.size, where N is a positive integer.
+
+~~~scala
+class MixedSplitterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
+  inner: InwardNodeImp [DI, UI, EI, BI],
+  outer: OutwardNodeImp[DO, UO, EO, BO])(
+  dFn: SplitterArg[DI] => Seq[DO],
+  uFn: SplitterArg[UO] => Seq[UI],
+  numPO: Range.Inclusive = 1 to 999,
+  numPI: Range.Inclusive = 1 to 999)
+  extends MixedNode(inner, outer)(numPO, numPI)
+~~~
+
++ **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) input node parameters.
++ **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) output node parameters.
++ **dFn** `(SplitterArg[DI]) => DO` used to resolve oParams.
++ **uFn** `(SplitterArg[UO]) => UI` used to resolve iParams.
++ **numPO** `Range.Inclusive = 1 to 999` (param) output range.
++ **numPI** `Range.Inclusive = 1 to 999` (param) input range.
++ **externalIn** `Boolean = true` generate external input port bundles.
++ **externalOut** `Boolean = true` generate external output port bundles.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
+  resolve `iStar` and `oStar`. `iStar <= 0, oStar <= iKown`.
++ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO]` resolve oParams using number of ports (ps) and dFn().
++ **mapParamsU** `(ps:Int, p:Seq[DO]) => Seq[DI]` resolve iParams using number of ports (ps) and uFn().
+
+## class SplitterNode
+
+~~~scala
+class SplitterNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
+  dFn: SplitterArg[D] => Seq[D],
+  uFn: SplitterArg[U] => Seq[U],
+  numPO: Range.Inclusive = 1 to 999,
+  numPI: Range.Inclusive = 1 to 999)
+    extends MixedSplitterNode[D, U, EI, B, D, U, EO, B](imp, imp)(dFn, uFn, numPO, numPI)
+~~~
+
+## class IdentityNode
 
 ~~~scala
 class IdentityNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
   extends AdapterNode(imp)({s => s}, {s => s})
 ~~~
 
-class OutputNode
--------------
+## class OutputNode
 
 ~~~scala
 class OutputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
@@ -378,7 +423,7 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 18/07/2017<br>
+Last updated: 20/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
