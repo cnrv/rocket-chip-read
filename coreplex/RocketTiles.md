@@ -4,7 +4,7 @@
 
 **********************
 
-### Rocket Tiles
+## Rocket Tiles
 *Negotiate the interrupt, clock and reset connections for Rocket Tiles.*
 *Allow for synchronous, asynchronous and rational connections.*
 
@@ -18,7 +18,7 @@
 > Debug interrupt is definitely asynchronous in all cases.
 
 
-#### HasRocketTiles
+### trait HasRocketTiles
 *Trait of the Rocket Tiles.*
 
 ~~~scala
@@ -27,7 +27,6 @@ trait HasRocketTiles extends CoreplexRISCVPlatform {
 }
 ~~~
 
-+ Derived from [CoreplexRISCVPlatform](RISCVPlatform.md#coreplexriscvplatform)
 + **module** `HasRocketTilesModule` pointer to the generated module.
 + **tileParams** `Seq[RocketTileParams] = p(RocketCrossing)` parameters of individual tiles.
 + **localIntNodes** `Seq[Option[IntInputNode]` interrupt port for local interrupt sources.
@@ -36,7 +35,7 @@ trait HasRocketTiles extends CoreplexRISCVPlatform {
 
 <img src="../figure/coreplex/rocket_tile.png" width="650">
 
-#### HasRocketTilesBundle
+### trait HasRocketTilesBundle
 *Bundle trait of Rocket Tiles.*
 
 ~~~scala
@@ -45,12 +44,11 @@ trait HasRocketTilesBundle extends CoreplexRISCVPlatformBundle {
 }
 ~~~
 
-+ Derived from [CoreplexRISCVPlatformBundle](CoreplexNetwork.md#coreplexriscvplatformbundle)
 + **outer** `HasRocketTiles` pointer to the LazyModule.
 + **local\_interrupts** `HeterogeneousBag(outer.localIntNodes.flatten.map(_.bundleIn))` Declare the interrupt lines.
 + **tcrs** `Vec[Bundle{Clock(INPUT), Bool(INPUT)}]` clock and reset ports.
 
-#### HasRocketTilesModule
+### trait HasRocketTilesModule
 *Module trait of Rocket Tiles.*
 
 ~~~scala
@@ -60,7 +58,6 @@ trait HasRocketTilesModule extends CoreplexRISCVPlatformModule {
 }
 ~~~
 
-+ Derived from [CoreplexRISCVPlatformModule](CoreplexNetwork.md#coreplexriscvplatformmodule)
 + **outer** `HasRocketTiles` pointer to the LazyModule.
 + **io** `HasRocketTilesBundle` pointer to the I/O bundle.
 

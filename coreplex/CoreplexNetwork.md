@@ -7,7 +7,7 @@
 ### Coreplex Network
 *Base of all on-chip interconnects.*
 
-#### CoreplexNetwork
+#### trait CoreplexNetwork
 *Trait for LazyModule.*
 
 ~~~scala
@@ -30,7 +30,7 @@ trait CoreplexNetwork extends HasCoreplexParameters
 
 <img src="../figure/coreplex/coreplex_network.png" width="600">
 
-#### CoreplexNetworkBundle
+#### trait CoreplexNetworkBundle
 *Bundle trait for Rocket-chip with on-chip interconnects.*
 
 ~~~scala
@@ -43,7 +43,7 @@ trait CoreplexNetworkBundle extends HasCoreplexParameters
 + **l2in** `HeterogeneousBag[TLBundle] = outer.l2in.bundleIn` external master ports to the shared cache.
 + **l2out** `HeterogeneousBag[TLBundle] = outer.l2out.bundleOut` external slave ports from the shared cache.
 
-#### CoreplexNetworkModule
+#### trait CoreplexNetworkModule
 *Module trait for Rocket-chip wirh on-chip interconnects.*
 
 ~~~scala
@@ -59,17 +59,16 @@ Double check the device memory space match with device tree.
 ### Banked L2
 *On-chip interconnect supporting L2 cache*
 
-#### BankedL2CoherenceManagers
+#### trait BankedL2CoherenceManagers
 ~~~scala
 trait BankedL2CoherenceManagers extends CoreplexNetwork {
   val module: BankedL2CoherenceManagersModule
 }
 ~~~
 
-+ Derived from [CoreplexNetwork](CoreplexNetwork.md#coreplexnetwork)
 + **mem** `Seq[TLOutputNode]` output ports to the backing memory.
 
-#### BankedL2CoherenceManagersBundle
+#### trait BankedL2CoherenceManagersBundle
 ~~~scala
 trait BankedL2CoherenceManagersBundle extends CoreplexNetworkBundle {
   val outer: BankedL2CoherenceManagers
@@ -77,9 +76,7 @@ trait BankedL2CoherenceManagersBundle extends CoreplexNetworkBundle {
 }
 ~~~
 
-+ Derived from [CoreplexNetwork](CoreplexNetwork.md#coreplexnetworkbundle)
-
-#### BankedL2CoherenceManagersModule
+#### trait BankedL2CoherenceManagersModule
 ~~~scala
 trait BankedL2CoherenceManagersModule extends CoreplexNetworkModule {
   val outer: BankedL2CoherenceManagers
@@ -87,11 +84,9 @@ trait BankedL2CoherenceManagersModule extends CoreplexNetworkModule {
 }
 ~~~
 
-+ Derived from [CoreplexNetwork](CoreplexNetwork.md#coreplexnetworkmodule)
-
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/07/2017<br>
+Last updated: 20/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

@@ -2,41 +2,47 @@ Class index
 ========================
 ***************************
 
-+ Arbiters<br>
-  devices.tilelink.TLArbiter [object](../devices/tilelink/Arbiter.md#object-tlarbiter)<br>
+# Coreplex
+***************************
 
-+ Configs<br>
-  chip.BasePlatformConfig [class](../chip/Configs.md#class-baseplatformconfig)
+#### CoreplexNetwork
 
-+ Coreplex
-  + coreplex.BankedL2CoherenceManagers<br>
-    LazyModule [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagers);
-    Bundle [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle);
-    Module [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersmodule)<br>
-  + coreplex.BareCoreplex<br>
-    LazyModule [abstract class](../coreplex/BaseCoreplex.md#barecoreplex);
-    Bundle [abstract class](../coreplex/BaseCoreplex.md#barecoreplex);
-    Module [abstract class](../coreplex/BaseCoreplex.md#barecoreplex)<br>
-  + coreplex.BaseCoreplex<br>
-    LazyModule [abstract class](../coreplex/BaseCoreplex.md#basecoreplex);
-    Bundle [class](../coreplex/BaseCoreplex.md#basecoreplex);
-    Module [class](../coreplex/BaseCoreplex.md#basecoreplex)<br>
-  + coreplex.CoreplexNetwork<br>
-    LazyModule [trait](../coreplex/CoreplexNetwork.md#coreplexnetwork);
-    Bundle [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkbundle);
-    Module [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkmodule)<br>
-  + coreplex.CoreplexRISCVPlatform<br>
-    LazyModule [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatform);
-    Bundle [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatformbundle);
-    Module [trait](../coreplex/RISCVPlatform.md#coreplexriscvplatformmodule)<br>
-  + coreplex.HasRocketTiles<br>
-    LazyModule [trait](../coreplex/RocketTiles.md#hasrockettiles);
-    Bundle [trait](../coreplex/RocketTiles.md#hasrockettilesbundle);
-    Module [trait](../coreplex/RocketTiles.md#hasrockettilesmodule)<br>
+`CoreplexNetwork`       [trait](    ../coreplex/CoreplexNetwork.md#coreplexnetwork       )
+`CoreplexNetworkBundle` [trait](    ../coreplex/CoreplexNetwork.md#coreplexnetworkbundle )
+`CoreplexNetworkModule` [trait](    ../coreplex/CoreplexNetwork.md#coreplexnetworkmodule )
 
-+ RegisterCrossing<br>
-  regmapper.BusyRegisterCrossing [class](../regmapper/RegisterCrossing.md#class-busyregistercrossing)<br>
-  regmapper.RegisterWriteCrossing [class](../regmapper/RegisterCrossing.md#class-registerwritecrossing)
+`BankedL2CoherenceManagers`       [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagers      )
+`BankedL2CoherenceManagersBundle` [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle)
+`BankedL2CoherenceManagersModule` [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersmodule)
+
+#### BareCoreplex
+
+`BareCoreplex`       [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplex      )
+`BareCoreplexBundle` [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplexbundle)
+`BareCoreplexModule` [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplexmodule)
+
+`BaseCoreplex`       [abstract class](../coreplex/BaseCoreplex.md#abstract-class-basecoreplex)
+`BaseCoreplexBundle` [class](         ../coreplex/BaseCoreplex.md#class-basecoreplexbundle   )
+`BaseCoreplexModule` [class](         ../coreplex/BaseCoreplex.md#class-basecoreplexmodule   )
+
+#### RISCVPlatform
+
+`CoreplexRISCVPlatform`       [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatform      )
+`CoreplexRISCVPlatformBundle` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformbundle)
+`CoreplexRISCVPlatformModule` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformmodule)
+
+#### RocketTiles
+
+`HasRocketTiles`       [trait](     ../coreplex/RocketTiles.md#trait-hasrockettiles      )
+`HasRocketTilesBundle` [trait](     ../coreplex/RocketTiles.md#trait-hasrockettilesbundle)
+`HasRocketTilesModule` [trait](     ../coreplex/RocketTiles.md#trait-hasrockettilesmodule)
+
+# chip
+***************************
+
+#### Configs
+`BasePlatformConfig`   [class](     ../chip/Configs.md#class-baseplatformconfig          )
+
 
 # Diplomacy
 ***************************
@@ -117,6 +123,13 @@ Class index
 `ResourceString`   [case class](    ../diplomacy/Resources.md#case-class-resourcestring   )
 
 
+# Regmapper
+***************************
+
+#### RegisterCrossing
+`BusyRegisterCrossing`  [class](    ../regmapper/RegisterCrossing.md#class-busyregistercrossing )
+`RegisterWriteCrossing` [class](    ../regmapper/RegisterCrossing.md#class-registerwritecrossing)
+
 # Rocket
 ***************************
 
@@ -137,7 +150,7 @@ Class index
 
 #### HellaCache
 `DCacheParams`     [case class](    ../rocket/HellaCache.md#case-class-dcacheparams     )
-`HasHellaCache`    [trait](         ../rocket/HellaCache.md#trait-hashellacache         )
+`HasHellaCache`       [trait](      ../rocket/HellaCache.md#trait-hashellacache         )
 `HasHellaCacheBundle` [trait](      ../rocket/HellaCache.md#trait-hashellacachebundle   )
 `HasHellaCacheModule` [trait](      ../rocket/HellaCache.md#trait-hashellacachemodule   )
 `HellaCache`       [class](         ../rocket/HellaCache.md#class-hellacache            ),
@@ -157,6 +170,9 @@ Class index
 
 # Tilelink
 ***************************
+
+#### Arbiters
+`TLArbiter`        [object](        ../tilelink/Arbiter.md#object-tlarbiter             )
 
 #### Buffer
 `TLBuffer`         [class](         ../tilelink/Buffer.md#class-tlbuffer                ),
