@@ -24,8 +24,8 @@ trait InwardNodeImp[DI, UI, EI, BI <: Data]
     _enM_: whether to insert a bus monitor.<br>
     _m_: The optional monitor node to be connected.<br>
     _bind_: The actual connection procedure to be called later by LazyModule.
-+ **mixI** `(pu: UI, InwardNode[DI, UI, BI]) => UI = pu` insert node into parameters.
-+ **getO** `(pu: UI) => Option[BaseNode] = None` most-outward common node.
++ **mixI** `(pu: UI, InwardNode[DI, UI, BI]) => UI` insert node into parameters.
++ **getO** `(pu: UI) => Option[BaseNode]` most-outward common node.
 
 trait OutwardNodeImp
 ------------------------------

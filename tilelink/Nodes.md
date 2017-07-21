@@ -46,21 +46,21 @@ object TLImp
   _monitor_: The monitor to be connected. Depending on parameter TLMonitorBuilder
   _bind_: The actual port binding procedure to be processed later.
 
-### TileLink Extension of basic Nodes
+### TileLink extension of basic Nodes
 
-+ case class TLIdentityNode extends IdentityNode
-+ case class TLClientNode extends SourceNode
-+ object TLClientNode
-+ case class TLManagerNode extends SinkNode
-+ object TLManagerNode
-+ case class TLAdapterNode extends AdapterNode
-+ case class TLNexusNode extends NexusNode
-+ case class TLOutputNode extends OutputNode
-+ case class TLInputNode extends InputNode
-+ case class TLBlindOutputNode extends BlindOutputNode
-+ case class TLBlindInputNode extends BlindInputNode
-+ case class TLInternalOutputNode extends InternalOutputNode
-+ case class TLInternalInputNode extends InternalOutputNode
++ case class **TLIdentityNode**       extends IdentityNode
++ case class **TLClientNode**         extends SourceNode
++ object     **TLClientNode**
++ case class **TLManagerNode**        extends SinkNode
++ object     **TLManagerNode**
++ case class **TLAdapterNode**        extends AdapterNode
++ case class **TLNexusNode**          extends NexusNode
++ case class **TLOutputNode**         extends OutputNode
++ case class **TLInputNode**          extends InputNode
++ case class **TLBlindOutputNode**    extends BlindOutputNode
++ case class **TLBlindInputNode**     extends BlindInputNode
++ case class **TLInternalOutputNode** extends InternalOutputNode
++ case class **TLInternalInputNode**  extends InternalOutputNode
 
 Asynchronous TileLink Nodes
 ----------------
@@ -90,11 +90,11 @@ object TLAsyncImp
 
 ### Asynchronous TileLink Extension of basic Nodes
 
-+ case class TLAsyncIdentityNode extends IdentityNode
-+ case class TLAsyncOutputNode extends OutputNode
-+ case class TLAsyncInputNode extends InputNode
-+ case class TLAsyncSourceNode extends MixedAdapterNode
-+ case class TLAsyncSinkNode extends MixedAdapterNode
++ case class **TLAsyncIdentityNode** extends IdentityNode
++ case class **TLAsyncOutputNode**   extends OutputNode
++ case class **TLAsyncInputNode**    extends InputNode
++ case class **TLAsyncSourceNode**   extends MixedAdapterNode
++ case class **TLAsyncSinkNode**     extends MixedAdapterNode
 
 Rational TileLink Nodes
 ----------------
@@ -123,11 +123,11 @@ object TLRationalImp
 
 ### Rational TileLink Extension of basic Nodes
 
-+ case class TLRationalIdentityNode extends IdentityNode
-+ case class TLRationalOutputNode extends OutputNode
-+ case class TLRationalInputNode extends InputNode
-+ case class TLRationalSourceNode extends MixedAdapterNode
-+ case class TLRationalSinkNode extends MixedAdapterNode
++ case class **TLRationalIdentityNode** extends IdentityNode
++ case class **TLRationalOutputNode**   extends OutputNode
++ case class **TLRationalInputNode**    extends InputNode
++ case class **TLRationalSourceNode**   extends MixedAdapterNode
++ case class **TLRationalSinkNode**     extends MixedAdapterNode
 
 
 <br><br><br><p align="right">

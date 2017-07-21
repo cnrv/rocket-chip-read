@@ -18,6 +18,7 @@ of adapters and protocol converters.
 + **[FIFOFixer](tilelink/FIFOFixer.md)**
   enforce FIFO order if required (related to the order of transactions from a shared port).
 + **[IntNodes](tilelink/IntNodes.md)**
+  interrupt related nodes.
 + **[Nodes](tilelink/Nodes.md)**
   TileLink Nodes
 + **[Parameters](tilelink/Parameters.md)**
