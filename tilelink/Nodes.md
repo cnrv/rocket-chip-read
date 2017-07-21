@@ -7,8 +7,8 @@
 *TileLink Nodes*
 
 * [Synchronous TileLink Nodes](#synchronous-tilelink-nodes)
-* [Asynchronous TileLink Nodes](#object-tlasyncimp)
-* [Rational TileLink Nodes](#object-tlrationalimp)
+* [Asynchronous TileLink Nodes](#asynchronous-tilelink-nodes)
+* [Rational TileLink Nodes](#rational-tilelink-nodes)
 
 **********************
 
@@ -62,8 +62,10 @@ object TLImp
 + case class TLInternalOutputNode extends InternalOutputNode
 + case class TLInternalInputNode extends InternalOutputNode
 
-object TLAsyncImp
-------------
+Asynchronous TileLink Nodes
+----------------
+
+### object TLAsyncImp
 *Asynch TileLink module generator.*
 
 ~~~scala
@@ -94,8 +96,10 @@ object TLAsyncImp
 + case class TLAsyncSourceNode extends MixedAdapterNode
 + case class TLAsyncSinkNode extends MixedAdapterNode
 
-object TLRationalImp
-------------
+Rational TileLink Nodes
+----------------
+
+### object TLRationalImp
 *Rational TileLink module generator*
 
 ~~~scala
@@ -128,7 +132,7 @@ object TLRationalImp
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 13/07/2017<br>
+Last updated: 21/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

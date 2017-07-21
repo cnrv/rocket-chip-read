@@ -2,8 +2,9 @@
 =====================
 
 **********************
-object RegionType
-------------------------------
+
+
+## object RegionType
 *Type of address region*
 
 + **CACHED**: cached memory region
@@ -12,8 +13,7 @@ object RegionType
 + **PUT\_EFFECTS**: ??
 + **GET\_EFFECTS**: ??
 
-case class IdRange
-----------------------
+## case class IdRange
 *A non-empty half-open range `[start, end)`, `0 <= start < end`*
 
 ~~~scala
@@ -31,8 +31,7 @@ case class IdRange(start: Int, end: Int)
 + **size** `() => Int` size of range
 + **range** `() => Range` iterate
 
-case class TransferSizes
---------------------------
+## case class TransferSizes
 *An potentially empty inclusive range of 2's powers `[min, max]`, <br>
 `0 <= min <= max && isPow2(max) && isPow2(min) && (max == 0 || min != 0)`*
 
@@ -49,8 +48,7 @@ case class TransferSizes(min: Int, max: Int)
   `(x: UInt) => Bool` (1.U << x) &isin; this
 + **intersect** `(x: TransferSizes) => TransferSizes` this &cap; x
 
-case class AddressRange
----------------------------
+## case class AddressRange
 
 ~~~scala
 case class AddressRange(base: BigInt, size: BigInt) extends Ordered[AddressRange]
@@ -64,13 +62,11 @@ case class AddressRange(base: BigInt, size: BigInt) extends Ordered[AddressRange
 + **contains** `(x: AddressRange) => Boolean` this &supe; x
 + **union** `(x: AddressRange) => Some[AddressRange]` this &cup; x
 
-object AddressRange
-----------------------------
+### object AddressRange
 + **fromSets** `(seq: Seq[AddressSet]) => Seq[AddressRange]` convert AddressSet to unified AddressRange
 + **unify** `(seq: Seq[AddressRange]) => Seq[AddressRange]` combine ranges which are combinable (order as well)
 
-case class AddressSet
-----------------------------
+## case class AddressSet
 *AddressSets specify the address space managed by the manager*<br>
 *Base is the base address, and mask are the bits consumed by the manager*<br>
 *e.g: base=0x200, mask=0xff describes a device managing 0x200-0x2ff*<br>
@@ -99,8 +95,7 @@ case class AddressSet(base: BigInt, mask: BigInt) extends Ordered[AddressSet]
 + **toString** `() => String` convert to string
 + **toRange** `() => AddressRange` convert to AddressRange
 
-object AddressSet
-----------------------------
+### object AddressSet
 + **misaligned** `(BigInt, BigInt, Seq[AddressSet]) => Seq[AddressSet]` ?? not used
 + **unify** `(seq: Seq[AddressSet]) => Seq[AddressSet]` combine ranges which are combinable (order as well)
 
@@ -117,7 +112,7 @@ case class BufferParams(depth: Int, flow: Boolean, pipe: Boolean)
 - **latency** `() => Int` get the minimal latency of the buffer.
 - **apply** `(DecoupledIO[T]) => DecoupledIO[T]` insert a buffer according to the configuration.
 
-## object BufferParams
+### object BufferParams
 
 - **apply** `(d:Int) => BufferParams(d, false, false)`
 - **default** `() => BufferParams(2, false, false)`
@@ -128,7 +123,7 @@ case class BufferParams(depth: Int, flow: Boolean, pipe: Boolean)
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 18/07/2017<br>
+Last updated: 21/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

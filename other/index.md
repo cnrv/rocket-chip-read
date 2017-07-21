@@ -206,6 +206,10 @@ Class index
 `TLFIFOFixer`      [class](         ../tilelink/FIFOFixer.md#class-tlfifofixer          ),
                    [object](        ../tilelink/FIFOFixer.md#object-tlfifofixer         )
 
+#### IntNodes
+`IntRange`         [case class](    ../tilelink/IntNodes.md#case-class-intrange         ),
+                   [object](        ../tilelink/IntNodes.md#object-intrange             )
+
 #### Nodes
 `TLImp`            [object](        ../tilelink/Nodes.md#object-tlimp                   )
 `TLAdapterNode`    [case class](    ../tilelink/Nodes.md#tilelink-extension-of-basic-nodes)

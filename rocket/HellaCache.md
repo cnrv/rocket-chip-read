@@ -9,8 +9,8 @@
 + [Traits for Tiles](#traits-for-tiles)
 
 *****************
-Definitions
--------------------------
+
+## Definitions
 
 ### case class DCacheParams
 *Parameters of a cache module.*
@@ -72,8 +72,7 @@ class L1MetadataArray[T <: L1Metadata](onReset: () => T)(implicit p: Parameters)
 | resp                   | Vec[T]           | O          | read response from all ways           |
 
 
-Base for L1 data caches
-------------------------
+## Base for L1 data caches
 
 ### class HellaCache
 
@@ -107,7 +106,7 @@ class HellaCacheModule(outer: HellaCache) extends LazyModuleImp(outer)
     with HasL1HellaCacheParameters
 ~~~
 
-### object HellaCache
+#### object HellaCache
 *L1 cache generator function*
 
 + **apply** `(blocking:Boolean, scratch: () => Option[AAddressSet]) => LazyModule[HellaCacheModule]`
@@ -115,8 +114,7 @@ class HellaCacheModule(outer: HellaCache) extends LazyModuleImp(outer)
   + *scratch* the base address of the scratch pad.
 
 
-Traits for Tiles
------------------------------
+## Traits for Tiles
 
 ### trait HasHellaCache
 
@@ -147,7 +145,7 @@ trait HasHellaCacheModule extends HasTileLinkMasterPortModule
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/07/2017<br>
+Last updated: 21/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
