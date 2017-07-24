@@ -32,7 +32,7 @@ This RTL package generates the Rocket in-order pipelined core,
 as well as the L1 instruction and data caches.
 This library is intended to be used by a chip generator that instantiates the
 core within a memory system and connects it to the outside world.
-+ **tile**
++ **[tile](tile.md)**
 This RTL package contains components that can be combined with cores to construct tiles, such as FPUs and accelerators.
 + **[tilelink](tilelink.md)**
 This RTL package uses diplomacy to generate bus implementations of the TileLink protocol. It also contains a variety
@@ -49,7 +49,7 @@ multiple other packages,
 + **[Chisel operators](other/chisel_op.md)**
 + **[class index](other/index.md)**
 
-The document is partially based on commit \#[29f5f77](https://github.com/freechipsproject/rocket-chip/tree/29f5f77817eccb771b3598e4ab9038b52e49f823).
+The document is partially based on commit \#[01ca3efc2be1](https://github.com/freechipsproject/rocket-chip/tree/01ca3efc2be16a09156ea06018c10886dbfd7058).
 
 <br><br><br><p align="right">
 <sub>

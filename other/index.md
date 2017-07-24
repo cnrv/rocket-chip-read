@@ -31,11 +31,11 @@ Class index
 `CoreplexRISCVPlatformBundle` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformbundle)
 `CoreplexRISCVPlatformModule` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformmodule)
 
-#### RocketTiles
+#### RocketTilesplex
 
-`HasRocketTiles`       [trait](../coreplex/RocketTiles.md#trait-hasrockettiles      )
-`HasRocketTilesBundle` [trait](../coreplex/RocketTiles.md#trait-hasrockettilesbundle)
-`HasRocketTilesModule` [trait](../coreplex/RocketTiles.md#trait-hasrockettilesmodule)
+`HasRocketTiles`       [trait](../coreplex/RocketCoreplex.md#trait-hasrockettiles      )
+`HasRocketTilesBundle` [trait](../coreplex/RocketCoreplex.md#trait-hasrockettilesbundle)
+`HasRocketTilesModule` [trait](../coreplex/RocketCoreplex.md#trait-hasrockettilesmodule)
 
 # chip
 ***************************
@@ -112,16 +112,17 @@ Class index
 `MemoryDevice`     [class         ](../diplomacy/Resources.md#class-memorydevice    )
 `SimpleDevice`     [class         ](../diplomacy/Resources.md#class-simpledevice    )
 
-`Resource`         [case class](../diplomacy/Resources.md#case-class-resource         )
-`ResourceAddress`  [case class](../diplomacy/Resources.md#case-class-resourceaddress  )
-`ResourceBinding`  [object    ](../diplomacy/Resources.md#object-resourcebindings     )
-`ResourceBindings` [case class](../diplomacy/Resources.md#case-class-resourcebindings )
-`ResourceInt`      [case class](../diplomacy/Resources.md#case-class-resourceint      )
-`ResourceMapping`  [case class](../diplomacy/Resources.md#case-class-resourcemapping  )
-`ResourceMap`      [case class](../diplomacy/Resources.md#case-class-resourcemap      )
-`ResourceReference`[case class](../diplomacy/Resources.md#case-class-resourcereference)
-`ResourceString`   [case class](../diplomacy/Resources.md#case-class-resourcestring   )
+`Resource`           [case class      ](../diplomacy/Resources.md#case-class-resource           )
+`ResourcePermissions`[case calss      ](../diplomacy/Resources.md#case-class-resourcepermissions)
+`ResourceAddress`    [final case class](../diplomacy/Resources.md#case-class-resourceaddress    )
+`ResourceInt`        [final case class](../diplomacy/Resources.md#case-class-resourceint        )
+`ResourceMapping`    [final case class](../diplomacy/Resources.md#case-class-resourcemapping    )
+`ResourceMap`        [final case class](../diplomacy/Resources.md#case-class-resourcemap        )
+`ResourceReference`  [final case class](../diplomacy/Resources.md#case-class-resourcereference  )
+`ResourceString`     [final case class](../diplomacy/Resources.md#case-class-resourcestring     )
 
+`ResourceBinding`    [object    ](../diplomacy/Resources.md#object-resourcebindings     )
+`ResourceBindings`   [case class](../diplomacy/Resources.md#case-class-resourcebindings )
 
 # Regmapper
 ***************************
@@ -167,6 +168,13 @@ Class index
 #### RVC
 `ExpandedInstruction` [class](../rocket/RVC.md#class-expandedinstruction)
 `RVCExpander`         [class](../rocket/RVC.md#class-rvcexpander        )
+
+# Tile
+***************************
+
+#### RocketTile
+`RocketTileParams` [case class](../tile/RocketTile.md#case-class-rockettileparams)
+
 
 # Tilelink
 ***************************

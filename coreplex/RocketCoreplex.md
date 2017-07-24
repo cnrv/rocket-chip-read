@@ -22,8 +22,12 @@
 *Trait of the Rocket Tiles.*
 
 ~~~scala
-trait HasRocketTiles extends CoreplexRISCVPlatform {
-  val module: HasRocketTilesModule
+trait HasRocketTiles extends HasSystemBus
+    with HasPeripheryBus
+    with HasPeripheryPLIC
+    with HasPeripheryClint
+    with HasPeripheryDebug {
+  val module: HasRocketTilesModuleImp
 }
 ~~~
 
