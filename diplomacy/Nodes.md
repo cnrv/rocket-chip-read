@@ -194,7 +194,7 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
   (virtual) A function to resolve the number of star type input and output ports.
 + **mapParamsD** `(Int, Seq[DI]) => Seq[DO]`<br>
   (virtual) A function to resolve oParams.
-+ **mapParamsU** `(Int, Seq[DO]) => Seq[DI]`<br>
++ **mapParamsU** `(Int, Seq[UO]) => Seq[UI]`<br>
   (virtual) A function to resolve iParams.
 + **oPortMapping** `Seq[(Int, Int)]` (lazy)range of each output port.
 + **iPortMapping** `Seq[(Int, Int)]` (lazy)range of each input port.
@@ -275,7 +275,7 @@ class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
   (**_not sure why <=1 star binding is allowed_**)
 + **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn(), resolve port individually.
-+ **mapParamsU** `(Int, p:Seq[DO]) => Seq[DI]` resolve iParams using uFn(), resolve port individually.
++ **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` resolve iParams using uFn(), resolve port individually.
 
 
 ## class MixedNexusNode
@@ -303,7 +303,7 @@ class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
   resolve `iStar` and `oStar`. NexusNode does not allow any input or output star connections.
 + **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn().
-+ **mapParamsU** `(Int, p:Seq[DO]) => Seq[DI]` resolve iParams using uFn().
++ **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` resolve iParams using uFn().
 + **oStar** `Int = 0` (const)
 + **iStar** `Int = 0` (const)
 
@@ -368,7 +368,7 @@ class MixedSplitterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
   resolve `iStar` and `oStar`. `iStar <= 0, oStar <= iKown`.
 + **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO]` resolve oParams using number of ports (ps) and dFn().
-+ **mapParamsU** `(ps:Int, p:Seq[DO]) => Seq[DI]` resolve iParams using number of ports (ps) and uFn().
++ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI]` resolve iParams using number of ports (ps) and uFn().
 
 ## class SplitterNode
 
@@ -413,17 +413,28 @@ class SourceNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(po: Seq
 
 class SinkNode
 -----------
+*A sink on a bus.*
 
 ~~~scala
 class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U])
   extends MixedNode(imp, imp)(0 to 0, pi.size to pi.size)
 ~~~
 
++ **imp** `NodeImp [D, U, EO, EI, B]` (param) node parameters.
++ **pi** `Seq[U]` iParams.
++ **externalIn** `Boolean = true` generate external input port bundles.
++ **externalOut** `Boolean = false` no external output port bundles.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
+  resolve `iStar` and `oStar`. `iStar <= pi.size - iKnown, oStar <= 0`.
++ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO] = Seq()` resolve oParams. Not needed for a sink.
++ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI] = pi` resolve iParams.
+
+
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 20/07/2017<br>
+Last updated: 25/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
