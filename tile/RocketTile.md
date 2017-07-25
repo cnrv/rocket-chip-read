@@ -64,9 +64,14 @@ class RocketTile(val rocketParams: RocketTileParams, val hartid: Int)(implicit p
   - **interrupt-controller**
   - **#interrupt-cells** `Seq(ResourceInt(1))`
 
++ **ResourceBinding** `=> Unit` register a resource binding function to the global BindingScope.<br>
+  Currently it bind hartid to the cpu and interrupt controller in each tile.
+  It also bind the interrupt controllers in tiles to the global PLIC according the interrupt interconnects.
+  Obviously the registered binding functions will be called later in the compilation process in a lazy fashion.
+
 <br><br><br><p align="right">
 <sub>
-Last updated: 24/07/2017<br>
+Last updated: 25/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
