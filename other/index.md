@@ -176,12 +176,31 @@ Class index
 # Tile
 ***************************
 
+#### BaseTile
+
+`BareTile`          [abstract class](../tile/BaseTile.md#abstract-class-baretile      )
+`BareTileBundle`    [abstract class](../tile/BaseTile.md#abstract-class-baretilebundle)
+`BareTileModule`    [abstract class](../tile/BaseTile.md#abstract-class-baretilemodule)
+
+`BaseTile`          [abstract class](../tile/BaseTile.md#abstract-class-basetile      )
+`BaseTileBundle`    [class         ](../tile/BaseTile.md#abstract-class-basetilebundle)
+`BaseTileModule`    [class         ](../tile/BaseTile.md#abstract-class-basetilemodule)
+
+`HasExternallyDrivenTileConstants` [trait](../tile/BaseTile.md#trait-hasexternallydriventileconstants)
+`HasTileLinkMasterPort`            [trait](../tile/BaseTile.md#trait-hastilelinkmasterport           )
+`HasTileLinkMasterPortBundle`      [trait](../tile/BaseTile.md#trait-hastilelinkmasterportbundle     )
+`HasTileLinkMasterPortModule`      [trait](../tile/BaseTile.md#trait-hastilelinkmasterportmodule     )
+
+
+
 #### Interrupts
+
 `TileInterrupts`              [class](../tile/Interrupts.md#class-tileinterrupts             )
 `HasExternalInterrupts`       [trait](../tile/Interrupts.md#trait-hasexternalinterrupts      )
 `HasExternalInterruptsModule` [trait](../tile/Interrupts.md#trait-hasexternalinterruptsmodule)
 
 #### RocketTile
+
 `RocketTileParams` [case class](../tile/RocketTile.md#case-class-rockettileparams)
 `RocketTile`       [class     ](../tile/RocketTile.md#class-rockettile           )
 `RocketTileBundle` [class     ](../tile/RocketTile.md#class-rockettilebundle     )
