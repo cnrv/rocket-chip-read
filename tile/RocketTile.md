@@ -25,6 +25,7 @@ case class RocketTileParams(
 + **dataScratchpadBytes** `Int` (param) size of the scratch pad (conflict with D$).
 
 ## class RocketTile
+*The Rocket tile generator (LazyModule).*
 
 ~~~scala
 class RocketTile(val rocketParams: RocketTileParams, val hartid: Int)(implicit p: Parameters) extends BaseTile(rocketParams)(p)
@@ -35,6 +36,7 @@ class RocketTile(val rocketParams: RocketTileParams, val hartid: Int)(implicit p
 
 + **rocketParams** `RocketTileParams` (param) parameter of the tile.
 + **hartid** `Int` the hardware thread identifier (identify a hard thread).
++ **module** `RocketTileModule(this)` pointer to the module implemenation.
 + **cpuDevice** `Device` the device decription for the processor.
   - reference: [Device node requirements](https://github.com/devicetree-org/devicetree-specification/blob/master/source/devicenodes.rst)
   - **reg** `Seq[ResourceInt]` address space of the tile (empty).
@@ -69,9 +71,28 @@ class RocketTile(val rocketParams: RocketTileParams, val hartid: Int)(implicit p
   It also bind the interrupt controllers in tiles to the global PLIC according the interrupt interconnects.
   Obviously the registered binding functions will be called later in the compilation process in a lazy fashion.
 
+## class RocketTileBundle
+~~~scala
+class RocketTileBundle(outer: RocketTile) extends BaseTileBundle(outer)
+    with HasExternalInterruptsBundle
+    with CanHaveScratchpadBundle
+~~~
+
+## class RocketTileModule
+~~~scala
+class RocketTileModule(outer: RocketTile) extends BaseTileModule(outer, () => new RocketTileBundle(outer))
+    with HasExternalInterruptsModule
+    with HasLazyRoCCModule
+    with CanHaveScratchpadModule
+~~~
+
++ **outer** `RocketTile` (param) pointer to the LazyModule.
+
+
+
 <br><br><br><p align="right">
 <sub>
-Last updated: 25/07/2017<br>
+Last updated: 26/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

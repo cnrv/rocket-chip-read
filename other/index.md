@@ -25,6 +25,10 @@ Class index
 `BaseCoreplexBundle` [class         ](../coreplex/BaseCoreplex.md#class-basecoreplexbundle   )
 `BaseCoreplexModule` [class         ](../coreplex/BaseCoreplex.md#class-basecoreplexmodule   )
 
+#### Configs
+
+`BaseCoreplexConfig` [class](../coreplex/Configs.md#class-basecoreplexconfig)
+
 #### RISCVPlatform
 
 `CoreplexRISCVPlatform`       [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatform      )
@@ -179,6 +183,8 @@ Class index
 
 #### RocketTile
 `RocketTileParams` [case class](../tile/RocketTile.md#case-class-rockettileparams)
+`RocketTile`       [class     ](../tile/RocketTile.md#class-rockettile           )
+`RocketTileBundle` [class     ](../tile/RocketTile.md#class-rockettilebundle     )
 
 
 # Tilelink
