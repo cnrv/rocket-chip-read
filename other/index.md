@@ -191,7 +191,14 @@ Class index
 `HasTileLinkMasterPortBundle`      [trait](../tile/BaseTile.md#trait-hastilelinkmasterportbundle     )
 `HasTileLinkMasterPortModule`      [trait](../tile/BaseTile.md#trait-hastilelinkmasterportmodule     )
 
+#### Core
 
+`CoreParams`        [trait](../tile/Core.md#trait-coreparams       )
+`HasCoreParameters` [trait](../tile/Core.md#trait-hascoreparameters)
+`HasCoreIO`         [trait](../tile/Core.md#trait-hascoreio        )
+
+`CoreModule` [abstract class](../tile/Core.md#abstract-class-coremodule)
+`CoreBundle` [abstract class](../tile/Core.md#abstract-class-corebundle)
 
 #### Interrupts
 
@@ -348,7 +355,7 @@ Class index
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 25/07/2017<br>
+Last updated: 27/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
