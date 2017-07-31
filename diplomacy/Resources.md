@@ -7,6 +7,8 @@
 
 - [Resource description](#resource-description)
 - [Device description](#device-description)
+- [Device classes](#device-classes)
+- [The resource bookkeeping system](#the-resource-bookkepping-system)
 
 **********************
 
@@ -38,6 +40,7 @@ final case class ResourceAddress(address: Seq[AddressSet], permissions: Resource
 
 ### case class ResourceMapping
 *An address space with an offset to be respected by the address negotiation process.*
+*It is used to map a device address into the bus address space. (see `SimpleBus`)*
 
 ~~~scala
 final case class ResourceMapping(address: Seq[AddressSet], offset: BigInt, permissions: ResourcePermissions)
@@ -107,7 +110,7 @@ case class ResourceBindings(map: Map[String, Seq[Binding]])
 ~~~
 
 + **map** `Map[String, Seq[Binding]]` (param)
-+ **apply** `(key: String) => Seq[Binding]` get the bindings of ("int").
++ **apply** `(key: String) => Seq[Binding]` get the key matched bindings.
 
 ### case class Description
 *A serializable discription of a device.*
@@ -121,13 +124,13 @@ case class Description(name: String, mapping: Map[String, Seq[ResourceValue]])
 
 ## Device description
 
-## abstract class Device
+### abstract class Device
 *Definition of a device*
 
 + **describe** `(resources: ResourceBindings) => Description` (virtual) generate the device description.
 + **label** `String` A unique label of a device.
 
-## trait DeviceInterrupts
+### trait DeviceInterrupts
 *Interrupts of a device (extensible only to Device).*
 
 > For a device that generates interrupts, it needs to decribe its interrupts and
@@ -161,59 +164,99 @@ case class Description(name: String, mapping: Map[String, Seq[ResourceValue]])
   - **interrupts** `Option[("interrupts", Seq[ResourceInt])]` for a simple device, list the interrupt lines.
   - **interrupts_extended** `Option[("interrupt-extended", Seq[(ResourceReference, ResourceInt)])]`<br>
   For an extended device, list the interrupt line pairs.
-+ **int** `() => Seq(Resource(this, "int"))`
++ **int** `() => Seq(Resource(this, "int"))` get the interrupt related device object and description string.
 
-## trait DeviceRegName
-*Device registration name (extensible only to Device).*
+### trait DeviceRegName
+*The device name of a device (extensible only to Device).*
 
 + **prefix** `String = "soc/"*` prefix
-+ **describeName** `(devname: String, resources: ResourceBindings) => String`
++ **describeName** `(devname: String, resources: ResourceBindings) => String`<br>
+  Get the device name string.
+  For a device with a register space, the name is `$prefix/$devname@$addr`
+  where `$addr` points to its control register or general register space.
+  Otherwise, the device is named as `$prefix/$devname`.
++ **reg** `() => Seq(Resource(this, "reg"))` get a reg device with defautl name "reg".
++ **reg** `(name: String) => Seq(Resource(this, "reg/"+name))`<br>
+  Get a reg device with a name "reg/<name>".
++ **regFilter** `(String) => Boolean` a filter function used to pick reg devices.
++ **regName** `(name: String) => Option[String]` get the name provided the device is named as "reg/<name>".
 
-    Get the device name string. For a valid device, the name is `$prefix/$devname@$base_addr`
+## Device classes
 
-+ **reg** `_ => Seq(Resource(this, "reg"))`
+### class SimpleDevice
+*A simple device that can be named and support interrupts.*
 
-    ??
-
-## class SimpleDevice
 ~~~scala
 class SimpleDevice(devname: String, devcompat: Seq[String])
     extends Device with DeviceInterrupts with DeviceRegName
 ~~~
 
-*Simple device device definition.*
++ **devname** `String` (param) the name of the device.
++ **devcompat** `Seq[String]*` (param) the **compatible** property of device tree.
++ **describe** `(resources: ResourceBindings) => Description` generate a description of this device.
+  - **name** `String` device name.
+  - **int** `Map[String, Seq[ResourceValue]]` interrupt description.
+  - **compat** `("compatible", Seq[ResourceString])` compatible description.
+  - **names** `("reg-names", Seq[ResourceString])` names of the names reg spaces.
+  - **regs** `("reg", Seq[ResourceAddress])` the register spaces (named + bulk).
+  
+  Set device tree properties for "compatible", "reg-names", "reg", "interrupt-parent", "interrupts", and "interrupts-extended".
 
-+ *describe: (resources: ResourceBindings) => Description*: generate a description of this device
+### class SimpleBus
+*A simple bus.*
+
 ~~~scala
-Description(describeName(devname, resources),
-    ListMap("reg"        -> resources("reg").map(_.value),
-            "compatible" -> devcompat.map(ResourceString(_)), // optional
-            describeInterrupts(resources)))
+class SimpleBus(devname: String, devcompat: Seq[String], offset: BigInt = 0)
+    extends SimpleDevice(devname, devcompat ++ Seq("simple-bus"))
 ~~~
 
-## class MemoryDevice
++ **devname** `String` (param) the name of the device.
++ **devcompat** `Seq[String]*`<br>
+  (param) The **compatible** property of device tree.
++ **offset** `BigInt` the offset of this bus.
+  A bus is always compatible with "simple-bus".
++ **describe** `(resources: ResourceBindings) => Description` (override) generate a description of this device.
+  - **ranges** `Seq[ResourceMapping]` the address spaces of all devices with the bus offset attached.
+  - **map** `Seq[AddressRange]` a address range collection to contain all ranges.
+  
+  Set device tree properties for "#address-cells", "#size-cells", and "ranges", plus the ones set by `SimpleDevice`.
+
+### class MemoryDevice
+*Simple memory device*
+
 ~~~scala
 class MemoryDevice extends Device with DeviceRegName
 ~~~
 
-*Simple memory device definition*
-
 + override prefix to "".
-+ *describe: (resources: ResourceBindings) =>  Description*: generate a description of this device
++ **describe** `(resources: ResourceBindings) =>  Description` generate a description of this device.
+
+  Set device tree properties for "reg" and set device type to "memory".
+
+
+## The resource bookkeeping system
+
+### case class Resource
+*A record of resource binding.*
+
 ~~~scala
-Description(describeName("memory", resources),
-    ListMap("reg"         ->resources("reg").map(_.value),
-            "device_type" -> Seq(ResourceString("memory"))))
+case class Resource(owner: Device, key: String)
 ~~~
 
++ **bind** `(user: Device, value: ResourceValue) => Unit`<br>
+  Record a binding of "this -> (user, value)". Here the user is another device
+  (eg. the interrupt controller consume the interrupts generated by this device).
++ **bind** `(value: ResourceValue) => Unit`<br>
+  Record a binding of "this -> value". A generic property.
 
-## case class Resource
+### trait BindingScope
+*The bookkeeping scope for a LazyModule.*
 
-+ **bind** `(user: Device, value: ResourceValue) => Unit`
-+ **bind** `(value: ResourceValue) => Unit`
++ **resourceBindingFns** `Seq[() => Unit]` (protected, lazy) list of callbacks to set up bindings at scala run-time.
++ **resourceBindings** `Seq[(Resource, Option[Device], ResourceValue)]`<br>
+  (protected, lazy) the binding map database.
++ **eval** 
 
-## trait BindingScope
-*(extensible only to LazyModule)*
 
 + **bindingTree** `_ => ResourceMap`
 
@@ -228,7 +271,7 @@ Description(describeName("memory", resources),
 
     Return the first parent `LazyModule` extended with `BindingScope`.
 
-## object ResourceBinding
+### object ResourceBinding
 *An global function object that is called with extension (weird Scala code pattern) in a device to initialize all binding functions.*
 
 + **apply** `(block: => Unit): Unit`
@@ -238,7 +281,7 @@ Description(describeName("memory", resources),
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 28/07/2017<br>
+Last updated: 31/07/2017<br>
 [CC-BY](https://creativecommons.org/licenses/by/3.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

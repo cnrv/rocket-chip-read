@@ -113,7 +113,9 @@ Class index
 `Device`           [abstract class](../diplomacy/Resources.md#abstract-class-device )
 `DeviceInterrupts` [trait         ](../diplomacy/Resources.md#trait-deviceinterrupts)
 `DeviceRegName`    [trait         ](../diplomacy/Resources.md#trait-deviceregname   )
+
 `MemoryDevice`     [class         ](../diplomacy/Resources.md#class-memorydevice    )
+`SimpleBus`        [class         ](../diplomacy/Resources.md#class-simplebus       )
 `SimpleDevice`     [class         ](../diplomacy/Resources.md#class-simpledevice    )
 
 `Resource`           [case class      ](../diplomacy/Resources.md#case-class-resource           )
