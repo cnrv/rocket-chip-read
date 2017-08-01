@@ -250,38 +250,38 @@ case class Resource(owner: Device, key: String)
   Record a binding of "this -> value". A generic property.
 
 ### trait BindingScope
-*The bookkeeping scope for a LazyModule.*
+*The bookkeeping database for a LazyModule that generates DTS.*
+*Coreplex modules are the only LazyModules that generate DTS.*
 
++ **parentScope** `Option[BindingScope]` (private) the parent binding scope if there is one.
 + **resourceBindingFns** `Seq[() => Unit]` (protected, lazy) list of callbacks to set up bindings at scala run-time.
 + **resourceBindings** `Seq[(Resource, Option[Device], ResourceValue)]`<br>
   (protected, lazy) the binding map database.
-+ **eval** 
++ **eval** `Unit` (private, lazy) use a lazy value to enforce the order of binding scope elaboration steps.
 
+  > The binding scopes are elaborated from root to leaves.
+  > The steps of eval()
+  > - Check LazyModules are constructed.
+  > - Ensure parent binding scopes are evaluated.
+  > - Set up a critical section.
+  > - Call all callbacks in `resourceBindingFns` in reversed order (why)?
+  > - Set off the critical section.
 
-+ **bindingTree** `_ => ResourceMap`
-
-    Generate device tree map.
++ **bindingTree** `() => ResourceMap` generate the device tree map for DTS and JSON.
 
 ### object BindingScope
-+ **active** `Option[BindingScope]`
-
-    The current active LazyModule needing binding.
-
-+ **find** `(m: Option[LazyModule]) => Option[BindingScope]`
-
-    Return the first parent `LazyModule` extended with `BindingScope`.
++ **active** `Option[BindingScope]` pointing to the current BindingScope that is being evaluated.
++ **find** `(m: Option[LazyModule]) => Option[BindingScope]` find the first BindingScope from this to parents.
 
 ### object ResourceBinding
-*An global function object that is called with extension (weird Scala code pattern) in a device to initialize all binding functions.*
+*A function object used to add resource binding callbacks to the callback function list in the BindingScope.*
 
-+ **apply** `(block: => Unit): Unit`
-
-    Add a new code segement `block` into the binding functions.
++ **apply** `(block: => Unit) => Unit` add the callback function `block` to `BindingScope.resourceBindingFns`.
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 31/07/2017<br>
+Last updated: 01/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

@@ -1,16 +1,28 @@
 [Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[LazyModule](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/diplomacy/LazyModule.scala)
 =====================
+*Definition of LazyModule: the base for diplomacy and cacke pattern.*
 
 **********************
 
 ## abstract class LazyModule
-*Module generator. Allow run-time module configuration and generation.*
+*Module generator. Allow postponed (lazy) module elaboration.*
 
-+ **bindings** `List[() => Unit]` A list of port connection functions called during instantiation.
-+ *children: List[LazyModule]*: list of inner components (LazyModules).
-+ **nodes** `List[BaseNode]` the nodes inside this module (think about ports of a crossbar)
-+ *info: SourceInfo*: source information (line number, etc.) for better error/warning messages.
-+ *parent: Option[LazyModule]*: parent module.
++ **children** `List[LazyModule]` (protected) list of sub-modules.
++ **parent** `Option[LazyModule]` (protected) parent module.
+
+  > `childran` and `parent` record the module hierarchy with the help of `LazyModule.stack`.<br>
+  > For a module hierarchy as : `A{ B{ C, D }, E }`:
+  > ~~~
+  > A.parent = None  A.children = B, E
+  > B.parent = A     B.children = C, D
+  > C.parent = B     C.children = ()
+  > D.parent = B     D.children = ()
+  > E.parent = A     E.children = ()
+  > ~~~
+
++ **nodes** `List[BaseNode]` (protected) all diplomacy nodes (one-level, not recursive) in this LazyModule.
++ **bindings** `List[() => Unit]` (protected) a list of port connection functions called during instantiation.
++ *info: SourceInfo*: (protected) source information (line number, etc.) for better error/warning messages.
 + *suggestName: (x:String) => Unit*: set the suggested module name?
 + *moduleName: _ => String*: ??
 + *instanceName: _ => String*: ??
@@ -22,10 +34,10 @@
 + *nodeIterator: (iterfunc: (LazyModule) => Unit) => Unit*: a cross hierarchy module traveller.
 
 ### object LazyModule
-*Companion object for LazyModule.*
+*Global stack to keep the module hierarchy.*
 
-+ *stack: List[LazyModule]*: A list of all LazyModules remaining to be processed (recursively).
-+ *apply[T <: LazyModule]: (bc:T) => bc*: LazyModule wrapper to enforce the LazyModule process order.
++ **stack** `List[LazyModule]` (protected) a stack of LazyModules that have not been constructed.
++ **apply** `[T <: LazyModule](bc:T) => bc` a LazyModule wrapper to enforce the LazyModule construction order.
 
 ## abstract class LazyModuleImp
 *The actual Module implementation of a LazyModule.*
@@ -45,7 +57,7 @@ abstract class LazyModuleImp(outer: LazyModule) extends Module
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 21/07/2017<br>
+Last updated: 01/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
