@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[diplomacy](../diplomacy.md)/[Node](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/diplomacy/Nodes.scala)
 =====================
-*The base classes of nodes on on-chip interconnects.*
+*A port binding elaboration library based on virtual nodes.*
 
 **********************
 + [Node implementation](#node-implementation)
@@ -199,15 +199,15 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **numPO** `Range.Inclusive` (param) output range.
 + **numPI** `Range.Inclusive` (param) input range.
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
-  (virtual) A function to resolve the number of star type ports.
+  (virtual) A function to resolve star type bindings.
 + **mapParamsD** `(Int, Seq[DI]) => Seq[DO]`<br>
   (virtual) A function to propagate parameters from clients to managers.
 + **mapParamsU** `(Int, Seq[UO]) => Seq[UI]`<br>
   (virtual) A function to propagate parameters from managers to clients.
 + **oPortMapping** `Seq[(Int, Int)]` (lazy) ranges of ports connected to managers.
 + **iPortMapping** `Seq[(Int, Int)]` (lazy) ranges of ports connected clients.
-+ **oStar** `Int` (lazy) number of star type of ports connected to managers.
-+ **iStar** `Int` (lazy) number of tar type of ports connected to clients.
++ **oStar** `Int` (lazy) number of managers binded with star type connections.
++ **iStar** `Int` (lazy) number of clients binded with star type connections.
 + **oPorts** `Seq[(Int, InwardNode [DI, UI, BI])]` (lazy) a list of (index, port) binded by all its manager side ports.
 + **iPorts** `Seq[(Int, OutwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by all its client side ports.
 + **oParams** `Seq[DO]` (lazy) output port node parameters.
@@ -222,46 +222,25 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **bundleIn** `Seq[BI]` (lazy) get the input bundles.
   > `bundleIn` and `bundleOut` are first utilized when generating the actual hardware module's IO.
   > Then these lazy value then triggers the series of port elaboration process.
-  > The triggering order:
-  > ~~~
-  > x.bundleIn (lazy) <= x.edgesIn
-  >  ^ x.edgesIn (lazy) <= (x.iPorts, x.iParams)
-  >     ^ x.iPorts (lazy) <= (x.iBindings, i.oPortMapping)
-  >     | ^ x.iBindings (lazy) <= x.accPI (var)
-  >     | ^ i.oPortMapping (lazy) <= (i.oBindings, i.iBindings)
-  >     |   ^ i.oBindings (lazy) <= i.accPO (var)
-  >     |   ^ i.iBindings (lazy) <= i.accPI (var)
-  >     ^---- x.iParams (lazy) <= (x.iPorts, x.oPorts, o.iParam) -------\
-  >           ^ x.iPorts (resolved)                                     |
-  >           ^ x.oPorts (lazy) <= (x.oBindings, o.iPortMapping)        |
-  >           | ^ x.oBindings (lazy) <= x.accPO (var)                 recursive
-  >           | ^ o.iPortMapping (lazy) <= (o.oBindings, o.iBindings)   |
-  >           |   ^ o.oBindings (resolved)                              |
-  >           |   ^ o.iBindings (lazy) <= o.accPO (var)                 |
-  >           ^ o.iParam (lazy) <= (o.iPorts, o.oPorts, oo.iParam) -----/
-  > ~~~
-  > For a client side port, the `iParam` is propagated from the leaf manager to the top client.
-  > Therefore, the direction is reversed from the manager side.
-
 
 + **connectButDontMonitor** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
   Equal to `:=` but without a monitor.
 + **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
-  Connect `h` to the only output port of this, 1 to 1 connection. Add a monitor.
+  Bind one connection from `h` to this. Add a monitor.
 ~~~
 (h)==>(x)
 x.iPush(h, BIND_ONCE)
 h.oPush(x, BIND_ONCE)
 ~~~
 + **\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
-  Connect `h` to all output ports of this, 1 output to M input connection. Add a monitor.
+  Bind N (N >= 0) connections from `h`to this, while this decides the value of N. Add a monitor.
 ~~~
 (h)==>*(x,...)
 x.iPush(h, BIND_STAR)
 h.oPush(x, BIND_QUERY)
 ~~~
 + **=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
-  Add `h` to the input ports list of this, M output to 1 input connection. Add a monitor.
+  Bind N (N >= 0) connections from `h`to this, while `h` decides the value of N. Add a monitor.
 ~~~
 (h,...)*==>(x)
 x.iPush(h, BIND_QUERY)
@@ -284,9 +263,16 @@ Reference: https://github.com/freechipsproject/rocket-chip/pull/536
 >baz1 := foo<br>
 >baz2 := foo // two times
 
+Some remarks:
+> The star type connections allow variable number of ports to be connected and resolved at elaboration time.
+> However, there are two problems which may not be handled properly:
+> 1. There cannot be a ring, othewise the lazy process cannot figure out a value.
+> 2. On a side (inner or outer) of a node, there can be one star bind in maximal.
+
 
 ### class MixedAdapterNode
 *Generic bus adapters.*
+**_Allow only one side to have a star binding._**
 
 ~~~scala
 class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
@@ -297,19 +283,20 @@ class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
   num: Range.Inclusive = 0 to 999)
   extends MixedNode(inner, outer)(num, num)
 ~~~
-+ **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) input node (manager side) parameters.
-+ **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) output node (client side) parameters.
-+ **dFn** `(DI) => DO` used to resolve oParams.
-+ **uFn** `(DO) => DI` used to resolve iParams.
-+ **num** `Range.Inclusive = 1 to 999` (param) input and output range.
++ **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) client side node implementation.
++ **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) manager side node implementation.
++ **dFn** `(DI) => DO` (param) downwards parameter resolvation funciton.
++ **uFn** `(DO) => DI` (param) upwards parameter resolvation function.
++ **num** `Range.Inclusive = 1 to 999` (param) the maximal number of connections for either clients or managers.
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
-  (**_not sure why <=1 star binding is allowed_**)
+  Resolve the `iStar` and `oStar` numbers. Onle one side can have a star!
 + **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn(), resolve port individually.
 + **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` resolve iParams using uFn(), resolve port individually.
 
 
 ### class MixedNexusNode
 *Generic class of switches.*
+**_No star binding is allowed for both sides._**
 
 ~~~scala
 class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
@@ -330,14 +317,12 @@ class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **numPI** `Range.Inclusive = 1 to 999` (param) input range.
 + **externalIn** `Boolean = true` generate external input port bundles.
 + **externalOut** `Boolean = true` generate external output port bundles.
-+ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
-  resolve `iStar` and `oStar`. NexusNode does not allow any input or output star connections.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (0,0)`<br>
+  A NexusNode does not allow any star bindings.
 + **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn().
 + **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` resolve iParams using uFn().
 + **oStar** `Int = 0` (const)
 + **iStar** `Int = 0` (const)
-
-
 
 ### class AdapterNode
 *Base node class for a bus adapter.*
@@ -373,6 +358,7 @@ case class SplitterArg[T](newSize: Int, ports: Seq[T])
 
 ### class MixedSplitterNode
 *Demultiplexer for complicate channel bundles.*
+**_No star binding is allowed for both sides._**
 
 oParams.size == N * iParams.size, where N is a positive integer.
 
@@ -419,6 +405,8 @@ class IdentityNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
 ~~~
 
 ### class OutputNode
+*A hierarchical output node.*
+**_No star binding is allowed for both sides._**
 
 ~~~scala
 class OutputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
@@ -426,6 +414,8 @@ class OutputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
 ~~~
 
 ### class InputNode
+*A hierarchical input node.*
+**_No star binding is allowed for both sides._**
 
 ~~~scala
 class InputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
@@ -433,14 +423,29 @@ class InputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])
 ~~~
 
 ### class SourceNode
+*A source node in a network.*
+**_Allow one star at the manager side._**
+**_The number of bindings is defined at design time._**
 
 ~~~scala
 class SourceNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(po: Seq[D])
   extends MixedNode(imp, imp)(po.size to po.size, 0 to 0)
 ~~~
 
++ **imp** `NodeImp [D, U, EO, EI, B]` (param) node parameters.
++ **po** `Seq[D]`<br>
+  (param) Downwards parameters of all manager side connections.
+  The size of `po` decides the total number of port bindings. 
++ **externalIn** `Boolean = false` no external input port bundles.
++ **externalOut** `Boolean = true` generate external output port bundles.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (0, po.size - oKnown)`
++ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO] = po` assign downwards parameters.
++ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq()` no needed.
+
 ### class SinkNode
-*A sink on a bus.*
+*A sink node in a network.*
+**_Allow one star at the client side._**
+**_The number of bindings is defined at design time._**
 
 ~~~scala
 class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U])
@@ -448,20 +453,70 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
 ~~~
 
 + **imp** `NodeImp [D, U, EO, EI, B]` (param) node parameters.
-+ **pi** `Seq[U]` iParams.
++ **pi** `Seq[U]`<br>.
+  (param) Upwards parameters of all manager side connections.
+  The size of `po` decides the total number of port bindings. 
 + **externalIn** `Boolean = true` generate external input port bundles.
 + **externalOut** `Boolean = false` no external output port bundles.
-+ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
-  resolve `iStar` and `oStar`. `iStar <= pi.size - iKnown, oStar <= 0`.
-+ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO] = Seq()` resolve oParams. Not needed for a sink.
-+ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI] = pi` resolve iParams.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (pi.size - iKnown, 0)`
++ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq()` no needed.
++ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI] = pi` assign upwards parameters.
 
+### BlindOutputNode
+
+~~~scala
+class BlindOutputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U])
+  extends SinkNode(imp)(pi)
+{
+  override val externalIn: Boolean = false
+  override val flip = true
+  override lazy val bundleOut = bundleIn
+}
+~~~
+
+### BlindInputNode
+
+~~~scala
+class BlindInputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(po: Seq[D])
+  extends SourceNode(imp)(po)
+{
+  override val externalOut: Boolean = false
+  override val flip = true
+  override lazy val bundleIn = bundleOut
+}
+~~~
+
+### InternalOutputNode
+
+~~~scala
+class InternalOutputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U])
+  extends SinkNode(imp)(pi)
+{
+  override val externalIn: Boolean = false
+  override val externalOut: Boolean = false
+  override val wire = true
+  override lazy val bundleOut = bundleIn
+}
+~~~
+
+### InternalInputNode
+
+~~~scala
+class InternalInputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(po: Seq[D])
+  extends SourceNode(imp)(po)
+{
+  override val externalIn: Boolean = false
+  override val externalOut: Boolean = false
+  override val wire = true
+  override lazy val bundleIn = bundleOut
+}
+~~~
 
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 03/08/2017<br>
+Last updated: 04/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

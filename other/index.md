@@ -87,11 +87,15 @@ Class index
 `MixedSplitterNode`[class     ](../diplomacy/Nodes.md#class-mixedsplitternode)
 `SplitterNode`     [class     ](../diplomacy/Nodes.md#class-splitternode     )
 
-`IdentityNode` [class](../diplomacy/Nodes.md#class-identitynode)
-`InputNode`    [class](../diplomacy/Nodes.md#class-inputnode   )
-`OutputNode`   [class](../diplomacy/Nodes.md#class-outputnode  )
-`SinkNode`     [class](../diplomacy/Nodes.md#class-sinknode    )
-`SourceNode`   [class](../diplomacy/Nodes.md#class-sourcenode  )
+`IdentityNode`       [class](../diplomacy/Nodes.md#class-identitynode      )
+`InputNode`          [class](../diplomacy/Nodes.md#class-inputnode         )
+`OutputNode`         [class](../diplomacy/Nodes.md#class-outputnode        )
+`SinkNode`           [class](../diplomacy/Nodes.md#class-sinknode          )
+`SourceNode`         [class](../diplomacy/Nodes.md#class-sourcenode        )
+`BlindOutputNode`    [class](../diplomacy/Nodes.md#class-blindoutputnode   )
+`BlindInputNode`     [class](../diplomacy/Nodes.md#class-blindinputnode    )
+`InternalOutputNode` [class](../diplomacy/Nodes.md#class-internaloutputnode)
+`InternalInputNode`  [class](../diplomacy/Nodes.md#class-internalinputnode )
 
 #### Parameters
 
@@ -357,7 +361,7 @@ Class index
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 27/07/2017<br>
+Last updated: 04/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
