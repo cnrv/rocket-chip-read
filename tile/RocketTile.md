@@ -39,7 +39,7 @@ class RocketTile(val rocketParams: RocketTileParams, val hartid: Int)(implicit p
 + **module** `RocketTileModule(this)` pointer to the module implemenation.
 + **cpuDevice** `Device` the device decription for the processor.
   - reference: [Device node requirements](https://github.com/devicetree-org/devicetree-specification/blob/master/source/devicenodes.rst)
-  - **reg** `Seq[ResourceInt]` address space of the tile (empty).
+  - **reg** `Seq[ResourceInt]` hartid.
   - **device\_type** `Seq(ResourceString("cpu"))` a cpu device.
   - **compatible** `Seq(ResourceString("sifive,rocket0"), ResourceString("riscv"))` (manufacture,model)
   - **status** `Seq(ResourceString("okay"))` _okay_: CPU is running; _disabled_: CPU is in a quiecent state.
@@ -69,7 +69,7 @@ class RocketTile(val rocketParams: RocketTileParams, val hartid: Int)(implicit p
 + **ResourceBinding** `=> Unit` register a resource binding function to the global BindingScope.<br>
   Currently it bind hartid to the cpu and interrupt controller in each tile.
   It also bind the interrupt controllers in tiles to the global PLIC according the interrupt interconnects.
-  Obviously the registered binding functions will be called later in the compilation process in a lazy fashion.
+  These bindings are later used in the device `describe()` functions.
 
 ## class RocketTileBundle
 ~~~scala
@@ -79,6 +79,8 @@ class RocketTileBundle(outer: RocketTile) extends BaseTileBundle(outer)
 ~~~
 
 ## class RocketTileModule
+*The Rocket tile top connections.*
+
 ~~~scala
 class RocketTileModule(outer: RocketTile) extends BaseTileModule(outer, () => new RocketTileBundle(outer))
     with HasExternalInterruptsModule
@@ -87,12 +89,41 @@ class RocketTileModule(outer: RocketTile) extends BaseTileModule(outer, () => ne
 ~~~
 
 + **outer** `RocketTile` (param) pointer to the LazyModule.
++ **core** `CoreModule with HasCoreIO` the Rocket core.
+  - **core** the rocket core.
+  - **outer.frontend.module** instruction cache.
+  - **outer.dcache** data cache.
+  - **fpuOpt** FPUs.
+  - **roccCore** ROCC.
+  - **ptw** page table walker.
 
+## RocketTileWrapper
+*A base wrapper to wrap a Rocket tile into a diplomacy node.*
+**_Here the master/slave nodes are defined virtual to support sync/async/rational clock domains._**
 
++ **rtp** `RocketTileParams` (param) Parameter for Rocket core.
++ **hartid** `Int` (param) hart id.
++ **rocket** `RocketTile` the Rocket tile.
++ **masterNode** `OutputNode` bus master (client) port.
++ **slaveNode** `InputNode` bus slave (manager) port.
++ **asyncIntNode** `IntInputNode` asynchronous interrupt inputs.
++ **periphIntNode** `IntInputNode` peripherial interrupt inputs.
++ **coreIntNode** `IntInputNode` core local interrupts.
++ **intXbar** `IntXbar` interrupt crossbar.
++ **optionalMasterBuffer** `TLOutwardNode => TLOutwardNode` a function to buffer the master port.
++ **optionalSlaveBuffer** `TLInwardNode => TLInwardNode` a function to buffer the slave port.
++ **module** `LazyModuleImp` the module implementation.
+
+    I/O:
+    - **master** `Bundle` master port.
+    - **slave** `Bundle` slave port.
+    - **asyncInterrupts** `Vec[Bool]` interrupt inputs.
+    - **periphInterrupts** `Vec[Bool]` interrupt inputs.
+    - **coreInterrupts** `Vec[Bool]` interrupt inputs.
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 26/07/2017<br>
+Last updated: 07/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
