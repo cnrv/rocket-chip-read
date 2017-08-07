@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[tilelink](../tilelink.md)/[Edges](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/tilelink/Edges.scala)
 =====================
-
+*Definitions for the TileLink packets.*
 **********************
 
 class TLEdge
@@ -31,12 +31,15 @@ class TLEdge(
   Whether the transaction has data. See the "[type of TileLink transactions](Bundles.md#type-of-tilelink-transactions)."
 + Helper functions to get transaction fields
 
-  **opcode**, **param**, **size**, **data**, **mask**, **full_mask**, **address**, and **source**<br>
+  **opcode**, **param**, **size**, **data**, and **source**<br>
   `(TLDataChannel) => UInt`<br>
+
+  **mask**, **full_mask**, and **address**<br>
+  `(TLAddrChannel) => UInt`<br>
 
   **addr_hi** `(UInt) => UInt` or `(TLAddrChannel) => UInt`<br>
   MSBs of an address (to a beat).
-+ **addr_lo** `(UInt) => UInt` or `(TLDataChannel) => UInt`<br>
++ **addr_lo** `(UInt) => UInt` or `(TLAddrChannel) => UInt`<br>
   LSBs of an address (inside a beat).
 + **numBeats** `(TLChannel) => UInt`<br>
   Number of beats of this transaction.
@@ -184,29 +187,32 @@ Return value:
 + Packet generators for channel D
 
   **Grant**<br>
-  `(fromAddr, fromSink, toSrc, lgSize, capPerm) => packetD`<br>
-  `(fromAddr, fromSink, toSrc, lgSize, capPerm, error) => packetD`<br>
-  `(fromAddr, fromSink, toSrc, lgSize, capPerm, data) => packetD`<br>
-  `(fromAddr, fromSink, toSrc, lgSize, capPerm, data, error) => packetD`
+  `(fromSink, toSrc, lgSize, capPerm) => packetD`<br>
+  `(fromSink, toSrc, lgSize, capPerm, error) => packetD`<br>
+  `(fromSink, toSrc, lgSize, capPerm, data) => packetD`<br>
+  `(fromSink, toSrc, lgSize, capPerm, data, error) => packetD`
 
-  **Release** `(fromAddr, fromSink, toSrc, lgSize) => packetD`<br>
+  **ReleaseAck**<br>
+  `(c: TLBundleC) => packetD`<br>
+  `(toSrc, lgSize) => packetD`
+
   **AccessAck**<br>
-  `(a: TLBundleA, fromSink) => packetD`<br>
-  `(a: TLBundleA, fromSink, data) => packetD`<br>
-  `(a: TLBundleA, fromSink, error) => packetD`<br>
-  `(a: TLBundleA, fromSink, data, error) => packetD`<br>
-  `(fromAddr fromSink, toSrc, lgSize) => packetD`<br>
-  `(fromAddr fromSink, toSrc, lgSize, data) => packetD`<br>
-  `(fromAddr fromSink, toSrc, lgSize, error) => packetD`<br>
-  `(fromAddr fromSink, toSrc, lgSize, data, error) => packetD`<br>
+  `(a: TLBundleA) => packetD`<br>
+  `(a: TLBundleA, data) => packetD`<br>
+  `(a: TLBundleA, error) => packetD`<br>
+  `(a: TLBundleA, data, error) => packetD`<br>
+  `(toSrc, lgSize) => packetD`<br>
+  `(toSrc, lgSize, data) => packetD`<br>
+  `(toSrc, lgSize, error) => packetD`<br>
+  `(toSrc, lgSize, data, error) => packetD`
 
-  **HintAck** `(a:TLBundleA, fromSink) => packetD`<br>
-  **HintAck** `(fromAddr fromSink, toSrc, lgSize) => packetD`<br>
+  **HintAck** `(a:TLBundleA) => packetD`<br>
+  **HintAck** `(toSrc, lgSize) => packetD`
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 12/07/2017<br>
+Last updated: 07/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
