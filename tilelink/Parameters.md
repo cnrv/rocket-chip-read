@@ -5,22 +5,15 @@
 
 **********************
 
-### [TL](#case-class-tlmanagerparameters)
-
-Base TileLink connection.
-
-### [TLAsync](#case-class-tlasyncmanagerportparameters)
-
-Asynchronous TileLink connection, cross asynchronous clock domains.
-
-### [TLRational](#case-class-tlrationalmanagerportparameters)
-
-Mesochronous TileLink connection, cross source shared clock domains.
-
++ [Synchronous TileLink](#synchronous-tilelink)
++ [TLAsync](#asynchronous-tilelink)
++ [TLRational](#rational-tilelink)
 
 **********************
 
-## case class TLManagerParameters
+## Synchronous TileLink
+
+### case class TLManagerParameters
 *Parameters for a TileLink manager.*
 
 ~~~scala
@@ -41,7 +34,7 @@ case class TLManagerParameters(
   fifoId:             Option[Int]   = None)
 ~~~
 
-### Case variables:
+#### Case variables:
 
 + **address**            `Seq[AddressSet]` address range covered by this manager.
 + **resources**          `Seq[Resource] = Seq()`
@@ -61,7 +54,7 @@ case class TLManagerParameters(
   If fifoId=Some, all accesses sent to the same fifoId are executed and ACK'd in FIFO order.<br>
   Note: you can only rely on this FIFO behaviour if your TLClientParameters include requestFifo.
 
-### Member variables and functions:
+#### Member variables and functions:
 
 + **maxTransfer** `TransferSizes` the maximal packet size.
 + **maxAddress** `BigInt` the maximal address in all address spaces.
@@ -69,8 +62,7 @@ case class TLManagerParameters(
 + **minAlignment** `BigInt` the minimal alignment of all address spaces.
 + **toResource** `_ => ResourceAddress` convert this to `ResourceAddress`.
 
-case class TLManagerPortParameters
---------------
+### case class TLManagerPortParameters
 *Parameters for a TileLink manager (upwards) port.*
 
 ~~~scala
@@ -81,14 +73,14 @@ case class TLManagerPortParameters(
   minLatency: Int = 0)
 ~~~
 
-### Case variables:
+#### Case variables:
 
 + **managers** `Seq[TLManagerParameters]` parameters of the managers sharing this port.
 + **beatBytes** `Int` number of bytes per beat.
 + **endSinkId** `Int = 1`
 + **minLatency** `Int = 0`
 
-### Member variables and functions:
+#### Member variables and functions:
 
 + **maxTransfer** `_ => Int` the maximal packet size.
 + **maxAddress** `_ => BigInt` the maximal address in all address spaces.
@@ -141,7 +133,7 @@ case class TLManagerPortParameters(
 + **findFifoIdFast** `(address: UInt) => Int` get the `fifoId + 1` or 0 if none.
 + **hasFifoIdFast** `(address: UInt) => Boolean` whether there is a matched `fifoId`.
 
-## case class TLClientParameters
+### case class TLClientParameters
 *Parameters for a TileLink client.*
 
 ~~~scala
@@ -161,7 +153,7 @@ case class TLClientParameters(
 
 A TileLink channel may either a coherent channel (need B/C) or a strong ordered (fifo order) channel, but not both.
 
-### Case variables:
+#### Case variables:
 
 + **sourceId** `IdRange = IdRange(0,1)` source ID range used for routing responses.
 + **nodePath** `Seq[BaseNode] = Seq()`
@@ -175,12 +167,12 @@ A TileLink channel may either a coherent channel (need B/C) or a strong ordered 
   + **supportsPutPartial**  `TransferSizes = TransferSizes.none`
   + **supportsHint**        `TransferSizes = TransferSizes.none`
 
-### Member variables and functions:
+#### Member variables and functions:
 
 + **maxTransfer** `TransferSizes` the maximal packet size.
 + **name** `String`
 
-## case class TLClientPortParameters
+### case class TLClientPortParameters
 *Parameters for a TileLink client (downwards) port.*
 
 ~~~scala
@@ -190,13 +182,13 @@ case class TLClientPortParameters(
   minLatency:    Int = 0) // Atomics are executed as get+put
 ~~~
 
-### Case variables:
+#### Case variables:
 
 + **clients** `Seq[TLClientParameters]` parameters of the clients sharing this port.
 + **unsafeAtomics** `Boolean = false`
 + **minLatency** `Int = 0`
 
-### Member variables and functions:
+#### Member variables and functions:
 
 + **endSourceId** `_ => Int` the maximal source ID.
 + **maxTransfer** `_ => Int` the maximal packet size.
@@ -233,7 +225,7 @@ case class TLClientPortParameters(
 + **requestFifo** `(id: UInt) => Bool` whether need fifo order for this id.
 + **contains** `(id: UInt) => Bool` Whether this ID belongs to this port.
 
-## case class TLBundleParameters
+### case class TLBundleParameters
 *Parameters for a TileLink IO interface (Bundle).*
 
 ~~~scala
@@ -245,7 +237,7 @@ case class TLBundleParameters(
   sizeBits:    Int)
 ~~~
 
-### Case variables:
+#### Case variables:
 
 + **addressBits** `Int` size of address.
 + **dataBits**    `Int` size of data.
@@ -253,13 +245,13 @@ case class TLBundleParameters(
 + **sinkBits**    `Int` size of sink ID?
 + **sizeBits**    `Int` size of size field.
 
-### Member variables and functions:
+#### Member variables and functions:
 
 + **addrLoBits** `Int` size of beat offset bits.
 + **union** `(x: TLBundleParameters) => TLBundleParameters`<br>
     Return a parameter object that fits both `this` and `x`.
 
-## object TLBundleParameters
+### object TLBundleParameters
 
 + **emptyBundleParams** `TLBundleParameters(1,8,1,1,1)` the default (empty) bundle parameter object.
 + **union** `(Seq[TLBundleParameters]) => TLBundleParameters`<br>
@@ -267,7 +259,7 @@ case class TLBundleParameters(
 + **apply** `(TLClientPortParameters, TLManagerPortParameters) => TLBundleParameters`<br>
     Generate a bundle parameter according to port parameters.
 
-## case class TLEdgeParameters
+### case class TLEdgeParameters
 *Parameters for a TileLink connection.*
 
 ~~~scala
@@ -276,18 +268,20 @@ case class TLEdgeParameters(
   manager: TLManagerPortParameters)
 ~~~
 
-### Case variables:
+#### Case variables:
 
 + **client** `TLClientPortParameters` client side parameters.
 + **manager** `TLManagerPortParameters` manager side parameters.
 
-### Member variables and functions:
+#### Member variables and functions:
 
 + **maxTransfer** `Int` the maximal transfer size in both client/manager sides.
 + **maxLgSize** `log2Ceil(maxTransfer)`
 + **bundle** `TLBundleParameters(client, manager)`
 
-## case class TLAsyncManagerPortParameters
+## Asynchronous TileLink
+
+### case class TLAsyncManagerPortParameters
 *Async TileLink (cross clock-domain) manager port parameters.*
 
 ~~~scala
@@ -295,14 +289,14 @@ case class TLAsyncManagerPortParameters(
     depth: Int, base: TLManagerPortParameters)
 ~~~
 
-## case class TLAsyncClientPortParameters
+### case class TLAsyncClientPortParameters
 *Async TileLink (cross clock-domain) client port parameters.*
 
 ~~~scala
 case class TLAsyncClientPortParameters(base: TLClientPortParameters)
 ~~~
 
-## case class TLAsyncBundleParameters
+### case class TLAsyncBundleParameters
 *Async TileLink (cross clock-domain) interface IO parameters.*
 
 ~~~scala
@@ -311,14 +305,14 @@ case class TLAsyncBundleParameters(depth: Int, base: TLBundleParameters)
 
 + **union** `(x: TLAsyncBundleParameters) => TLAsyncBundleParameters` get a parameter that fits both `this` and `x`.
 
-## object TLAsyncBundleParameters
+### object TLAsyncBundleParameters
 
 + **emptyBundleParams** `TLAsyncBundleParameters(1, TLBundleParameters.emptyBundleParams)`<br>
     The default (empty) bundle parameter object.
 + **union** `(Seq[TLAsyncBundleParameters]) => TLAsyncBundleParameters`<br>
     Get a parameter that fits all individual parameter objects.
 
-## case class TLAsyncEdgeParameters
+### case class TLAsyncEdgeParameters
 *Parameters for an asynchronous TileLink connection.*
 
 ~~~scala
@@ -328,16 +322,18 @@ case class TLAsyncEdgeParameters(
 
 + **bundle** `TLAsyncBundleParameters(manager.depth, TLBundleParameters(client.base, manager.base))`
 
-### Case variables:
+#### Case variables:
 
 + **client** `TLAsyncClientPortParameters` client side parameters.
 + **manager** `TLAsyncManagerPortParameters` manager side parameters.
 
-### Member variables and functions:
+#### Member variables and functions:
 
 + **bundle** `TLAsyncBundleParameters(client, manager)`
 
-## case class TLRationalManagerPortParameters
+## Rational TileLink
+
+### case class TLRationalManagerPortParameters
 *Rational TileLink (cross clock-domain) manager port parameters.*
 
 ~~~scala
@@ -352,14 +348,14 @@ case class TLRationalManagerPortParameters(
     + `FastToSlow` Register at the slow sink.
     + `SlowToFast` Register at the slow source.
 
-## case class TLRationalClientPortParameters
+### case class TLRationalClientPortParameters
 *Rational TileLink (cross clock-domain) client port parameters.*
 
 ~~~scala
 case class TLRationalClientPortParameters(base: TLClientPortParameters)
 ~~~
 
-## case class TLRationalEdgeParameters
+### case class TLRationalEdgeParameters
 *Parameters for a rational TileLink connection.*
 
 ~~~scala
@@ -369,7 +365,7 @@ case class TLRationalEdgeParameters(
 
 + **bundle** `TLBundleParameters(client.base, manager.base)`
 
-## object ManagerUnification
+### object ManagerUnification
 
 + **apply** `(Seq[TLManagerParameters]) => Seq[TLManagerParameters]`<br>
     Merge `TLManagerParameters` that have the same key (transaction types). Key is defined as
@@ -391,7 +387,7 @@ case class TLManagerKey(
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 19/07/2017<br>
+Last updated: 08/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

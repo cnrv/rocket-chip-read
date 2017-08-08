@@ -48,6 +48,22 @@ Also print out device tree in compilation stdout.
 *Base Coreplex class with no peripheral devices or ports added.*
 
 ### abstract class BaseCoreplex
+*Base coreplex.*
+
+~~~scala
+abstract class BaseCoreplex(implicit p: Parameters) extends BareCoreplex
+    with HasInterruptBus
+    with HasSystemBus
+    with HasPeripheryBus
+    with HasMemoryBus {
+  override val module: BaseCoreplexModule[BaseCoreplex]
+}
+~~~
+
++ **topManagers** `Option[Seq[TLManagerParameters]]` unified manager parameters.
+
+
+
 ### abstract class BaseCoreplexModule
 
 <br><br><br><p align="right">
