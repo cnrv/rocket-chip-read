@@ -41,7 +41,7 @@ of adapters and protocol converters.
 This utility package contains a framework for generateing synthesizeable hardware testers of individual modules.
 + **[util](util.md)**
 This utility package provides a variety of common Scala and Chisel constructs that are re-used across
-multiple other packages,
+multiple other packages.
 
 *******************
 
@@ -53,7 +53,7 @@ The document is partially based on commit \#[aff028f8](https://github.com/freech
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 07/08/2017<br>
+Last updated: 08/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

@@ -18,12 +18,10 @@ Class index
 #### BareCoreplex
 
 `BareCoreplex`       [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplex      )
-`BareCoreplexBundle` [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplexbundle)
 `BareCoreplexModule` [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplexmodule)
 
 `BaseCoreplex`       [abstract class](../coreplex/BaseCoreplex.md#abstract-class-basecoreplex)
-`BaseCoreplexBundle` [class         ](../coreplex/BaseCoreplex.md#class-basecoreplexbundle   )
-`BaseCoreplexModule` [class         ](../coreplex/BaseCoreplex.md#class-basecoreplexmodule   )
+`BaseCoreplexModule` [abstract class](../coreplex/BaseCoreplex.md#abstract-class-basecoreplexmodule   )
 
 #### Configs
 
@@ -364,6 +362,11 @@ Class index
 #### Crossing
 `Crossing`         [abstract class](../util/Crossing.md#abstract-class-crossing)
 `CrossingIO`       [class         ](../util/Crossing.md#class-crossingio       )
+
+#### GeneratorUtils
+`ElaborationArtefacts` [object    ](../util/GeneratorUtils.md#object-elaborationartefacts)
+`GeneratorApp`         [trait     ](../util/GeneratorUtils.md#trait-generatorapp         )
+`ParsedInputNames`     [case class](../util/GeneratorUtils.md#case-class-parsedinputnames)
 
 
 <br><br><br><p align="right">
