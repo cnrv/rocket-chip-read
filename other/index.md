@@ -217,10 +217,14 @@ Class index
 
 #### RocketTile
 
-`RocketTileParams` [case class](../tile/RocketTile.md#case-class-rockettileparams)
-`RocketTile`       [class     ](../tile/RocketTile.md#class-rockettile           )
-`RocketTileBundle` [class     ](../tile/RocketTile.md#class-rockettilebundle     )
+`RocketTileParams`  [case class    ](../tile/RocketTile.md#case-class-rockettileparams     )
+`RocketTile`        [class         ](../tile/RocketTile.md#class-rockettile                )
+`RocketTileBundle`  [class         ](../tile/RocketTile.md#class-rockettilebundle          )
+`RocketTileWrapper` [abstract class](../tile/RocketTile.md#abstract-class-rockettilewrapper)
 
+`SyncRocketTile`     [class](../tile/RocketTile.md#class-syncrockettile    )
+`AsyncRocketTile`    [class](../tile/RocketTile.md#class-asyncrockettile   )
+`RationalRocketTile` [class](../tile/RocketTile.md#class-rationalrockettile)
 
 # Tilelink
 ***************************
@@ -364,7 +368,7 @@ Class index
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 07/08/2017<br>
+Last updated: 08/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

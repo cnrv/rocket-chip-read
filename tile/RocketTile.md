@@ -1,10 +1,17 @@
 [Rocket](../Readme.md)/[tile](../tile.md)/[RocketTile](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/tile/RocketTile.scala)
 ========================
-
+*Definitions for Rocket tiles.*
 
 **********************
 
-## case class RocketTileParams
+* [The Rocket tile kernel](#the-rocket-tile-kernel)
+* [Wrapped Rocket tiles](#wrapped-rocket-tiles)
+
+**********************
+
+## The Rocket tile kernel
+
+### case class RocketTileParams
 
 ~~~scala
 case class RocketTileParams(
@@ -24,7 +31,7 @@ case class RocketTileParams(
 + **btb** `Option[BTBParams]` (param) branch target buffer parameter (optional).
 + **dataScratchpadBytes** `Int` (param) size of the scratch pad (conflict with D$).
 
-## class RocketTile
+### class RocketTile
 *The Rocket tile generator (LazyModule).*
 
 ~~~scala
@@ -71,14 +78,14 @@ class RocketTile(val rocketParams: RocketTileParams, val hartid: Int)(implicit p
   It also bind the interrupt controllers in tiles to the global PLIC according the interrupt interconnects.
   These bindings are later used in the device `describe()` functions.
 
-## class RocketTileBundle
+### class RocketTileBundle
 ~~~scala
 class RocketTileBundle(outer: RocketTile) extends BaseTileBundle(outer)
     with HasExternalInterruptsBundle
     with CanHaveScratchpadBundle
 ~~~
 
-## class RocketTileModule
+### class RocketTileModule
 *The Rocket tile top connections.*
 
 ~~~scala
@@ -97,7 +104,7 @@ class RocketTileModule(outer: RocketTile) extends BaseTileModule(outer, () => ne
   - **roccCore** ROCC.
   - **ptw** page table walker.
 
-## RocketTileWrapper
+### RocketTileWrapper
 *A base wrapper to wrap a Rocket tile into a diplomacy node.*
 **_Here the master/slave nodes are defined virtual to support sync/async/rational clock domains._**
 
@@ -121,9 +128,67 @@ class RocketTileModule(outer: RocketTile) extends BaseTileModule(outer, () => ne
     - **periphInterrupts** `Vec[Bool]` interrupt inputs.
     - **coreInterrupts** `Vec[Bool]` interrupt inputs.
 
+## Wrapped Rocket tiles
+
+### SyncRocketTile
+*A synchronous Rocket tile (no clock crossing needed).*
+
+~~~scala
+class SyncRocketTile(rtp: RocketTileParams, hartid: Int)(implicit p: Parameters) extends RocketTileWrapper(rtp, hartid)
+~~~
+
++ **rtp** `RocketTileParams` (param) Parameter for Rocket core.
++ **hartid** `Int` (param) hart id.
++ **masterNode** `TLOutputNode` bus master (client) port.
++ **slaveNode** `TLInputNode` bus slave (manager) port (for sratchpads).
++ **xing** `IntXing` interrupt synchronizer for asynchornous interrupts.
+
+Both core and peripheral interrupts are synchronous with the core clock.
+The asynchronous interrupts are synchronized.
+
+### AsyncRocketTile
+*An asynchronous Rocket tile (asynchronous clock domain crossing).*
+
+~~~scala
+class AsyncRocketTile(rtp: RocketTileParams, hartid: Int)(implicit p: Parameters) extends RocketTileWrapper(rtp, hartid)
+~~~
+
++ **rtp** `RocketTileParams` (param) Parameter for Rocket core.
++ **hartid** `Int` (param) hart id.
++ **masterNode** `TLAsyncOutputNode` bus master (client) port.
++ **source** `TLAsyncCrossingSource` the source side of the asynchronous clock domain crossing for the master port.
++ **slaveNode** `TLAsyncInputNode` bus slave (manager) port (for scratchpads).
++ **sink** `TLAsyncCrossingSink` the sink side of the asynchonous clock domain crossing for the slave port.
++ **asyncXing** `IntXing` interrupt synchronizer for asynchronous interrupts.
++ **periphXing** `IntXing` interrupt synchronizer for peripheral interrupts.
+
+The core interrupts are synchronous with the core clock.
+The peripheral and asycnhornous interrupts are synchronized.
+
+### RationalRocketTile
+*An asynchronous Rocket tile (asynchronous clock domain crossing).*
+
+~~~scala
+class RationalRocketTile(rtp: RocketTileParams, hartid: Int)(implicit p: Parameters) extends RocketTileWrapper(rtp, hartid)
+~~~
+
++ **rtp** `RocketTileParams` (param) Parameter for Rocket core.
++ **hartid** `Int` (param) hart id.
++ **masterNode** `TLRationalOutputNode` bus master (client) port.
++ **source** `TLRationalCrossingSource` the source side of the rational clock domain crossing for the master port.
++ **slaveNode** `TLRationalInputNode` bus slave (manager) port (for scratchpads).
++ **sink** `TLRationalCrossingSink` the sink side of the rational clock domain crossing for the slave port.
++ **asyncXing** `IntXing` interrupt synchronizer for asynchronous interrupts.
++ **periphXing** `IntXing` interrupt synchronizer for peripheral interrupts.
+
+The core interrupts are synchronous with the core clock.
+The peripheral and asycnhornous interrupts are synchronized.
+**_Although the peripheral interrupts need only rational synchronizers._**
+
+
 <br><br><br><p align="right">
 <sub>
-Last updated: 07/08/2017<br>
+Last updated: 08/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

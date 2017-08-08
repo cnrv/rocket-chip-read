@@ -7,7 +7,7 @@ This RTL package contains components that can be combined with cores to construc
 + **[BaseTile](tile/BaseTile.md)** the set of base classes for tiles.
 + **[Core](tile/Core.md)** base class for a generic core.
 + **[Interrupts](tile/Interrupts.md)** interrupt ports for a Rocket tile.
-+ **[RocketTile](tile/RocketTile.md)** Rocket tile.
++ **[RocketTile](tile/RocketTile.md)** definitions for Rocket tiles.
 
 <br><br><br><p align="right">
 <sub>
