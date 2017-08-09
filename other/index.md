@@ -15,7 +15,7 @@ Class index
 `BankedL2CoherenceManagersBundle` [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle)
 `BankedL2CoherenceManagersModule` [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersmodule)
 
-#### BareCoreplex
+#### BaseCoreplex
 
 `BareCoreplex`       [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplex      )
 `BareCoreplexModule` [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplexmodule)
@@ -27,13 +27,23 @@ Class index
 
 `BaseCoreplexConfig` [class](../coreplex/Configs.md#class-basecoreplexconfig)
 
+#### InterruptBus
+
+`InterruptBusWrapper`       [class         ](../coreplex/InterruptBus.md#class-interruptbuswrapper      )
+`HasInterruptBus`           [trait         ](../coreplex/InterruptBus.md#trait-hasinterruptbus          )
+`HasExtInterrupts`          [abstract trait](../coreplex/InterruptBus.md#abstract-trait-hasextinterrupts)
+`HasAsyncExtInterrupts`     [trait         ](../coreplex/InterruptBus.md#trait-hasasyncextinterrupts    )
+`HasSyncExtInterrupts`      [trait         ](../coreplex/InterruptBus.md#trait-hassyncextinterrupts     )
+`HasExtInterruptsBundle`    [trait         ](../coreplex/InterruptBus.md#trait-hasextinterruptsbundle   )
+`HasExtInterruptsModuleImp` [trait         ](../coreplex/InterruptBus.md#trait-hasextinterruptsmoduleimp)
+
 #### RISCVPlatform
 
 `CoreplexRISCVPlatform`       [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatform      )
 `CoreplexRISCVPlatformBundle` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformbundle)
 `CoreplexRISCVPlatformModule` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformmodule)
 
-#### RocketTilesplex
+#### RocketCoreplex
 
 `HasRocketTiles`       [trait](../coreplex/RocketCoreplex.md#trait-hasrockettiles      )
 `HasRocketTilesBundle` [trait](../coreplex/RocketCoreplex.md#trait-hasrockettilesbundle)
@@ -371,7 +381,7 @@ Class index
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/08/2017<br>
+Last updated: 09/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

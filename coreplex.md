@@ -12,6 +12,8 @@ clock-crossers and converters from TileLink to external bus protocols (e.g. AXI 
   configure the parameters of a core complex.
 + **[CoreplexNetwork](coreplex/CoreplexNetwork.md)**
   on-chip interconnect of a Rocket-chip.
++ **[InterruptBus](coreplex/InterruptBus.md)**
+  the coreplex interrupt bus.
 + **[RISCVPlatform](coreplex/RISCVPlatform.md)**
   RISCV SoC Platform.
 + **[RocketCoreplex](coreplex/RocketCoreplex.md)**
@@ -20,7 +22,7 @@ clock-crossers and converters from TileLink to external bus protocols (e.g. AXI 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/08/2017<br>
+Last updated: 09/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

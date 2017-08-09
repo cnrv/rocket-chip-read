@@ -74,5 +74,3 @@ Last updated: 08/08/2017<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
 </sub>
 </p>
-
-
