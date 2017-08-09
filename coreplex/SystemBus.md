@@ -16,10 +16,10 @@ case class SystemBusParams(
 ) extends TLBusParams
 ~~~
 
-**beatBytes** `Int` number of bytes per beat.
-**blockBytes** `Int` number of bytes per burst.
-**masterBuffering** `BufferParams.default` buffer depth on the master (inner) side.
-**slaveBuffering** `BufferParams.flow` buffer depth on the slave (outer) side.
++ **beatBytes** `Int` number of bytes per beat.
++ **blockBytes** `Int` number of bytes per burst.
++ **masterBuffering** `BufferParams.default` buffer depth on the master (inner) side.
++ **slaveBuffering** `BufferParams.flow` buffer depth on the slave (outer) side.
 
 ## class SystemBus
 

@@ -213,6 +213,11 @@ Class index
 `HasTileLinkMasterPortBundle`      [trait](../tile/BaseTile.md#trait-hastilelinkmasterportbundle     )
 `HasTileLinkMasterPortModule`      [trait](../tile/BaseTile.md#trait-hastilelinkmasterportmodule     )
 
+#### Bus
+
+`TLBusParams`  [trait         ](../tilelink/Bus.md#trait-tlbusparams          )
+`TLBusWrapper` [abstract class](../tilelink/Bus.md#abstract-class-tlbuswrapper)
+
 #### Core
 
 `CoreParams`        [trait](../tile/Core.md#trait-coreparams       )
