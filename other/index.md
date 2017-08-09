@@ -49,6 +49,11 @@ Class index
 `HasRocketTilesBundle` [trait](../coreplex/RocketCoreplex.md#trait-hasrockettilesbundle)
 `HasRocketTilesModule` [trait](../coreplex/RocketCoreplex.md#trait-hasrockettilesmodule)
 
+#### SystemBus
+`SystemBusParams` [case class](../coreplex/SystemBus.md#case-class-systembusparams)
+`SystemBus`       [class     ](../coreplex/SystemBus.md#class-systembus           )
+`HasSystemBus`    [trait     ](../coreplex/SystemBus.md#trait-hassystembus        )
+
 # chip
 ***************************
 
