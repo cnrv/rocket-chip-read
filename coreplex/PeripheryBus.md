@@ -19,12 +19,12 @@ case class PeripheryBusParams(
 }
 ~~~
 
-+ **beatBytes** `Int` number of bytes per beat.
-+ **blockBytes** `Int` number of bytes per burst.
-+ **masterBuffering** `BufferParams.default` buffer depth on the master (inner) side.
-+ **slaveBuffering** `BufferParams.flow` buffer depth on the slave (outer) side.
-+ **arithmetic** `true` support arithmetic atomic operations.
-+ **frequency** `BigInt(100000000)` 100MHz as default bus frequency.
++ **beatBytes** `Int` (param) number of bytes per beat.
++ **blockBytes** `Int` (param) number of bytes per burst.
++ **masterBuffering** `BufferParams.default` (param) buffer depth on the master (inner) side.
++ **slaveBuffering** `BufferParams.none` (param) buffer depth on the slave (outer) side.
++ **arithmetic** `true` (param) support arithmetic atomic operations.
++ **frequency** `BigInt(100000000)` (param) 100MHz as default bus frequency.
 
 ## class PeripheryBus
 

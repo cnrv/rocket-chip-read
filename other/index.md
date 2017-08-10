@@ -37,6 +37,17 @@ Class index
 `HasExtInterruptsBundle`    [trait         ](../coreplex/InterruptBus.md#trait-hasextinterruptsbundle   )
 `HasExtInterruptsModuleImp` [trait         ](../coreplex/InterruptBus.md#trait-hasextinterruptsmoduleimp)
 
+#### MemoryBus
+
+`BroadcastParams` [case class](../coreplex/MemoryBus.md#case-class-broadcastparams)
+`BankedL2Params`  [case class](../coreplex/MemoryBus.md#case-class-bankedl2params )
+
+`MemoryBusParams` [case class](../coreplex/MemoryBus.md#case-class-memorybusparams)
+`MemoryBus`       [class     ](../coreplex/MemoryBus.md#class-memorybus           )
+`HasMemoryBus`    [trait     ](../coreplex/MemoryBus.md#trait-hasmemorybus        )
+
+
+
 #### PeripheryBus
 
 `PeripheryBusParams` [case class](../coreplex/PeripheryBus.md#case-class-peripherybusparams)

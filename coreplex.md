@@ -14,6 +14,8 @@ clock-crossers and converters from TileLink to external bus protocols (e.g. AXI 
   on-chip interconnect of a Rocket-chip.
 + **[InterruptBus](coreplex/InterruptBus.md)**
   the coreplex interrupt bus.
++ **[MemoryBus](coreplex/MemoryBus.md)**
+  the memory bus after LLC.
 + **[PeripheryBus](coreplex/PeripheryBus.md)**
   the periphery bus.
 + **[RISCVPlatform](coreplex/RISCVPlatform.md)**
