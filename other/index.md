@@ -37,6 +37,12 @@ Class index
 `HasExtInterruptsBundle`    [trait         ](../coreplex/InterruptBus.md#trait-hasextinterruptsbundle   )
 `HasExtInterruptsModuleImp` [trait         ](../coreplex/InterruptBus.md#trait-hasextinterruptsmoduleimp)
 
+#### PeripheryBus
+
+`PeripheryBusParams` [case class](../coreplex/PeripheryBus.md#case-class-peripherybusparams)
+`PeripheryBus`       [class     ](../coreplex/PeripheryBus.md#class-peripherybus           )
+`HasPeripheryBus`    [trait     ](../coreplex/PeripheryBus.md#trait-hasperipherybus        )
+
 #### RISCVPlatform
 
 `CoreplexRISCVPlatform`       [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatform      )
@@ -391,7 +397,7 @@ Class index
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 09/08/2017<br>
+Last updated: 10/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
