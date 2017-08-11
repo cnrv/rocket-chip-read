@@ -67,7 +67,8 @@ master ------------------ *==> ------------ *==>
 *Provides buses that serve as attachment points, for use in traits that connect individual devices or external ports.*
 
 + **sbus** `SystemBus` the system bus.
-+ **sharedMemoryTLEdge** `() => TLEdgeIn` get the inward Edge parameter.
++ **sharedMemoryTLEdge** `() => TLEdgeIn` get the inward Edge parameter at the inward port of `master_splitter`.
+  This parameter is used significantly in BaseCoreplex. Not yet sure why.
 
 
 <br><br><br><p align="right">
