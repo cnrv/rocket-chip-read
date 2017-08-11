@@ -38,22 +38,14 @@ class SystemBus(params: SystemBusParams)(implicit p: Parameters) extends TLBusWr
 + **toPeripheryBus** `() => TLOutwardNode` get the outward port of `slave_ww` as attachment point for peripheral bus.
 + **toMemoryBus** `() => TLOutwardNode` get the outward port of `xbar` as attachment point for memory bus.
 + **toSlave** `() => TLOutwardNode` get the outward port of `slave_buffer` as attachment point for slaves.
-+ **fromAsyncMasters** `(depth:Int, sync:Int) => TLAsyncInwardNode`<br>
-  Get an asynchornous master inward port attach point towards the `master_fixer`.
-+ **fromSyncMasters** `(params: BufferParams) => TLSyncInwardNode`<br>
-  Get a synchornous master inward port attach point towards the `master_fixer`.
-+ **fromAsyncTiles** `(depth:Int, sync:Int) => TLAsyncInwardNode`<br>
-  Get an asynchornous tile inward port attach point towards the `tile_fixer`.
-+ **fromSyncTiles** `(params: BufferParams) => TLSyncInwardNode`<br>
-  Get a synchornous tile inward port attach point towards the `tile_fixer`.
-+ **fromRationalTiles** `(dir: RationalDirection) => TLRationalInwardNode`<br>
-  Get a rational tile inward port attach point towards the `tile_fixer`.
-+ **fromAsyncPorts** `(depth:Int, sync:Int) => TLAsyncInwardNode`<br>
-  Get an asynchornous port inward port attach point towards the `port_fixer`.
-+ **fromSyncPorts** `(params: BufferParams) => TLSyncInwardNode`<br>
-  Get a synchornous port inward port attach point towards the `port_fixer`.
-+ **fromRationalPorts** `(dir: RationalDirection) => TLRationalInwardNode`<br>
-  Get a rational port inward port attach point towards the `port_fixer`.
++ **fromAsyncMasters** `(depth:Int, sync:Int) => TLAsyncInwardNode`get an asynchornous master inward port attach point towards the `master_fixer`.
++ **fromSyncMasters** `(params: BufferParams) => TLSyncInwardNode` get a synchornous master inward port attach point towards the `master_fixer`.
++ **fromAsyncTiles** `(depth:Int, sync:Int) => TLAsyncInwardNode` get an asynchornous tile inward port attach point towards the `tile_fixer`.
++ **fromSyncTiles** `(params: BufferParams) => TLSyncInwardNode` get a synchornous tile inward port attach point towards the `tile_fixer`.
++ **fromRationalTiles** `(dir: RationalDirection) => TLRationalInwardNode` get a rational tile inward port attach point towards the `tile_fixer`.
++ **fromAsyncPorts** `(depth:Int, sync:Int) => TLAsyncInwardNode` get an asynchornous port inward port attach point towards the `port_fixer`.
++ **fromSyncPorts** `(params: BufferParams) => TLSyncInwardNode` get a synchornous port inward port attach point towards the `port_fixer`.
++ **fromRationalPorts** `(dir: RationalDirection) => TLRationalInwardNode` get a rational port inward port attach point towards the `port_fixer`.
 
 The internal connections:
 ~~~
@@ -80,7 +72,7 @@ master ------------------ *==> ------------ *==>
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 10/08/2017<br>
+Last updated: 11/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)

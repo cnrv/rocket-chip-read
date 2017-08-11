@@ -36,8 +36,7 @@ case class BankedL2Params(
 
 + **nMemoryChannels** `Int` (param) number of parallel memory channels (parameter from the memory controller).
 + **nBanksPerChannel** `Int` (param) number of banks per memory cahnnel.
-+ **coherenceManager** `(Parameters, HasMemoryBus) => (TLInwardNode, TLOutwardNode)`<br>
-  (param) a coherence hub generation function, return the inwards and outwards ports of the hub.
++ **coherenceManager** `(Parameters, HasMemoryBus) => (TLInwardNode, TLOutwardNode)` (param) a coherence hub generation function, return the inwards and outwards ports of the hub.
 + **nBanks** `Int` (param) the total number of banks.
 
 ## case class MemoryBusParams
@@ -64,17 +63,35 @@ case class MemoryBusParams(
 class MemoryBus(params: MemoryBusParams)(implicit p: Parameters) extends TLBusWrapper(params)(p)
 ~~~
 
++ **fromCoherenceManager** `TLInwardNode` get the coherent manager attachment point at the inward port of `master_buffer`.
++ **toDRAMController** `TLOutwardNode` get the attachment point for memory controllers at the outward port of `slave_buffer`.
++ **toVariableWidthSlave** `TLOutwardNode` get the attachment point for variable width slaves at the outward port of `slave_frage`.
+
+The internal connections:
+~~~
+                     master_buffer      xbar      slave_buffer       slave_ww
+coherent_manager ==> ------------- *==> ---- ==>* ------------ ==>* -----------
+                          Buffer        Xbar         Buffer   |     WidthWidget
+                                                              |
+                                                              |      slave_frage
+                                                              \===>* ----------- ==> variable width slave
+                                                              |      Fragmenter
+                                                              \----------------- ==> DRAM controller
+~~~
+
+
 ## trait HasMemoryBus
 
 ~~~scala
 trait HasMemoryBus extends HasSystemBus with HasPeripheryBus with HasInterruptBus
 ~~~
 
++ **memBuses** `Seq[MemoryBus]` the memory buses, one per memory channel.
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 10/08/2017<br>
+Last updated: 11/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
