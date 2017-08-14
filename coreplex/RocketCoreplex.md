@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[coreplex](../coreplex.md)/[RocketTiles](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/coreplex/RocketTiles.scala)
 ========================
-
+*Extending coreplex with Rocket tiles.*
 
 **********************
 
@@ -31,46 +31,74 @@ trait HasRocketTiles extends HasSystemBus
 }
 ~~~
 
-+ **module** `HasRocketTilesModule` pointer to the generated module.
-+ **tileParams** `Seq[RocketTileParams] = p(RocketCrossing)` parameters of individual tiles.
++ **module** `HasRocketTilesModule` (virtual) pointer to the generated module.
++ **crossing** `CoreplexClockCrossing` (private) define the clock domain crossing.
++ **tileParams** `Seq[RocketTileParams]` (private) parameters of individual tiles.
++ **localIntCounts** `Seq[Int]` number of interrupt sources of each tile.
 + **localIntNodes** `Seq[Option[IntInputNode]` interrupt port for local interrupt sources.
 + **wiringTuple** `Seq[(Option[IntInputNode], RocketTileParams, Int)]` tuple of (intrrupt, tile, index).
-+ **rocketWires** `Seq[HasRocketTilesBundle => Unit]` initialize Rocket tiles and produce connection callback functions.
++ **rocket_tiles** `Seq[RocketTileWrapper]` initialize Rocket tiles and produce connection callback functions.
+  - **asyncIntXbar** `IntXbar` a per tile crossbar for asycnhronous interrupts, including debug.
+  - **periphIntXbar** `IntXbar` a per tile crossbar for peripheral interrupts, including clint (msip+mtip), plic (meip+seip).
+  - **coreIntXbar** `IntXbar` a per tile crossbar for local interrupts.
 
-<img src="../figure/coreplex/rocket_tile.png" width="650">
+### class ClockedRocketTileInputs
+*Base IO bundle for Rocket tiles, which has only the external interrupt lines and constants.*
+
+~~~scala
+class ClockedRocketTileInputs(implicit val p: Parameters) extends ParameterizedBundle
+    with HasExternallyDrivenTileConstants
+    with Clocked
+~~~
 
 ### trait HasRocketTilesBundle
 *Bundle trait of Rocket Tiles.*
 
 ~~~scala
-trait HasRocketTilesBundle extends CoreplexRISCVPlatformBundle {
-  val outer: HasRocketTiles
+trait HasRocketTilesBundle{
+  val rocket_tile_inputs: Vec[ClockedRocketTileInputs]
 }
 ~~~
 
-+ **outer** `HasRocketTiles` pointer to the LazyModule.
-+ **local\_interrupts** `HeterogeneousBag(outer.localIntNodes.flatten.map(_.bundleIn))` Declare the interrupt lines.
-+ **tcrs** `Vec[Bundle{Clock(INPUT), Bool(INPUT)}]` clock and reset ports.
++ **rocket_tile_inputs** `Vec[ClockedRocketTileInputs]` generic IO bundles for tiles, allowing for specialization.
 
-### trait HasRocketTilesModule
-*Module trait of Rocket Tiles.*
+### trait HasRocketTilesModuleImp
+*Module implementation trait of Rocket Tiles.*
 
 ~~~scala
-trait HasRocketTilesModule extends CoreplexRISCVPlatformModule {
+trait HasRocketTilesModuleImp extends LazyMultiIOModuleImp
+    with HasRocketTilesBundle
+    with HasResetVectorWire
+    with HasPeripheryDebugModuleImp {
   val outer: HasRocketTiles
-  val io: HasRocketTilesBundle
+  val rocket_tile_inputs = Wire(Vec(outer.nRocketTiles, new ClockedRocketTileInputs))
 }
 ~~~
 
-+ **outer** `HasRocketTiles` pointer to the LazyModule.
-+ **io** `HasRocketTilesBundle` pointer to the I/O bundle.
+Provide a base trait for all Rocket tile implementations.
+Connect the clock, the reset and the constants IO connections.
 
-Call the connection callback functions defined by `outer.rocketWires`.
+### class RocketCoreplex
+*A Rocket coreplex with Rocket tiles.*
+
+~~~scala
+class RocketCoreplex(implicit p: Parameters) extends BaseCoreplex
+    with HasRocketTiles {
+  override lazy val module = new RocketCoreplexModule(this)
+}
+~~~
+
+### class RocketCoreplexModule
+
+~~~scala
+class RocketCoreplexModule[+L <: RocketCoreplex](_outer: L) extends BaseCoreplexModule(_outer)
+    with HasRocketTilesModuleImp
+~~~
 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 08/07/2017<br>
+Last updated: 14/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
