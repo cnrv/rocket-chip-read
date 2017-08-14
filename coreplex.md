@@ -10,16 +10,14 @@ clock-crossers and converters from TileLink to external bus protocols (e.g. AXI 
   the base class of a Rocket-chip.
 + **[Configs](coreplex/Configs.md)**
   configure the parameters of a core complex.
-+ **[CoreplexNetwork](coreplex/CoreplexNetwork.md)**
-  on-chip interconnect of a Rocket-chip.
 + **[InterruptBus](coreplex/InterruptBus.md)**
   the coreplex interrupt bus.
 + **[MemoryBus](coreplex/MemoryBus.md)**
   the memory bus after LLC.
 + **[PeripheryBus](coreplex/PeripheryBus.md)**
   the periphery bus.
-+ **[RISCVPlatform](coreplex/RISCVPlatform.md)**
-  RISCV SoC Platform.
++ **[Ports](coreplex/Ports.md)**
+  provide various traits to add ports to the system, in some cases converting to different interconnect standards.
 + **[RocketCoreplex](coreplex/RocketCoreplex.md)**
   extending Rocket coreplex with Rocket Tiles.
 + **[SystemBus](coreplex/SystemBus.md)**

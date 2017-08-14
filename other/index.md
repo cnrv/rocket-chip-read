@@ -5,16 +5,6 @@ Class index
 # Coreplex
 ***************************
 
-#### CoreplexNetwork
-
-`CoreplexNetwork`       [trait](../coreplex/CoreplexNetwork.md#coreplexnetwork      )
-`CoreplexNetworkBundle` [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkbundle)
-`CoreplexNetworkModule` [trait](../coreplex/CoreplexNetwork.md#coreplexnetworkmodule)
-
-`BankedL2CoherenceManagers`       [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagers      )
-`BankedL2CoherenceManagersBundle` [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersbundle)
-`BankedL2CoherenceManagersModule` [trait](../coreplex/CoreplexNetwork.md#bankedl2coherencemanagersmodule)
-
 #### BaseCoreplex
 
 `BareCoreplex`       [abstract class](../coreplex/BaseCoreplex.md#abstract-class-barecoreplex      )
@@ -52,11 +42,13 @@ Class index
 `PeripheryBus`       [class     ](../coreplex/PeripheryBus.md#class-peripherybus           )
 `HasPeripheryBus`    [trait     ](../coreplex/PeripheryBus.md#trait-hasperipherybus        )
 
-#### RISCVPlatform
+#### Ports
 
-`CoreplexRISCVPlatform`       [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatform      )
-`CoreplexRISCVPlatformBundle` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformbundle)
-`CoreplexRISCVPlatformModule` [trait](../coreplex/RISCVPlatform.md#trait-coreplexriscvplatformmodule)
+`MasterPortParams` [case class](../coreplex/Ports.md#case-class-masterportparams)
+
+`HasMasterAXI4MemPort`          [trait](../coreplex/Ports.md#trait-hasmasteraxi4memport         )
+`HasMasterAXI4MemPortBundle`    [trait](../coreplex/Ports.md#trait-hasmasteraxi4memportbundle   )
+`HasMasterAXI4MemPortModuleImp` [trait](../coreplex/Ports.md#trait-hasmasteraxi4memportmoduleimp)
 
 #### RocketCoreplex
 
