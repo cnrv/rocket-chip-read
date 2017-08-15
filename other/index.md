@@ -50,6 +50,24 @@ Class index
 `HasMasterAXI4MemPortBundle`    [trait](../coreplex/Ports.md#trait-hasmasteraxi4memportbundle   )
 `HasMasterAXI4MemPortModuleImp` [trait](../coreplex/Ports.md#trait-hasmasteraxi4memportmoduleimp)
 
+`HasMasterAXI4MMIOPort`          [trait](../coreplex/Ports.md#trait-hasmasteraxi4mmioport         )
+`HasMasterAXI4MMIOPortBundle`    [trait](../coreplex/Ports.md#trait-hasmasteraxi4mmioportbundle   )
+`HasMasterAXI4MMIOPortModuleImp` [trait](../coreplex/Ports.md#trait-hasmasteraxi4mmioportmoduleimp)
+
+`HasSlaveAXI4Port`          [trait](../coreplex/Ports.md#trait-hasslaveaxi4port         )
+`HasSlaveAXI4PortBundle`    [trait](../coreplex/Ports.md#trait-hasslaveaxi4portbundle   )
+`HasSlaveAXI4PortModuleImp` [trait](../coreplex/Ports.md#trait-hasslaveaxi4portmoduleimp)
+
+`HasMasterTLMMIOPort`          [trait](../coreplex/Ports.md#trait-hasmastertlmmioport         )
+`HasMasterTLMMIOPortBundle`    [trait](../coreplex/Ports.md#trait-hasmastertlmmioportbundle   )
+`HasMasterTLMMIOPortModuleImp` [trait](../coreplex/Ports.md#trait-hasmastertlmmioportmoduleimp)
+
+`HasSlaveTLPort`          [trait](../coreplex/Ports.md#trait-hasslavetlport         )
+`HasSlaveTLPortBundle`    [trait](../coreplex/Ports.md#trait-hasslavetlportbundle   )
+`HasSlaveTLPortModuleImp` [trait](../coreplex/Ports.md#trait-hasslavetlportmoduleimp)
+
+`SimAXIMem` [class](../coreplex/Ports.md#class-simaximem)
+
 #### RocketCoreplex
 
 `HasRocketTiles`          [trait](../coreplex/RocketCoreplex.md#trait-hasrockettiles         )
@@ -403,7 +421,7 @@ Class index
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 14/08/2017<br>
+Last updated: 15/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
