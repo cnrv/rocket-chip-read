@@ -18,6 +18,8 @@ clock-crossers and converters from TileLink to external bus protocols (e.g. AXI 
   the periphery bus.
 + **[Ports](coreplex/Ports.md)**
   provide various traits to add ports to the system, in some cases converting to different interconnect standards.
++ **[ResetVector](coreplex/ResetVector.md)**
+  constants to define the reset addresses.
 + **[RocketCoreplex](coreplex/RocketCoreplex.md)**
   extending Rocket coreplex with Rocket Tiles.
 + **[SystemBus](coreplex/SystemBus.md)**
@@ -26,7 +28,7 @@ clock-crossers and converters from TileLink to external bus protocols (e.g. AXI 
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 14/08/2017<br>
+Last updated: 16/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
