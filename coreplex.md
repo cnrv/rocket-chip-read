@@ -22,6 +22,8 @@ clock-crossers and converters from TileLink to external bus protocols (e.g. AXI 
   constants to define the reset addresses.
 + **[RocketCoreplex](coreplex/RocketCoreplex.md)**
   extending Rocket coreplex with Rocket Tiles.
++ **[RTC](coreplex/RTC.md)**
+  real-time counter.
 + **[SystemBus](coreplex/SystemBus.md)**
   the coherent bus between tiles and coherent hubs (also split memory and I/O spaces).
 

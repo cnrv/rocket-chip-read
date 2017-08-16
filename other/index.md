@@ -82,6 +82,9 @@ Class index
 `RocketCoreplex`       [class](../coreplex/RocketCoreplex.md#class-rocketcoreplex      )
 `RocketCoreplexModule` [class](../coreplex/RocketCoreplex.md#class-rocketcoreplexmodule)
 
+#### RTC
+
+`HasRTCModuleImp` [trait](../coreplex/RTC.md#trait-hasrtcmoduleimp)
 
 #### SystemBus
 `SystemBusParams` [case class](../coreplex/SystemBus.md#case-class-systembusparams)
