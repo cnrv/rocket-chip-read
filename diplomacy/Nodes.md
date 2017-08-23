@@ -199,19 +199,19 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **numPO** `Range.Inclusive` (param) output range.
 + **numPI** `Range.Inclusive` (param) input range.
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
-  (virtual) A function to resolve star type bindings.
+  (protected, virtual) A function to resolve star type bindings.
 + **mapParamsD** `(Int, Seq[DI]) => Seq[DO]`<br>
-  (virtual) A function to propagate parameters from clients to managers.
+  (protected, virtual) A function to propagate parameters from clients to managers.
 + **mapParamsU** `(Int, Seq[UO]) => Seq[UI]`<br>
-  (virtual) A function to propagate parameters from managers to clients.
-+ **oPortMapping** `Seq[(Int, Int)]` (lazy) ranges of ports connected to managers.
-+ **iPortMapping** `Seq[(Int, Int)]` (lazy) ranges of ports connected clients.
-+ **oStar** `Int` (lazy) number of managers binded with star type connections.
-+ **iStar** `Int` (lazy) number of clients binded with star type connections.
+  (protected, virtual) A function to propagate parameters from managers to clients.
++ **oPortMapping** `Seq[(Int, Int)]` (protected, lazy) ranges of ports connected to managers.
++ **iPortMapping** `Seq[(Int, Int)]` (protected, lazy) ranges of ports connected clients.
++ **oStar** `Int` (protected, lazy) number of managers binded with star type connections.
++ **iStar** `Int` (protected, lazy) number of clients binded with star type connections.
 + **oPorts** `Seq[(Int, InwardNode [DI, UI, BI])]` (lazy) a list of (index, port) binded by all its manager side ports.
 + **iPorts** `Seq[(Int, OutwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by all its client side ports.
-+ **oParams** `Seq[DO]` (lazy) output port node parameters.
-+ **iParams** `Seq[DI]` (lazy) input port node parameters.
++ **oParams** `Seq[DO]` (protected, lazy) output port node parameters.
++ **iParams** `Seq[DI]` (protected, lazy) input port node parameters.
 + **edgesOut** `Seq[EO]` (lazy) output port edge parameters.
 + **edgesIn** `Seq[EI]` (lazy) input port edge parameters.
 + **externalEdgesOut** `Seq[EO]` (lazy) output edge parameter for external port connection.
@@ -288,10 +288,9 @@ class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **dFn** `(DI) => DO` (param) downwards parameter resolvation funciton.
 + **uFn** `(DO) => DI` (param) upwards parameter resolvation function.
 + **num** `Range.Inclusive = 1 to 999` (param) the maximal number of connections for either clients or managers.
-+ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
-  Resolve the `iStar` and `oStar` numbers. Onle one side can have a star!
-+ **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn(), resolve port individually.
-+ **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` resolve iParams using uFn(), resolve port individually.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)` (protected) resolve the `iStar` and `oStar` numbers. Onle one side can have a star!
++ **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` (protected) resolve oParams using dFn(), resolve port individually.
++ **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` (protected) resolve iParams using uFn(), resolve port individually.
 
 
 ### class MixedNexusNode
@@ -317,12 +316,11 @@ class MixedNexusNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **numPI** `Range.Inclusive = 1 to 999` (param) input range.
 + **externalIn** `Boolean = true` generate external input port bundles.
 + **externalOut** `Boolean = true` generate external output port bundles.
-+ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (0,0)`<br>
-  A NexusNode does not allow any star bindings.
-+ **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` resolve oParams using dFn().
-+ **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` resolve iParams using uFn().
-+ **oStar** `Int = 0` (const)
-+ **iStar** `Int = 0` (const)
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (0,0)` (protected) a NexusNode does not allow any star bindings.
++ **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` (protected) resolve oParams using dFn().
++ **mapParamsU** `(Int, p:Seq[UO]) => Seq[UI]` (protected) resolve iParams using uFn().
++ **oStar** `Int = 0` (protected, const)
++ **iStar** `Int = 0` (protected, const)
 
 ### class AdapterNode
 *Base node class for a bus adapter.*
@@ -381,10 +379,9 @@ class MixedSplitterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **numPI** `Range.Inclusive = 1 to 999` (param) input range.
 + **externalIn** `Boolean = true` generate external input port bundles.
 + **externalOut** `Boolean = true` generate external output port bundles.
-+ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)`<br>
-  resolve `iStar` and `oStar`. `iStar <= 0, oStar <= iKown`.
-+ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO]` resolve oParams using number of ports (ps) and dFn().
-+ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI]` resolve iParams using number of ports (ps) and uFn().
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)` (protected) resolve `iStar` and `oStar`. `iStar <= 0, oStar <= iKown`.
++ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO]` (protected) resolve oParams using number of ports (ps) and dFn().
++ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI]` (protected) resolve iParams using number of ports (ps) and uFn().
 
 ### class SplitterNode
 
@@ -438,9 +435,9 @@ class SourceNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(po: Seq
   The size of `po` decides the total number of port bindings. 
 + **externalIn** `Boolean = false` no external input port bundles.
 + **externalOut** `Boolean = true` generate external output port bundles.
-+ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (0, po.size - oKnown)`
-+ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO] = po` assign downwards parameters.
-+ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq()` no needed.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (0, po.size - oKnown)` (protected)
++ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq[DO] = po` (protected) assign downwards parameters.
++ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq()` (protected) no needed.
 
 ### class SinkNode
 *A sink node in a network.*
@@ -458,9 +455,9 @@ class SinkNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(pi: Seq[U
   The size of `po` decides the total number of port bindings. 
 + **externalIn** `Boolean = true` generate external input port bundles.
 + **externalOut** `Boolean = false` no external output port bundles.
-+ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (pi.size - iKnown, 0)`
-+ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq()` no needed.
-+ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI] = pi` assign upwards parameters.
++ **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (pi.size - iKnown, 0)` (protected)
++ **mapParamsD** `(ps:Int, p:Seq[DI]) => Seq()` (protected) no needed.
++ **mapParamsU** `(ps:Int, p:Seq[UO]) => Seq[UI] = pi` (protected) assign upwards parameters.
 
 ### BlindOutputNode
 
@@ -516,7 +513,7 @@ class InternalInputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 022/08/2017<br>
+Last updated: 23/08/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
