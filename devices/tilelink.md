@@ -1,10 +1,10 @@
-[Rocket](Readme.md)/[devices](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/devices)
+[Rocket](../Readme.md)/[devices](../devices.md)/[tilelink](https://github.com/freechipsproject/rocket-chip/tree/master/src/main/scala/devices/tilelink)
 ========================
-This RTL package contains implementations for peripheral devices, including the Debug module and various TL slaves.
+TileLink devices on the peripheral bus.
 
 **********************
 
-+ **[tilelink](devices/tilelink.md)** TileLink devices on the peripheral bus.
++ **[Plic](tilelink/Plic.md)** platform-level interrupt controller.
 
 
 
