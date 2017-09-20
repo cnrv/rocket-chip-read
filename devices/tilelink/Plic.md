@@ -38,11 +38,55 @@ When PLIC finishes serving an interrupt, it sets `plic.complete` to reset the cu
 + **hartBase** `(i:Int) => Int`
 + **size** `() => Int`
 
+### case class PLICParams
 
+~~~scala
+case class PLICParams(baseAddress: BigInt = 0xC000000, maxPriorities: Int = 7)
+~~~
+
++ **baseAddress** `BigInt` (param) the base address of the PLIC
++ **maxPriorities** `Int` (param) the maximal number of priority levels
++ **address** `() => AddressSet` get the address space of the PLIC
+
+### class TLPLIC
+*The platform level interrupt controller*
+
+~~~scala
+class TLPLIC(params: PLICParams)(implicit p: Parameters) extends LazyModule {
+  val device = new SimpleDevice("interrupt-controller", Seq("riscv,plic0"))
+  val node = TLRegisterNode
+  val intnode = IntNexusNode
+}
+~~~
+
++ **params** `PLICParams` (param) the parameter for the PLIC.
++ **device** `SimpleDevice` the device descriptor.
+  - `"interrupt-controller" -> Nil`  identify this is an interrupt controller
+  - `"riscv,ndev" -> nDevices` identify the number of interrupts controlled by this PLIC
+  - `"riscv,max-priority" -> maxPriorities` identify the maximal priority levels
+  - `"#interrupt-cells" -> 1` set the number size to 32b
++ **node** `TLRegisterNode` the diplomacy node description.
++ **intnode** `IntNexusNode` the interrupt crossbar
++ **nDevice** `() => Int` get the number of devices (interrupt inputs) by counting the `intnode.edgesIn`
++ **nPriorities** `() => Int` the number of actual priority levels: `min(nDevices, maxPriorities)`
++ **nHarts** `() => Int` the number of connected harts by counting `intnode.edgesOut`
++ **module** `LazyModuleImp` the actual module implementation
+  - io:<br>
+    **tl_in** `HeterogeneousBag[TLBundle]` tilelink input ports.<br>
+    **devices** `Vec[Bool]` interrupts from devices.<br>
+    **harts** `Vec[Bool]` interrupts to harts
+  - **interrupts** `Seq[Bool]` group interrupts
+  - **harts** `Seq[Bool]` group harts as well
+  - **gateways** `Seq[GatewayPLICIO]` implement the level gateways and get the PLICIOs
+  - **priority** `Reg[Vec[UInt]]` the priority of all interrupts
+  - **threshold** `Reg[Vec[UInt]]` the threshold of all interrupts
+  - **pending** `Reg[Vec[Bool]]` whether any interrupts are pending
+  - **enables** `Reg[Vec[Bool]]` whether a hart accepts interrupts
+  - **maxDevs** `Reg[Vec[UInt]]` record the pending interrupt with the largest priority for each hart
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 19/09/2017<br>
+Last updated: 20/09/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
