@@ -108,12 +108,12 @@ Class index
 `DTS` [object](../diplomacy/DeviceTree.md#object-dts)
 
 #### LazyModule
-`LazyModule`           [abstract class](../diplomacy/LazyModule/abstract-class-lazymodule          ),
-                       [object        ](../diplomacy/LazyModule/object-lazymodule                  )
-`LazyModuleImpLike`    [trait         ](../diplomacy/LazyModule/trait-lazymoduleimplike            )
-`LazyModuleImp`        [abstract class](../diplomacy/LazyModule/abstract-class-lazymoduleimp       )
-`LazyMultiIOModuleImp` [abstract class](../diplomacy/LazyModule/abstract-class-lazymultiiomoduleimp)
-`LazyRawModuleImp`     [abstract class](../diplomacy/LazyModule/abstract-class-lazyrawmoduleimp    )
+`LazyModule`           [abstract class](../diplomacy/LazyModule.md#abstract-class-lazymodule          ),
+                       [object        ](../diplomacy/LazyModule.md#object-lazymodule                  )
+`LazyModuleImpLike`    [trait         ](../diplomacy/LazyModule.md#trait-lazymoduleimplike            )
+`LazyModuleImp`        [abstract class](../diplomacy/LazyModule.md#abstract-class-lazymoduleimp       )
+`LazyMultiIOModuleImp` [abstract class](../diplomacy/LazyModule.md#abstract-class-lazymultiiomoduleimp)
+`LazyRawModuleImp`     [abstract class](../diplomacy/LazyModule.md#abstract-class-lazyrawmoduleimp    )
 
 #### Nodes
 `NodeHandle`       [case class    ](../diplomacy/Nodes.md#case-class-nodehandle  )
