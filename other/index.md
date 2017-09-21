@@ -101,6 +101,9 @@ Class index
 # Diplomacy
 ***************************
 
+#### AddressDecoder
+`AddressDecoder` [object](../diplomacy/AddressDecoder.md#object-addressdecoder)
+
 #### DeviceTree
 `DTS` [object](../diplomacy/DeviceTree.md#object-dts)
 
