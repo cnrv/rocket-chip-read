@@ -190,6 +190,16 @@ Class index
 # Regmapper
 ***************************
 
+#### RegField
+`RegReadFn`   [case class](../regmapper/RegField.md#case-class-regreadfn ),
+              [object    ](../regmapper/RegField.md#object-regreadfn     )
+`RegWriteFn`  [case class](../regmapper/RegField.md#case-class-regwritefn),
+              [object    ](../regmapper/RegField.md#object-regwritefn    )
+`RegField`    [case class](../regmapper/RegField.md#case-class-regfield  ),
+              [object    ](../regmapper/RegField.md#object-regfield      )
+`HasRegMap`   [trait     ](../regmapper/RegField.md#trait-hasregmap      )
+
+
 #### RegisterCrossing
 `BusyRegisterCrossing`  [class](../regmapper/RegisterCrossing.md#class-busyregistercrossing )
 `RegisterWriteCrossing` [class](../regmapper/RegisterCrossing.md#class-registerwritecrossing)
@@ -428,7 +438,7 @@ Class index
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 16/08/2017<br>
+Last updated: 21/09/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
