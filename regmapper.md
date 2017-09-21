@@ -9,7 +9,7 @@
 + **[RegisterCrossing](regmapper/RegisterCrossing.md)**
   Register interface for crossing power domains.
 + **[RegMapper](regmapper/RegMapper.md)**
-
+  A bus agnostic register interface to a register-based device.
 
 
 <br><br><br><p align="right">

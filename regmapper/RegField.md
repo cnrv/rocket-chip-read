@@ -62,6 +62,7 @@ case class RegField(width: Int, read: RegReadFn, write: RegWriteFn, name: String
 ### object RegField
 *Register generator*
 
++ **Map** `(Int => Seq[RegField])` (type) Register field definition: byte address => sequence of bit fields
 + **apply** `(n:Int) => RegField` get a dummy n bit wide register.
 + **apply** `(Int, RegReadFn, RegWriteFn) => RegField` get an annonymas register.
 + **apply** `(Int, rw: UInt) => RegField` get a plain register (set `rw` to a `Reg`).
