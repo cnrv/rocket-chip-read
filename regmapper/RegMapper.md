@@ -11,9 +11,9 @@
 case class RegMapperParams(indexBits: Int, maskBits: Int, extraBits: Int)
 ~~~
 
-+ **indexBits** `Int` (param)
-+ **maskBits** `Int` (param)
-+ **extraBits** `Int` (param)
++ **indexBits** `Int` (param) bit size of the index field.
++ **maskBits** `Int` (param) bit size of the byte mask.
++ **extraBits** `Int` (param) bit size of the extra field.
 
 
 ### class RegMapperInput
@@ -24,10 +24,10 @@ class RegMapperInput(params: RegMapperParams) extends GenericParameterizedBundle
 ~~~
 
 + **read** `Bool` whether it is a read request.
-+ **index** `UInt`
++ **index** `UInt` index (address offset) of the register word.
 + **data** `UInt` write data.
 + **mask** `UInt` write byte mask.
-+ **extra** `UInt` extra information attached to the request.
++ **extra** `UInt` extra information attached to the request. For `TLRegisterNode`, it is `{sourceId, lgSize}`.
 
 ### class RegMapperOutput
 *Read/write response*
@@ -43,11 +43,11 @@ class RegMapperOutput(params: RegMapperParams) extends GenericParameterizedBundl
 ### object RegMapper
 *Create a generic register-based device*
 
-+ **apply** `(bytes: Int, concurrency: Int, undefZero: Boolean, in: DecoupledIO[RegMapperInput], mapping: RegField.Map*) => `
++ **apply** `(bytes: Int, concurrency: Int, undefZero: Boolean, in: DecoupledIO[RegMapperInput], mapping: RegField.Map*) => DecoupledIO[RegMapperOutput]`
   - **bytes** the byte size of a word in the register device.
   - **concurrency** the max number of concurrent transactions.
-  - **undefZero**
-  - **in**
+  - **undefZero** whether to set zero to undefined fields.
+  - **in** the input request channel.
   - **mapping** the collective set of register (byte) definitions.
 
 Internal variabls inside `apply()`:
