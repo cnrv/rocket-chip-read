@@ -17,26 +17,28 @@ case class RegMapperParams(indexBits: Int, maskBits: Int, extraBits: Int)
 
 
 ### class RegMapperInput
+*Read/write request*
 
 ~~~scala
 class RegMapperInput(params: RegMapperParams) extends GenericParameterizedBundle(params)
 ~~~
 
-+ **read** `Bool`
++ **read** `Bool` whether it is a read request.
 + **index** `UInt`
-+ **data** `UInt`
-+ **mask** `UInt`
-+ **extra** `UInt`
++ **data** `UInt` write data.
++ **mask** `UInt` write byte mask.
++ **extra** `UInt` extra information attached to the request.
 
 ### class RegMapperOutput
+*Read/write response*
 
 ~~~scala
 class RegMapperOutput(params: RegMapperParams) extends GenericParameterizedBundle(params)
 ~~~
 
-+ **read** `Bool`
-+ **data** `UInt`
-+ **extra** `UInt`
++ **read** `Bool` whether it is responding to a read request.
++ **data** `UInt` read data.
++ **extra** `UInt` the extra information originally attached with the request.
 
 ### object RegMapper
 *Create a generic register-based device*
@@ -67,11 +69,17 @@ Internal variabls inside `apply()`:
 + **regSize** `1<<maskBits` the maximal number of register words.
 + **regIndexI** `(Int) => Int` shrink the 0s and get the index of the register word.
 + **regIndexU** `(UInt) => UInt` shrink the 0s and get the index of the register word.
-
++ **flat** `Seq[index:Int, bitAddrOffset:Int, RegField]` flatten the register file into (shrinked index, offset in word, bit field).
++ **rivalid** `Vec[Bool]` input read valid for each flattened bit-field.
++ **wivalid** `Vec[Bool]` input write valid for each flattened bit-field.
++ **roready** `Vec[Bool]` output read ready for each flattened bit-field.
++ **woready** `Vec[Bool]` output write ready for each flattened bit-field.
++ **frontMask** `UInt` expand `front.bits.mask` from byte mask to bit mask.
++ **backMask** `UInt` expand `back.bits.mask` from byte mask to bit mask.
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 21/09/2017<br>
+Last updated: 22/09/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
