@@ -1,6 +1,6 @@
 [Rocket](../Readme.md)/[tilelink](../tilelink.md)/[RegisterRouter](https://github.com/freechipsproject/rocket-chip/blob/master/src/main/scala/tilelink/RegisterRouter.scala)
 =====================
-**
+*A TileLink module that supports a register file and interrupts*
 
 **********************
 
@@ -92,7 +92,7 @@ case class TLRegBundleArg(interrupts: HeterogeneousBag[Vec[Bool]], in: Heterogen
 ~~~
 
 ### class TLRegBundleBase
-*Base IO bundle for a register node*
+*Base bundle for a register node, used for interrupt wire connections*
 
 ~~~scala
 class TLRegBundleBase(arg: TLRegBundleArg) extends Bundle
@@ -101,11 +101,69 @@ class TLRegBundleBase(arg: TLRegBundleArg) extends Bundle
 + **interrupts** `HeterogeneousBag[Vec[Bool]]` interrupt ports.
 + **in** `HeterogeneousBag[TLBundle]` TileLink input ports.
 
+### class TLRegBundle
+*Generic TileLink interrupt bundle*
+
+~~~scala
+class TLRegBundle[P](val params: P, arg: TLRegBundleArg)(implicit p: Parameters) extends TLRegBundleBase(arg)
+~~~
+
+### class TLRegModule
+*Module implemetation of a TileLink register module.*
+
+~~~scala
+class TLRegModule[P, B <: TLRegBundleBase](val params: P, bundleBuilder: => B, router: TLRegisterRouterBase)
+  extends LazyModuleImp(router) with HasRegMap
+~~~
+
++ **io** `<: TLRegBundleBase` the module IO bundle.
++ **interrupts** `Vec[Bool]` internal interrupt lines.
++ **address** `AddressSet` the address set of this register module.
++ **regmap** `(mapping: RegField.Map*) => Unit` link regmap to `TLRegisterNode.regmap()`.
+
+### class TLRegisterRouter
+*The actual class used to make a register device.*
+
+~~~scala
+class TLRegisterRouter[B <: TLRegBundleBase, M <: LazyModuleImp](
+     val base:        BigInt,
+     val devname:     String,
+     val devcompat:   Seq[String],
+     val interrupts:  Int     = 0,
+     val size:        BigInt  = 4096,
+     val concurrency: Int     = 0,
+     val beatBytes:   Int     = 4,
+     val undefZero:   Boolean = true,
+     val executable:  Boolean = false)
+   (bundleBuilder: TLRegBundleArg => B)
+   (moduleBuilder: (=> B, TLRegisterRouterBase) => M)(implicit p: Parameters)
+  extends TLRegisterRouterBase(devname, devcompat, AddressSet(base, size-1), interrupts, concurrency, beatBytes, undefZero, executable)
+{
+  // require (size >= 4096) ... not absolutely required, but highly recommended
+  lazy val module = moduleBuilder(bundleBuilder(TLRegBundleArg(intnode.bundleOut, node.bundleIn)), this)
+}
+~~~
+
++ **base** `BigInt` (param) the base address of this register device.
++ **devname** `String` (param) the device name used in device tree.
++ **devcompat** `Seq[String]` (param) the compatible device list used in the device tree.
++ **interrupts** `Int` (param) the number interrupt lines used by this device, used in interrupt souce node `IntSourceNode`.
++ **size** `BigInt` (param) the tatol address space size of this device (assume bigger than the actual register fields).
++ **concurrency** `Int` (param) the number of concurrent transactions. (0, reg; 1, SRAM, >1: even slower memory)
++ **beatBytes** `Int` (param) byte width of TileLink link.
++ **undefZero** `Boolean` (param) whether to set zero to undefined fields.
++ **executable** `Boolean` (param) whether the address space is executable.
++ **bundleBuilder** `(TLRegBundleArg) => TLRegBundleBase` a IO bundle generator (to habdle internal or external generated interrupts).
++ **moduleBuilder** `(=> TLRegBundleBase, TLRegisterRouterBase) => LazyModuleImp` a register module generator.
+
+
 <br><br><br><p align="right">
 <sub>
-Last updated: 20/09/2017<br>
+Last updated: 25/09/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
 </sub>
 </p>
+
+
