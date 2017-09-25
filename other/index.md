@@ -394,15 +394,38 @@ Class index
 `TLRationalSinkNode`     [object](../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
 `TLRationalSourceNode`   [object](../tilelink/Nodes.md#object-rational-tilelink-extension-of-basic-nodes)
 
+#### Parameters
+`TLManagerParameters`     [case class](../tilelink/Parameters.md#case-class-tlmanagerparameters    )
+`TLManagerPortParameters` [case class](../tilelink/Parameters.md#case-class-tlmanagerportparameters)
+
+`TLClientParameters`     [case class](../tilelink/Parameters.md#case-class-tlclientparameters    )
+`TLClientPortParameters` [case class](../tilelink/Parameters.md#case-class-tlclientportparameters)
+
+`TLBundleParameters` [case class](../tilelink/Parameters.md#case-class-tlbundleparameters),
+                     [object    ](../tilelink/Parameters.md#object-tlbundleparameters    )
+`TLEdgeParameters`   [case class](../tilelink/Parameters.md#case-class-tledgeparameters  )
+
+`TLAsyncManagerPortParameters` [case class](../tilelink/Parameters.md#case-class-tlasyncmanagerportparameters)
+`TLAsyncClientPortParameters`  [case class](../tilelink/Parameters.md#case-class-tlasyncclientportparameters )
+`TLAsyncBundleParameters`      [case class](../tilelink/Parameters.md#case-class-tlasyncbundleparameters     ),
+                               [object    ](../tilelink/Parameters.md#object-tlasyncbundleparameters         )
+`TLAsyncEdgeParameters`        [case class](../tilelink/Parameters.md#case-class-tlasyncedgeparameters       )
+
+`TLRationalManagerPortParameters` [case class](../tilelink/Parameters.md#case-class-tlrationalmanagerportparameters)
+`TLRationalClientPortParameters`  [case class](../tilelink/Parameters.md#case-class-tlrationalclientportparameters )
+`TLRationalEdgeParameters`        [case class](../tilelink/Parameters.md#case-class-tlrationaledgeparameters       )
+
+`ManagerUnification` [object](../tilelink/Parameters.md#object-managerunification)
+
 #### RegisterRouter
-`TLRegisterNode`       [class         ](../tilelink/RegisterRouter.md#class-TLRegisterNode               ),
-                       [object        ](../tilelink/RegisterRouter.md#object-TLRegisterNode              )
-`TLRegisterRouterBase` [abstract class](../tilelink/RegisterRouter.md#abstract-class-TLRegisterRouterBase)
-`TLRegBundleArg`       [case class    ](../tilelink/RegisterRouter.md#case-class-TLRegBundleArg          )
-`TLRegBundleBase`      [class         ](../tilelink/RegisterRouter.md#class-TLRegBundleBase              )
-`TLRegBundle`          [class         ](../tilelink/RegisterRouter.md#class-TLRegBundle                  )
-`TLRegModule`          [class         ](../tilelink/RegisterRouter.md#class-TLRegModule                  )
-`TLRegisterRouter`     [class         ](../tilelink/RegisterRouter.md#class-TLRegisterRouter             )
+`TLRegisterNode`       [class         ](../tilelink/RegisterRouter.md#class-tlregisternode               ),
+                       [object        ](../tilelink/RegisterRouter.md#object-tlregisternode              )
+`TLRegisterRouterBase` [abstract class](../tilelink/RegisterRouter.md#abstract-class-tlregisterrouterbase)
+`TLRegBundleArg`       [case class    ](../tilelink/RegisterRouter.md#case-class-tlregbundlearg          )
+`TLRegBundleBase`      [class         ](../tilelink/RegisterRouter.md#class-tlregbundlebase              )
+`TLRegBundle`          [class         ](../tilelink/RegisterRouter.md#class-tlregbundle                  )
+`TLRegModule`          [class         ](../tilelink/RegisterRouter.md#class-tlregmodule                  )
+`TLRegisterRouter`     [class         ](../tilelink/RegisterRouter.md#class-tlregisterrouter             )
 
 #### Splitter
 `TLSplitter` [class](../tilelink/Splitter.md#class-tlsplitter)
