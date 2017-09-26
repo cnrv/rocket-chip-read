@@ -24,10 +24,10 @@ When PLIC finishes serving an interrupt, it sets `plic.complete` to reset the cu
 ### object PLICConsts
 *Constants used by PLIC.*
 
-+ **maxDevices** `() => 1023`
-+ **maxHarts** `() => 15872`
-+ **priorityBase** `() => 0x0`
-+ **pendingBase** `() => 0x1000`
++ **maxDevices** `() => 1023`    the maximal number of devices that can be supported.
++ **maxHarts** `() => 15872`     the maximal number of harts that can be supported.
++ **priorityBase** `() => 0x0`   the register base address for interrupt priorities.
++ **pendingBase** `() => 0x1000` the register base address for interrupt pending registers.
 + **enableBase** `() => 0x2000`
 + **hartBase** `() => 0x200000`
 + **claimOffset** `() => 4`
@@ -83,10 +83,16 @@ class TLPLIC(params: PLICParams)(implicit p: Parameters) extends LazyModule {
   - **pending** `Reg[Vec[Bool]]` whether any interrupts are pending
   - **enables** `Reg[Vec[Bool]]` whether a hart accepts interrupts
   - **maxDevs** `Reg[Vec[UInt]]` record the pending interrupt with the largest priority for each hart
+  - **priorityRegFields** `Int -> Seq[RegField]` define the _interrupt source priorities_: `priorityBase -> priority.map(p => priorityRegField(p))`
+  - **pendingRegFields** `Int -> Seq[RegField]` define the _interrupt pending_ bits: `pendingBase -> Vec[Bool]`
+  - **enableRegFields** `Int -> Seq[RegField]` define the _target interrupt enable_ registers: `enableBase(i) -> RegField(1, Vec[Bool])`
+  - **hartRegFields** `Int -> Seq[RegField]` define hart interrupt control registers: `hartBase(i) -> RegField`
+    For the register field: When read, claim the interrupt source with the maximal priority.
+    When write, write {_target completion_, _target priority threshold_}.
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 20/09/2017<br>
+Last updated: 26/09/2017<br>
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
