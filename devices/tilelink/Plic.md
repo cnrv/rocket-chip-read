@@ -90,6 +90,18 @@ class TLPLIC(params: PLICParams)(implicit p: Parameters) extends LazyModule {
     For the register field: When read, claim the interrupt source with the maximal priority.
     When write, write {_target completion_, _target priority threshold_}.
 
+### trait HasPeripheryPLIC
+*Trait that will connect a PLIC to a coreplex*
+
+~~~scala
+trait HasPeripheryPLIC extends HasInterruptBus with HasPeripheryBus {
+  val plic  = LazyModule(new TLPLIC(p(PLICParams)))
+  plic.node := pbus.toVariableWidthSlaves
+  plic.intnode := ibus.toPLIC
+}
+~~~
+
+
 <br><br><br><p align="right">
 <sub>
 Last updated: 26/09/2017<br>
