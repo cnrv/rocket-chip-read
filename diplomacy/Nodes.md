@@ -18,6 +18,8 @@
 > - E: the generated packet helper from U and D.
 > - B: the generated IO bundle from E.
 
+![Node Terms](images/node-terms.png) 
+
 Node implementation
 -----------------------------------------
 
