@@ -128,8 +128,8 @@ trait InwardNodeHandle[DI, UI, BI <: Data]
 
 + **inward** `InwardNode[DI, UI, BI]` (virtual) pointing to the inward node.
 + **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
-+ **\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
-+ **=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
++ **:\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
++ **:=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
 
 ### trait InwardNode
 *Function definitions for a node who has the client side.*
