@@ -288,7 +288,7 @@ class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) client side node implementation.
 + **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) manager side node implementation.
 + **dFn** `(DI) => DO` (param) downwards parameter resolvation funciton.
-+ **uFn** `(DO) => DI` (param) upwards parameter resolvation function.
++ **uFn** `(UO) => UI` (param) upwards parameter resolvation function.
 + **num** `Range.Inclusive = 1 to 999` (param) the maximal number of connections for either clients or managers.
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)` (protected) resolve the `iStar` and `oStar` numbers. Onle one side can have a star!
 + **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` (protected) resolve oParams using dFn(), resolve port individually.
