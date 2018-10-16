@@ -234,14 +234,14 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 x.iPush(h, BIND_ONCE)
 h.oPush(x, BIND_ONCE)
 ~~~
-+ **\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
++ **:\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
   Bind N (N >= 0) connections from `h`to this, while this decides the value of N. Add a monitor.
 ~~~
 (h)==>*(x,...)
 x.iPush(h, BIND_STAR)
 h.oPush(x, BIND_QUERY)
 ~~~
-+ **=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
++ **:=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
   Bind N (N >= 0) connections from `h`to this, while `h` decides the value of N. Add a monitor.
 ~~~
 (h,...)*==>(x)
