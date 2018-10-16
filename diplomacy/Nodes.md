@@ -210,8 +210,8 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **iPortMapping** `Seq[(Int, Int)]` (protected, lazy) ranges of ports connected clients.
 + **oStar** `Int` (protected, lazy) number of managers binded with star type connections.
 + **iStar** `Int` (protected, lazy) number of clients binded with star type connections.
-+ **oPorts** `Seq[(Int, InwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by all its manager side ports.
-+ **iPorts** `Seq[(Int, OutwardNode [DI, UI, BI])]` (lazy) a list of (index, port) binded by all its client side ports.
++ **oPorts** `Seq[(Int, InwardNode [DI, UI, BI])]` (lazy) a list of (index, port) binded by all its manager side ports.
++ **iPorts** `Seq[(Int, OutwardNode [DO, UO, BO])]` (lazy) a list of (index, port) binded by all its client side ports.
 + **oParams** `Seq[DO]` (protected, lazy) output port node parameters.
 + **iParams** `Seq[DI]` (protected, lazy) input port node parameters.
 + **edgesOut** `Seq[EO]` (lazy) output port edge parameters.
