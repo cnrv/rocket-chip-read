@@ -128,8 +128,8 @@ trait InwardNodeHandle[DI, UI, BI <: Data]
 
 + **inward** `InwardNode[DI, UI, BI]` (virtual) pointing to the inward node.
 + **:=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
-+ **\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
-+ **=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
++ **:\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
++ **:=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`
 
 ### trait InwardNode
 *Function definitions for a node who has the client side.*
@@ -234,14 +234,14 @@ abstract class MixedNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 x.iPush(h, BIND_ONCE)
 h.oPush(x, BIND_ONCE)
 ~~~
-+ **\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
++ **:\*=** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
   Bind N (N >= 0) connections from `h`to this, while this decides the value of N. Add a monitor.
 ~~~
 (h)==>*(x,...)
 x.iPush(h, BIND_STAR)
 h.oPush(x, BIND_QUERY)
 ~~~
-+ **=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
++ **:=\*** `(h: OutwardNodeHandle[DI, UI, BI]) => Option[MonitorBase]`<br>
   Bind N (N >= 0) connections from `h`to this, while `h` decides the value of N. Add a monitor.
 ~~~
 (h,...)*==>(x)
@@ -288,7 +288,7 @@ class MixedAdapterNode[DI, UI, EI, BI <: Data, DO, UO, EO, BO <: Data](
 + **inner** `InwardNodeImp [DI, UI, EI, BI]` (param) client side node implementation.
 + **outer** `OutwardNodeImp[DO, UO, EO, BO]` (param) manager side node implementation.
 + **dFn** `(DI) => DO` (param) downwards parameter resolvation funciton.
-+ **uFn** `(DO) => DI` (param) upwards parameter resolvation function.
++ **uFn** `(UO) => UI` (param) upwards parameter resolvation function.
 + **num** `Range.Inclusive = 1 to 999` (param) the maximal number of connections for either clients or managers.
 + **resolveStar** `(iKown:Int, oKnown:Int, iStars:Int, oStars:Int) => (iStar:Int, oStar:Int)` (protected) resolve the `iStar` and `oStar` numbers. Onle one side can have a star!
 + **mapParamsD** `(Int, p:Seq[DI]) => Seq[DO]` (protected) resolve oParams using dFn(), resolve port individually.
