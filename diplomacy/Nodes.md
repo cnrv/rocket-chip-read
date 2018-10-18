@@ -515,8 +515,8 @@ class InternalInputNode[D, U, EO, EI, B <: Data](imp: NodeImp[D, U, EO, EI, B])(
 
 <br><br><br><p align="right">
 <sub>
-Last updated: 25/12/2017<br>
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), [Leway Colin](mailto:colin4124@gmail.com)<br>
+Last updated: 16/10/2018<br>
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), &copy; (2017) [Wei Song](mailto:wsong83@gmail.com), [Leway Colin](mailto:colin4124@gmail.com), (2018) [Peng Liu](mailto:748932750@qq.com)<br>
 [Apache 2.0](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.SiFive), &copy; (2016-2017) SiFive, Inc<br>
 [BSD](https://github.com/freechipsproject/rocket-chip/blob/master/LICENSE.Berkeley), &copy; (2012-2014, 2016) The Regents of the University of California (Regents)
 </sub>
